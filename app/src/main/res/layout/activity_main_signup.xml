@@ -1,9 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main_Signup">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Main_Login"
+    android:background="@drawable/background_combined">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/Main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <LinearLayout
+            android:id="@+id/RememberLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Password"
+            android:orientation="horizontal"
+            android:gravity="left">
+            <TextView
+                android:id="@+id/Back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text="Back"
+                android:textColor="@color/green_main"
+                android:fontFamily="@font/medio"
+                android:textSize="20dp"
+                android:clickable="true"
+                android:layout_below="@+id/Login"
+                android:onClick="X" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/Logo"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/Logo"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/title" />
+
+        <EditText
+            android:id="@+id/Name"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/Title"
+            android:inputType="text"
+            android:padding="15dp"
+            android:ems="10"
+            android:fontFamily="@font/medio"
+            android:hint="Enter your name and last name"
+            android:textColor="@color/green_main"
+            android:textColorHint="@color/hint_color_dark" />
+
+        <EditText
+            android:id="@+id/Mail"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/Name"
+            android:inputType="text"
+            android:padding="20dp"
+            android:ems="10"
+            android:fontFamily="@font/medio"
+            android:hint="Enter your email"
+            android:textColor="@color/green_main"
+            android:textColorHint="@color/hint_color_dark" />
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:padding="20dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_below="@+id/SecondName"
+            android:textColor="@color/green_main"
+            android:hint="Enter your password"
+            android:textColorHint="@color/hint_color_dark"
+            android:fontFamily="@font/medio" />
+
+        <EditText
+            android:id="@+id/RePassword"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:padding="20dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_below="@+id/Password"
+            android:textColor="@color/green_main"
+            android:hint="Repit your password"
+            android:textColorHint="@color/hint_color_dark"
+            android:fontFamily="@font/medio" />
+
+        <Button
+            android:id="@+id/Login"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:padding="20dp"
+            android:backgroundTint="#449740"
+            android:textColor="@color/white"
+            android:fontFamily="@font/medio"
+            android:text="Sign Up"
+            android:textSize="20dp"
+            android:onClick="onClick" />
+
+    </LinearLayout>
+
+</RelativeLayout>

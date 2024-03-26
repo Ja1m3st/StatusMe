@@ -113,9 +113,7 @@
             android:fontFamily="@font/medio"
             android:textSize="20dp"
             android:clickable="true"
-            android:layout_below="@+id/Login"
-            android:onClick="X" />
-
+            android:layout_below="@+id/Login"/>
     </LinearLayout>
 
 </RelativeLayout>
