@@ -124,9 +124,7 @@
             android:fontFamily="@font/medio"
             android:text="Log In"
             android:textSize="20dp"
-            android:onClick="onClick"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"/>
+            android:onClick="onClick" />
 
         <TextView
             android:id="@+id/Or"
