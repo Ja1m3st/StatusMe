@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.StatusMe" parent="Base.Theme.StatusMe" />
+    <color name="main_color">@color/white</color>
+    <color name="main_color_reverse">#2B2B2B</color>
+    <color name="hint_color_dark">@color/black</color>
 </resources>

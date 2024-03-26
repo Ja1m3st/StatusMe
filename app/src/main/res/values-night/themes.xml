@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.StatusMe" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">#2B2B2B</item>
     </style>
+    <color name="main_color">#2B2B2B</color>
+    <color name="main_color_reverse">@color/white</color>
+    <color name="hint_color_dark">@color/white</color>
 </resources>
