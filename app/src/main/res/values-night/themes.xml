@@ -5,7 +5,7 @@
         <item name="colorPrimary">#2B2B2B</item>
     </style>
 
-    <drawable name="title2">@drawable/blanco</drawable>
+    <drawable name="title">@drawable/blanco</drawable>
     <color name="main_color">#2B2B2B</color>
     <color name="main_color_reverse">@color/white</color>
     <color name="hint_color_dark">@color/white</color>
