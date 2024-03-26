@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="50dp"
+    android:paddingTop="40dp"
     tools:context=".Main_Login"
     android:background="@drawable/background_combined">
 
@@ -14,6 +14,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:id="@+id/RememberLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Password"
+            android:orientation="horizontal"
+            android:gravity="right">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/DarkMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:thumbTint="@color/main_color_reverse"
+                app:trackTint="@color/green_main"
+                android:layout_marginLeft="40dp"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/Logo"
@@ -62,34 +79,16 @@
             android:textColorHint="@color/hint_color_dark"
             android:fontFamily="@font/medio" />
 
-        <LinearLayout
-            android:id="@+id/RememberLayout"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/Remember"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/Password"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
-
-            <TextView
-                android:id="@+id/Remember"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¿Has olvidado la contraseña?"
-                android:textColor="@color/green_main"
-                android:fontFamily="@font/medio"
-                android:textSize="15dp"
-                android:clickable="true"
-                android:onClick="X"/>
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/DarkMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:thumbTint="@color/main_color_reverse"
-                app:trackTint="@color/green_main"
-                android:layout_marginLeft="40dp"/>
-        </LinearLayout>
+            android:text="¿Has olvidado la contraseña?"
+            android:textColor="@color/green_main"
+            android:fontFamily="@font/medio"
+            android:textSize="15dp"
+            android:clickable="true"
+            android:onClick="X"/>
 
         <Button
             android:id="@+id/Login"
