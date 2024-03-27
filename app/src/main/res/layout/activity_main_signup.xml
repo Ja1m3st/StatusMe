@@ -24,7 +24,7 @@
                 android:id="@+id/Back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:text="Back"
                 android:textColor="@color/green_main"
                 android:fontFamily="@font/medio"
@@ -47,7 +47,7 @@
         <ImageView
             android:id="@+id/Title"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="67dp"
             android:layout_below="@+id/Logo"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -64,7 +64,21 @@
             android:padding="15dp"
             android:ems="10"
             android:fontFamily="@font/medio"
-            android:hint="Enter your name and last name"
+            android:hint="Enter your name"
+            android:textColor="@color/green_main"
+            android:textColorHint="@color/hint_color_dark" />
+
+        <EditText
+            android:id="@+id/Lastname"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/Name"
+            android:inputType="text"
+            android:padding="20dp"
+            android:ems="10"
+            android:fontFamily="@font/medio"
+            android:hint="Enter your lastname"
             android:textColor="@color/green_main"
             android:textColorHint="@color/hint_color_dark" />
 
@@ -111,7 +125,7 @@
             android:fontFamily="@font/medio" />
 
         <Button
-            android:id="@+id/Login"
+            android:id="@+id/SignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

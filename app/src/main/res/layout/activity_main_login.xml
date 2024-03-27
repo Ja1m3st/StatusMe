@@ -61,7 +61,7 @@
             android:padding="20dp"
             android:ems="10"
             android:fontFamily="@font/medio"
-            android:hint="Enter your name"
+            android:hint="Enter your mail"
             android:textColor="@color/green_main"
             android:textColorHint="@color/hint_color_dark" />
 
