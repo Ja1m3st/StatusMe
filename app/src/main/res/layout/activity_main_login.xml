@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:text="Sign Up"
                 android:textColor="@color/hint_color_dark"
                 android:fontFamily="@font/medio"

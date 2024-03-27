@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,7 +17,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -25,6 +30,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
     private EditText  mail, password;
     Button myButton;
     private FirebaseManager firebaseManager;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +38,14 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_main_login);
 
         TextView signup = findViewById(R.id.SignUp);
-        signup.setOnClickListener(this);
-
         mail = findViewById(R.id.User);
         password = findViewById(R.id.Password);
+        signup.setOnClickListener(this);
 
-        myButton = findViewById(R.id.Login);
+
+        firebaseManager = new FirebaseManager();
+        mAuth = FirebaseAuth.getInstance();
+
         SwitchMaterial switchDarkMode = findViewById(R.id.DarkMode);
 
         switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -52,64 +60,34 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                 }
             }
         });
+
+        myButton = findViewById(R.id.Login);
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
     }
 
-    private void iniciarSesion(){
-        String etmail = mail.getText().toString();
+    public void login() {
+        String etemail = mail.getText().toString();
         String etpassword = password.getText().toString();
 
-        boolean datos = comprobacion();
-
-        if(datos) {
-            firebaseManager.obtenerContactos(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Usuario usuario;
-                    boolean existe = false;
-
-                    if (dataSnapshot.exists()) {
-                        String nombre = etmail;
-                        String clave = etpassword;
-
-                        for (DataSnapshot usaurioSnapshot : dataSnapshot.getChildren()) {
-                            usuario = usaurioSnapshot.getValue(Usuario.class);
-
-                            if (usuario.getNombre().equals(nombre) && usuario.getContraseña().equals(clave)) {
-                                existe = true;
-                            }
-                        }
-                        if(existe){
-                            Intent intent = new Intent(LoginActivity.this, FeetActivity.class);
-                            intent.putExtra("nombre",nombre);
+        mAuth.signInWithEmailAndPassword(etemail, etpassword)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(Main_Login.this, MainActivity.class);
                             startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(Main_Login.this, "Autenticación fallida.",
+                                    Toast.LENGTH_SHORT).show();
                         }
-                        else{
-                            Toast.makeText(LoginActivity.this, "Usuario incorrecto", Toast.LENGTH_SHORT).show();
-
-                        }
-                    } else {
-                        Toast.makeText(LoginActivity.this, "No existe el usuario", Toast.LENGTH_SHORT).show();
                     }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(LoginActivity.this, "Error al obtener los usuarios", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    private boolean comprobacion(){
-        boolean datos = false;
-        String nombre = String.valueOf(editTextUsername.getText());
-        String contrasena = String.valueOf(editTextPassword.getText());
-
-        if(!nombre.isEmpty() && !contrasena.isEmpty()){
-            datos = true;
-        } else{
-            Toast.makeText(LoginActivity.this, "Rellena todos los campos", Toast.LENGTH_SHORT).show();
-        }
-        return datos;
+                });
     }
 
     @Override
