@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -73,21 +74,23 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
     public void login() {
         String etemail = mail.getText().toString();
         String etpassword = password.getText().toString();
-
-        mAuth.signInWithEmailAndPassword(etemail, etpassword)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(Main_Login.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(Main_Login.this, "Autenticación fallida.",
-                                    Toast.LENGTH_SHORT).show();
+        if (!TextUtils.isEmpty(etemail) && !TextUtils.isEmpty(etpassword)){
+            mAuth.signInWithEmailAndPassword(etemail, etpassword)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(Main_Login.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(Main_Login.this, "Usuario no registrado", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }else{
+            Toast.makeText(Main_Login.this, "Rellena todos los campos.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
