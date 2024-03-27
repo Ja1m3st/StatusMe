@@ -1,5 +1,6 @@
 package es.sanchez.jaime.statusme;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,13 +10,20 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class Main_Signup extends AppCompatActivity implements View.OnClickListener{
+public class Main_Signup extends AppCompatActivity implements View.OnClickListener {
 
     private EditText name, lastname , mail, password, repassword;
     private FirebaseManager firebaseManager;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,30 +36,53 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
         repassword = findViewById(R.id.RePassword);
 
         firebaseManager = new FirebaseManager();
+        mAuth = FirebaseAuth.getInstance();
 
         TextView back = findViewById(R.id.Back);
         back.setOnClickListener(this);
 
-        Button signup= findViewById(R.id.SignUp);
+        Button signup = findViewById(R.id.SignUp);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.SignUp) {
-                    agregarContacto();
-                    Intent login = new Intent(Main_Signup.this, Main_Login.class);
-                    startActivity(login);
-                }
+                registrarUsuario();
             }
         });
     }
 
-    private void agregarContacto() {
+    private void agregarContactoJson() {
         String etname = name.getText().toString();
         String etlastname = lastname.getText().toString();
         String etmail = mail.getText().toString();
         String etpassord = password.getText().toString();
 
-        firebaseManager.agregarContacto(etname, etlastname, etmail, etpassord);
+        firebaseManager.agregarContactoJson(etname, etlastname, etmail, etpassord);
+    }
+
+    public void registrarUsuario() {
+        String etmail = mail.getText().toString();
+        String etpassword = password.getText().toString();
+        String etrepassword = repassword.getText().toString();
+
+        if (etpassword.equals(etrepassword)) {
+            mAuth.createUserWithEmailAndPassword(etmail, etpassword)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Usuario Registrado", Toast.LENGTH_SHORT).show();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Intent login = new Intent(Main_Signup.this, Main_Login.class);
+                                startActivity(login);
+                                agregarContactoJson();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Contraseña o Usuario incorrectos", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        } else {
+            Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

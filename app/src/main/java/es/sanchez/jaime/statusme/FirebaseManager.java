@@ -11,7 +11,7 @@ public class FirebaseManager {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Usuarios");
     }
-    public void agregarContacto(String name, String lastname, String mail, String password) {
+    public void agregarContactoJson(String name, String lastname, String mail, String password) {
         String contactoId = databaseReference.push().getKey();
         Usuario nuevoContacto = new Usuario(name, lastname, mail, password);
         databaseReference.child(contactoId).setValue(nuevoContacto);
