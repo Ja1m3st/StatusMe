@@ -70,7 +70,7 @@
             android:maxLength="50"/>
 
         <Button
-            android:id="@+id/SignUp"
+            android:id="@+id/Send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

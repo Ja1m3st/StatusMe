@@ -40,7 +40,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
     private EditText mail, password;
     private Button myButton;
     private FirebaseAuth mAuth;
-    CardView google;
+    private CardView google;
     private GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN = 1;
 
@@ -93,7 +93,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                 login();
             }
         });
-
     }
 
     // Método para iniciar sesión con Auth
