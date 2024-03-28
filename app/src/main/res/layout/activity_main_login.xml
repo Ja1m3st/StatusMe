@@ -70,7 +70,7 @@
             android:id="@+id/Password"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:padding="20dp"
             android:ems="10"
             android:inputType="textPassword"
@@ -87,7 +87,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/Password"
             android:orientation="horizontal"
-            android:gravity="left">
+            android:gravity="left"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:id="@+id/Remember"
