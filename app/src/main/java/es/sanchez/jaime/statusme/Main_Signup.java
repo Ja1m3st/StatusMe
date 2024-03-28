@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -60,29 +61,37 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
     }
 
     public void registrarUsuario() {
+        String etname = name.getText().toString();
+        String etlastname = lastname.getText().toString();
         String etmail = mail.getText().toString();
         String etpassword = password.getText().toString();
         String etrepassword = repassword.getText().toString();
 
-        if (etpassword.equals(etrepassword)) {
-            mAuth.createUserWithEmailAndPassword(etmail, etpassword)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Usuario Registrado", Toast.LENGTH_SHORT).show();
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Intent login = new Intent(Main_Signup.this, Main_Login.class);
-                                startActivity(login);
-                                agregarContactoJson();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Contraseña o Usuario incorrectos", Toast.LENGTH_SHORT).show();
+
+        if (!TextUtils.isEmpty(etmail) && !TextUtils.isEmpty(etname) && !TextUtils.isEmpty(etlastname)) {
+            if (etpassword.equals(etrepassword)) {
+                mAuth.createUserWithEmailAndPassword(etmail, etpassword)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "Usuario Registrado", Toast.LENGTH_SHORT).show();
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Intent login = new Intent(Main_Signup.this, Main_Login.class);
+                                    startActivity(login);
+                                    agregarContactoJson();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Contraseña o Usuario incorrectos", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
-        } else {
-            Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            Toast.makeText(Main_Signup.this, "Rellena todos los campos.", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override
