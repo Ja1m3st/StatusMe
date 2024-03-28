@@ -88,6 +88,7 @@
             android:layout_below="@id/Password"
             android:orientation="horizontal"
             android:gravity="left">
+
             <TextView
                 android:id="@+id/Remember"
                 android:layout_width="wrap_content"
@@ -97,9 +98,7 @@
                 android:text="¿Has olvidado la contraseña?"
                 android:textColor="@color/green_main"
                 android:fontFamily="@font/medio"
-                android:textSize="15dp"
-                android:clickable="true" />
-
+                android:textSize="15dp" />
             <TextView
                 android:id="@+id/SignUp"
                 android:layout_width="wrap_content"
