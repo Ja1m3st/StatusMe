@@ -98,8 +98,7 @@
                 android:textColor="@color/green_main"
                 android:fontFamily="@font/medio"
                 android:textSize="15dp"
-                android:clickable="true"
-                android:onClick="X"/>
+                android:clickable="true" />
 
             <TextView
                 android:id="@+id/SignUp"
