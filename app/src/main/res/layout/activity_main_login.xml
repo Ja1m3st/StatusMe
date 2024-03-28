@@ -103,14 +103,14 @@
                 android:id="@+id/SignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_below="@+id/Login"
                 android:layout_marginLeft="20dp"
-                android:text="Sign Up"
-                android:textColor="@color/hint_color_dark"
-                android:fontFamily="@font/medio"
-                android:textSize="15dp"
+                android:layout_marginTop="15dp"
                 android:clickable="true"
-                android:layout_below="@+id/Login" />
+                android:fontFamily="@font/medio"
+                android:text="Sign Up"
+                android:textColor="@color/dark"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
@@ -170,7 +170,7 @@
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/medio"
                     android:text="Iniciar sesión con Google"
-                    android:textColor="@color/hint_color_dark"
+                    android:textColor="@color/dark"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/google_logo"

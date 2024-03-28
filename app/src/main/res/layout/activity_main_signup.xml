@@ -54,37 +54,48 @@
             android:scaleType="centerCrop"
             android:src="@drawable/title" />
 
-        <EditText
-            android:id="@+id/Name"
-            android:layout_width="350dp"
+        <LinearLayout
+            android:id="@+id/RememberLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/Title"
-            android:inputType="text"
-            android:padding="15dp"
-            android:ems="10"
-            android:fontFamily="@font/medio"
-            android:hint="Enter your name"
-            android:textColor="@color/green_main"
-            android:textColorHint="@color/hint_color_dark" />
+            android:layout_below="@id/Password"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <EditText
+                android:id="@+id/Name"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/Title"
+                android:inputType="text"
+                android:padding="15dp"
+                android:ems="10"
+                android:fontFamily="@font/medio"
+                android:hint="Name"
+                android:textColor="@color/green_main"
+                android:textColorHint="@color/hint_color_dark" />
 
-        <EditText
-            android:id="@+id/Lastname"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/Name"
-            android:inputType="text"
-            android:padding="20dp"
-            android:ems="10"
-            android:fontFamily="@font/medio"
-            android:hint="Enter your lastname"
-            android:textColor="@color/green_main"
-            android:textColorHint="@color/hint_color_dark" />
+            <EditText
+                android:id="@+id/Lastname"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/Name"
+                android:inputType="text"
+                android:padding="15dp"
+                android:ems="10"
+                android:fontFamily="@font/medio"
+                android:hint="Lastname"
+                android:textColor="@color/green_main"
+                android:textColorHint="@color/hint_color_dark" />
+        </LinearLayout>
+
 
         <EditText
             android:id="@+id/Mail"
-            android:layout_width="350dp"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_below="@+id/Name"
@@ -92,13 +103,13 @@
             android:padding="20dp"
             android:ems="10"
             android:fontFamily="@font/medio"
-            android:hint="Enter your email"
+            android:hint="Email"
             android:textColor="@color/green_main"
             android:textColorHint="@color/hint_color_dark" />
 
         <EditText
             android:id="@+id/Password"
-            android:layout_width="350dp"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:padding="20dp"
@@ -106,13 +117,13 @@
             android:inputType="textPassword"
             android:layout_below="@+id/SecondName"
             android:textColor="@color/green_main"
-            android:hint="Enter your password"
+            android:hint="Password"
             android:textColorHint="@color/hint_color_dark"
             android:fontFamily="@font/medio" />
 
         <EditText
             android:id="@+id/RePassword"
-            android:layout_width="350dp"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:padding="20dp"
@@ -129,12 +140,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="#449740"
-            android:textColor="@color/white"
             android:fontFamily="@font/medio"
+            android:onClick="onClick"
             android:text="Sign Up"
-            android:textSize="20dp"
-            android:onClick="onClick" />
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
