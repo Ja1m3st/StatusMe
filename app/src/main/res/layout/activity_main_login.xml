@@ -63,7 +63,8 @@
             android:fontFamily="@font/medio"
             android:hint="Enter your mail"
             android:textColor="@color/green_main"
-            android:textColorHint="@color/hint_color_dark" />
+            android:textColorHint="@color/hint_color_dark"
+            android:maxLength="50"/>
 
         <EditText
             android:id="@+id/Password"
@@ -77,7 +78,8 @@
             android:textColor="@color/green_main"
             android:hint="Enter your password"
             android:textColorHint="@color/hint_color_dark"
-            android:fontFamily="@font/medio" />
+            android:fontFamily="@font/medio"
+            android:maxLength="50"/>
 
         <LinearLayout
             android:id="@+id/RememberLayout2"

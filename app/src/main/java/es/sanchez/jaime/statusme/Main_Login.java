@@ -1,8 +1,11 @@
 package es.sanchez.jaime.statusme;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,24 +17,33 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class Main_Login extends AppCompatActivity implements View.OnClickListener {
-    private EditText  mail, password;
-    Button myButton;
-    private FirebaseManager firebaseManager;
+
+    private EditText mail, password;
+    private Button myButton;
     private FirebaseAuth mAuth;
+    CardView google;
+    private GoogleSignInClient mGoogleSignInClient;
+    private final int RC_SIGN_IN = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,22 +53,32 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         TextView signup = findViewById(R.id.SignUp);
         mail = findViewById(R.id.User);
         password = findViewById(R.id.Password);
+        google= findViewById(R.id.card);
         signup.setOnClickListener(this);
 
-
-        firebaseManager = new FirebaseManager();
         mAuth = FirebaseAuth.getInstance();
 
-        SwitchMaterial switchDarkMode = findViewById(R.id.DarkMode);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
 
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signInWithGoogle();
+            }
+        });
+        // MODO OSCURO
+        SwitchMaterial switchDarkMode = findViewById(R.id.DarkMode);
         switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    // Si el interruptor está activado, cambia al modo oscuro
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 } else {
-                    // Si el interruptor está desactivado, cambia al modo claro (predeterminado)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
             }
@@ -71,10 +93,11 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+    // Método para iniciar sesión con Auth
     public void login() {
         String etemail = mail.getText().toString();
         String etpassword = password.getText().toString();
-        if (!TextUtils.isEmpty(etemail) && !TextUtils.isEmpty(etpassword)){
+        if (!TextUtils.isEmpty(etemail) && !TextUtils.isEmpty(etpassword)) {
             mAuth.signInWithEmailAndPassword(etemail, etpassword)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -88,7 +111,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                             }
                         }
                     });
-        }else{
+        } else {
             Toast.makeText(Main_Login.this, "Rellena todos los campos.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -102,5 +125,60 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             Intent signup = new Intent(Main_Login.this, Main_Signup.class);
             startActivity(signup);
         }
+    }
+
+    public void signInWithGoogle() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                // Manejar errores específicos
+                Log.e(TAG, "Google sign in failed", e);
+                String errorMessage = "Google sign in failed: " + e.getMessage();
+                Toast.makeText(Main_Login.this, errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(Main_Login.this, "Authentication successful", Toast.LENGTH_SHORT).show();
+
+                            mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign-out successful
+                                    } else {
+                                        // Sign-out failed
+                                    }
+                                }
+                            });
+
+                            mAuth.signOut();
+
+                            Intent intent = new Intent(Main_Login.this, MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(Main_Login.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
