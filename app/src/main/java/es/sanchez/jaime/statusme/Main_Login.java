@@ -100,8 +100,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         String etemail = mail.getText().toString();
         String etpassword = password.getText().toString();
         if (!TextUtils.isEmpty(etemail) && !TextUtils.isEmpty(etpassword)) {
-            mAuth.signInWithEmailAndPassword(etemail, etpassword)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(etemail, etpassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
