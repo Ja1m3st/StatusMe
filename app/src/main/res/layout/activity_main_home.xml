@@ -6,33 +6,31 @@
 
     <RelativeLayout
         android:id="@+id/Topnav"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp">
 
         <!-- Icono Izquierdo -->
-        <ImageView
+        <ImageButton
             android:id="@+id/icono_izquierdo"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
             android:src="@drawable/flecha2"
-            android:layout_alignParentStart="true"/>
-
-        <!-- Icono Central -->
-        <ImageView
-            android:id="@+id/icono_central"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/title"
-            android:layout_centerHorizontal="true"/>
+            android:scaleType="fitXY" />
 
         <!-- Icono Derecho -->
-        <ImageView
+        <ImageButton
             android:id="@+id/icono_derecho"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/flecha"
-            android:layout_alignParentEnd="true"/>
+            android:scaleType="fitXY" />
+
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/Bottomnav"
@@ -52,7 +50,6 @@
             android:layout_above="@id/Bottomnav">
             <RelativeLayout
                 android:id="@+id/Topnav2"
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
