@@ -13,25 +13,25 @@
         <!-- Icono Izquierdo -->
         <ImageView
             android:id="@+id/icono_izquierdo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_foreground"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/flecha2"
             android:layout_alignParentStart="true"/>
 
         <!-- Icono Central -->
         <ImageView
             android:id="@+id/icono_central"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_foreground"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/title"
             android:layout_centerHorizontal="true"/>
 
         <!-- Icono Derecho -->
         <ImageView
             android:id="@+id/icono_derecho"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_foreground"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/flecha"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
     <RelativeLayout
