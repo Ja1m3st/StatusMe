@@ -8,10 +8,7 @@
         android:id="@+id/Topnav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_margin="20dp">
 
         <!-- Icono Izquierdo -->
         <ImageButton
@@ -20,7 +17,8 @@
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:src="@drawable/flecha2"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:background="@null"/>
 
         <!-- Icono Derecho -->
         <ImageButton
@@ -29,7 +27,8 @@
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/flecha"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:background="@null"/>
 
     </RelativeLayout>
     <RelativeLayout
@@ -40,43 +39,56 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
-            app:cardCornerRadius="10dp"
-            tools:ignore="NotSibling"
-            android:layout_above="@id/Bottomnav">
-            <RelativeLayout
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
                 android:id="@+id/Topnav2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
 
-                <!-- Icono Izquierdo -->
-                <ImageView
+                <!-- ImageButton Izquierdo -->
+                <ImageButton
                     android:id="@+id/icono_izquierdo2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_launcher_foreground"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_weight="1"
+                    android:background="@null"/>
 
-                <!-- Icono Central -->
-                <ImageView
+                <!-- ImageButton Central -->
+                <ImageButton
                     android:id="@+id/icono_central2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_launcher_foreground"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_weight="1"
+                    android:background="@null"/>
 
-                <!-- Icono Derecho -->
-                <ImageView
+                <!-- ImageButton Derecho -->
+                <ImageButton
                     android:id="@+id/icono_derecho2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_launcher_foreground"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
+                    android:layout_weight="1"
+                    android:background="@null"/>
+
+                <!-- ImageButton Derecho -->
+                <ImageButton
+                    android:id="@+id/icono_derecho3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_launcher_foreground"
+                    android:layout_weight="1"
+                    android:background="@null"/>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 </RelativeLayout>
