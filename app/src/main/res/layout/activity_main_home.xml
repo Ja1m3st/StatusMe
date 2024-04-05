@@ -55,8 +55,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
@@ -71,54 +71,121 @@
                 android:layout_margin="5dp">
 
                 <!-- ImageButton Izquierdo -->
-                <ImageButton
-                    android:id="@+id/icono1"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/libro_abierto"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:background="@null"
-                    android:scaleType="centerInside"/>
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/icono1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:src="@drawable/libro"
+                        android:background="@null"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:text="Home"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+                        android:gravity="center"/>
+                </LinearLayout>
 
                 <!-- ImageButton Central -->
-                <ImageButton
-                    android:id="@+id/icono2"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/grafico_de_barras"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:background="@null"
-                    android:scaleType="centerInside"/>
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/icono2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:src="@drawable/estadisticas"
+                        android:background="@null"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:text="Estadisticas"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+                        android:gravity="center"/>
+                </LinearLayout>
 
                 <!-- ImageButton Derecho -->
-                <ImageButton
-                    android:id="@+id/icono3"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/mas"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@null"
-                    android:scaleType="centerInside"/>
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/icono3"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@drawable/mas"
+                        android:background="@null"
+                        android:scaleType="centerInside"/>
+                </LinearLayout>
 
                 <!-- ImageButton Derecho -->
-                <ImageButton
-                    android:id="@+id/icono_4"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher_foreground"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:background="@null"
-                    android:scaleType="centerInside"/>
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/icono4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:src="@drawable/calendario"
+                        android:background="@null"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:text="Calendario"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+                        android:gravity="center"/>
+                </LinearLayout>
                 <!-- ImageButton Derecho -->
 
-                <ImageButton
-                    android:id="@+id/icono5"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher_foreground"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:background="@null"
-                    android:scaleType="centerInside"/>
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/icono5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:src="@drawable/libro"
+                        android:background="@null"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:text="Usuario"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"
+                        android:gravity="center"/>
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
