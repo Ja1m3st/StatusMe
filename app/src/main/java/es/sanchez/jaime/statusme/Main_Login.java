@@ -105,7 +105,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(Main_Login.this, MainActivity.class);
+                                Intent intent = new Intent(Main_Login.this, Main_Home.class);
                                 startActivity(intent);
                                 finish();
                             } else {
@@ -176,7 +176,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                             });
                             mAuth.signOut();
 
-                            Intent intent = new Intent(Main_Login.this, MainActivity.class);
+                            Intent intent = new Intent(Main_Login.this, Main_Home.class);
                             startActivity(intent);
                         } else {
                             Toast.makeText(Main_Login.this, "Authentication failed", Toast.LENGTH_SHORT).show();
