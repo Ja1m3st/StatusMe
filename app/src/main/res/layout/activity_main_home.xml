@@ -8,7 +8,8 @@
         android:id="@+id/Topnav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null">
+        android:background="@null"
+        app:cardBackgroundColor="?attr/colorPrimary">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,144 +52,76 @@
         android:id="@+id/Bottomnav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/card_view"
         android:layout_below="@id/Topnav">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"
-            app:cardCornerRadius="10dp"
-            android:background="@null">
-
-            <LinearLayout
-                android:id="@+id/Topnav2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_margin="5dp">
-
-                <!-- ImageButton Izquierdo -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/icono1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:src="@drawable/libro"
-                        android:background="@null"
-                        android:scaleType="centerInside"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:text="Home"
-                        android:textColor="@color/black"
-                        android:textSize="10dp"
-                        android:gravity="center"/>
-                </LinearLayout>
-
-                <!-- ImageButton Central -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/icono2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:src="@drawable/estadisticas"
-                        android:background="@null"
-                        android:scaleType="centerInside"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:text="Estadisticas"
-                        android:textColor="@color/black"
-                        android:textSize="10dp"
-                        android:gravity="center"/>
-                </LinearLayout>
-
-                <!-- ImageButton Derecho -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/icono3"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:src="@drawable/mas"
-                        android:background="@null"
-                        android:scaleType="centerInside"/>
-                </LinearLayout>
-
-                <!-- ImageButton Derecho -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/icono4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:src="@drawable/calendario"
-                        android:background="@null"
-                        android:scaleType="centerInside"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:text="Calendario"
-                        android:textColor="@color/black"
-                        android:textSize="10dp"
-                        android:gravity="center"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Usuario"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/icono5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:src="@drawable/libro"
-                        android:background="@null"
-                        android:scaleType="centerInside"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:text="Usuario"
-                        android:textColor="@color/black"
-                        android:textSize="10dp"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
     </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:cardBackgroundColor="?attr/colorPrimary">
+
+        <LinearLayout
+            android:id="@+id/Topnav2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/icono1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/libro"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"/>
+
+                <ImageButton
+                    android:id="@+id/icono2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/estadisticas"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"/>
+
+                <ImageButton
+                    android:id="@+id/icono3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/mas"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"/>
+
+                <ImageButton
+                    android:id="@+id/icono4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/calendario"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"/>
+
+                <ImageButton
+                    android:id="@+id/icono5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/libro"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
 
 
