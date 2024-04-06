@@ -33,4 +33,15 @@ public class Main_Home extends AppCompatActivity {
         // Establecer la fecha formateada en el TextView
         fechaTextView.setText(fechaFormateada);
     }
+
+    public void onClick(View view) {
+
+        if (view.getId() == R.id.icono1) {
+            Intent signup = new Intent(Main_Home.this, Main_Home.class);
+            startActivity(signup);
+        } else if (view.getId() == R.id.icono5){
+            Intent remember2 = new Intent(Main_Home.this, Main_Usuario.class);
+            startActivity(remember2);
+        }
+    }
 }

@@ -8,7 +8,8 @@
         android:id="@+id/Topnav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null">
+        android:background="@null"
+        app:cardBackgroundColor="?attr/colorPrimary">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -18,8 +19,10 @@
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back"
-                android:textSize="20sp" />
+                android:text="Sign out"
+                android:textSize="20sp"
+                android:fontFamily="@font/medio"
+                android:textColor="@color/green_main"/>
 
         </RelativeLayout>
 
@@ -32,6 +35,52 @@
         android:layout_above="@+id/card_view"
         android:layout_below="@id/Topnav">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <es.sanchez.jaime.statusme.CircularImageView
+                    android:id="@+id/image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/grafico_de_barras"
+                    android:scaleType="centerCrop"
+                    android:layout_marginTop="30dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre"
+                    android:fontFamily="@font/medio"
+                    android:textSize="30dp"
+                    android:textColor="@color/green_main"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apellido"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/medio"
+                    android:textSize="30dp"
+                    android:textColor="@color/green_main"/>
+
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
@@ -40,57 +89,69 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@null"
-        app:cardCornerRadius="10dp">
+        app:cardBackgroundColor="?attr/colorPrimary">
 
         <LinearLayout
             android:id="@+id/Topnav2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/icono1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/libro"
                 android:background="@null"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher_foreground" />
-
+                android:padding="10dp"
+                android:onClick="onClick"/>
 
             <ImageButton
                 android:id="@+id/icono2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/estadisticas"
                 android:background="@null"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher_foreground" />
-
+                android:padding="10dp"
+                android:onClick="onClick"/>
 
             <ImageButton
                 android:id="@+id/icono3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/mas"
                 android:background="@null"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:padding="10dp"
+                android:onClick="onClick"/>
 
             <ImageButton
                 android:id="@+id/icono4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/calendario"
                 android:background="@null"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:padding="10dp"
+                android:onClick="onClick"/>
 
             <ImageButton
                 android:id="@+id/icono5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/libro"
                 android:background="@null"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:padding="10dp"
+                android:onClick="onClick"/>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
