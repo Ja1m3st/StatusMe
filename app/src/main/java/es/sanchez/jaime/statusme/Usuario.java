@@ -13,6 +13,11 @@ public class Usuario {
         this.mail = mail;
         this.password = password;
     }
+    public static class UsuarioGoogle extends Usuario {
+        public UsuarioGoogle(String name, String lastname, String mail) {
+            super(name, lastname, mail, null); // Asignar contraseña a null para usuarios de Google
+        }
+    }
 
     public int getId() {
         return id;

@@ -43,6 +43,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
     private CardView google;
     private GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN = 1;
+    private FirebaseManager firebaseManager;
 
 
     @Override
@@ -57,6 +58,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         google = findViewById(R.id.card);
         signup.setOnClickListener(this);
         remember.setOnClickListener(this);
+        firebaseManager = new FirebaseManager();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -131,6 +133,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             startActivity(remember2);
         }
     }
+
     public void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -144,6 +147,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
+                handleSignInResult(task);
             } catch (ApiException e) {
                 // Manejar errores específicos
                 Log.e(TAG, "Google sign in failed", e);
@@ -160,28 +164,35 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(Main_Login.this, "Authentication successful", Toast.LENGTH_SHORT).show();
-
-                            mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign-out successful
-                                    } else {
-                                        // Sign-out failed
-                                    }
-                                }
-                            });
-                            mAuth.signOut();
-
                             Intent intent = new Intent(Main_Login.this, Main_Home.class);
                             startActivity(intent);
+                            Toast.makeText(Main_Login.this, "Authentication successful", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(Main_Login.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            String email = account.getEmail();
+            firebaseManager.buscarEmail(email, new FirebaseManager.EmailCallback() {
+                @Override
+                public void onEmailFound(boolean found) {
+                    if (found == false) { // Si el email no existe en la base de datos, agrégalo
+                        String firstName = account.getGivenName();
+                        String lastName = account.getFamilyName();
+                        firebaseManager.agregarContactoGoogleJson(firstName, lastName, email);
+                    }
+
+                }
+            });
+        } catch (ApiException e) {
+            Log.e(TAG, "Google sign in failed", e);
+            String errorMessage = "Google sign in failed: " + e.getMessage();
+            Toast.makeText(Main_Login.this, errorMessage, Toast.LENGTH_SHORT).show();
+        }
     }
 }

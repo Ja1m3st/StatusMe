@@ -78,8 +78,8 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
                                     Toast.makeText(getApplicationContext(), "Usuario Registrado", Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Intent login = new Intent(Main_Signup.this, Main_Login.class);
-                                    startActivity(login);
                                     agregarContactoJson();
+                                    startActivity(login);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Contraseña o Usuario incorrectos", Toast.LENGTH_SHORT).show();
                                 }
