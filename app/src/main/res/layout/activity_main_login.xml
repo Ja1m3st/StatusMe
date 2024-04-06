@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="10dp"
+    tools:context=".Main_Login"
+    android:background="@drawable/background_combined">
+
+    <LinearLayout
+        android:id="@+id/Main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:id="@+id/RememberLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Password"
+            android:orientation="horizontal"
+            android:gravity="right">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/DarkMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:thumbTint="@color/main_color_reverse"
+                app:trackTint="@color/green_main"
+                android:layout_marginLeft="40dp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/Logo"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/Logo"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/title" />
+
+        <EditText
+            android:id="@+id/User"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/Title"
+            android:inputType="text"
+            android:padding="20dp"
+            android:ems="10"
+            android:fontFamily="@font/medio"
+            android:hint="Enter your mail"
+            android:textColor="@color/green_main"
+            android:textColorHint="@color/hint_color_dark"
+            android:maxLength="50"/>
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="20dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_below="@+id/User"
+            android:textColor="@color/green_main"
+            android:hint="Enter your password"
+            android:textColorHint="@color/hint_color_dark"
+            android:fontFamily="@font/medio"
+            android:maxLength="50"/>
+
+        <LinearLayout
+            android:id="@+id/RememberLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Password"
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/Remember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:text="¿Has olvidado la contraseña?"
+                android:textColor="@color/green_main"
+                android:fontFamily="@font/medio"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/SignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:fontFamily="@font/medio"
+                android:text="Sign Up"
+                android:textColor="@color/dark"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="#449740"
+            android:textColor="@color/white"
+            android:fontFamily="@font/medio"
+            android:text="Log In"
+            android:textSize="20dp"
+            android:onClick="onClick" />
+
+        <TextView
+            android:id="@+id/Or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="-o-"
+            android:textColor="@color/hint_color_dark"
+            android:fontFamily="@font/medio"
+            android:textSize="20dp"
+            android:layout_below="@+id/Login"
+            android:clickable="true"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:clickable="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:id="@+id/google_logo"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/google"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+                    android:id="@+id/google_sign_in_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/medio"
+                    android:text="Iniciar sesión con Google"
+                    android:textColor="@color/dark"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/google_logo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</RelativeLayout>

@@ -2,8 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.StatusMe" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
     </style>
-
+    <drawable name="title">@drawable/status</drawable>
     <style name="Theme.StatusMe" parent="Base.Theme.StatusMe" />
+    <color name="main_color">@color/colorPrimaryLight</color>
+    <color name="main_color_reverse">#2B2B2B</color>
+    <color name="hint_color_dark">#8c8c8c</color>
+    <color name="dark">@color/black</color>
 </resources>

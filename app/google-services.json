@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "76241082892",
+    "firebase_url": "https://statusme-e3cc0-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "statusme-e3cc0",
+    "storage_bucket": "statusme-e3cc0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76241082892:android:77279edcd5bd1b50276c29",
+        "android_client_info": {
+          "package_name": "es.sanchez.jaime.statusme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiT4lJuR8Q9XT7x9kIRGCy3A6p--1UBlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
