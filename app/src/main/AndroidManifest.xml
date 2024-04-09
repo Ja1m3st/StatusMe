@@ -18,19 +18,17 @@
         <activity
             android:name=".Main_Remember"
             android:exported="false" />
-
         <activity
             android:name=".Main_Signup"
             android:exported="false" />
-
         <activity
             android:name=".Main_Home"
             android:exported="false" />
         <activity
-            android:name=".Main_Login"
+            android:name=".Main_Usuario"
             android:exported="false" />
         <activity
-            android:name=".Main_Usuario"
+            android:name=".Main_Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

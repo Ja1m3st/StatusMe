@@ -1,11 +1,14 @@
 package es.sanchez.jaime.statusme;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,10 +17,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class Main_Signup extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,7 +84,10 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Usuario Registrado", Toast.LENGTH_SHORT).show();
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                                    String email = currentUser.getEmail();
+                                    crearCarpetaStorage(email);
                                     Intent login = new Intent(Main_Signup.this, Main_Login.class);
                                     agregarContactoJson();
                                     startActivity(login);
@@ -91,7 +102,6 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
         }else {
             Toast.makeText(Main_Signup.this, "Rellena todos los campos.", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -103,5 +113,24 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
             Intent back = new Intent(Main_Signup.this, Main_Login.class);
             startActivity(back);
         }
+    }
+
+    private void crearCarpetaStorage(String email){
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference folderRef = storage.getReference().child(email);
+        folderRef.child(email).putBytes(new byte[0]).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // La carpeta se creó exitosamente
+                Log.d(TAG, "Carpeta creada correctamente.");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Ocurrió un error al crear la carpeta
+                Log.e(TAG, "Error al crear la carpeta: " + e.getMessage());
+            }
+        });
     }
 }

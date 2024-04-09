@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,6 +28,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.AuthCredential;
@@ -34,6 +37,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class Main_Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,6 +50,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
     private GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN = 1;
     private FirebaseManager firebaseManager;
+    private FirebaseStorage firebaseStorage;
 
 
     @Override
@@ -164,7 +171,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(Main_Login.this, Main_Home.class);
                             startActivity(intent);
                             Toast.makeText(Main_Login.this, "Authentication successful", Toast.LENGTH_SHORT).show();
@@ -185,6 +191,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                         String firstName = account.getGivenName();
                         String lastName = account.getFamilyName();
                         firebaseManager.agregarContactoGoogleJson(firstName, lastName, email);
+                        crearCarpetaStorage(email);
                     }
 
                 }
@@ -194,5 +201,24 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             String errorMessage = "Google sign in failed: " + e.getMessage();
             Toast.makeText(Main_Login.this, errorMessage, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void crearCarpetaStorage(String email){
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference folderRef = storage.getReference().child(email);
+        folderRef.child(email).putBytes(new byte[0]).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // La carpeta se creó exitosamente
+                Log.d(TAG, "Carpeta creada correctamente.");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Ocurrió un error al crear la carpeta
+                Log.e(TAG, "Error al crear la carpeta: " + e.getMessage());
+            }
+        });
     }
 }
