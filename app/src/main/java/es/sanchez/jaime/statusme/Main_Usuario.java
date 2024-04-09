@@ -60,7 +60,6 @@ public class Main_Usuario extends AppCompatActivity {
         lastname = findViewById(R.id.lastaname);
         name.setText(nombre);
         lastname.setText(apellido);
-
         CargarImagen();
         findViewById(R.id.image).setOnClickListener(v -> openGallery());
     }
