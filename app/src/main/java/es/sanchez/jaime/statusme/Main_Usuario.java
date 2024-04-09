@@ -49,17 +49,15 @@ public class Main_Usuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_usuario);
+        String nombre = "";
+        String apellido = "";
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-
         image = findViewById(R.id.image);
         name = findViewById(R.id.name);
         lastname = findViewById(R.id.lastaname);
-
-        String nombre = "";
-        String apellido = "";
 
         if (SesionGoogle() != null) {
             nombre = account.getGivenName();
@@ -190,9 +188,17 @@ public class Main_Usuario extends AppCompatActivity {
         } else if (view.getId() == R.id.icono5){
             Intent remember2 = new Intent(Main_Usuario.this, Main_Usuario.class);
             startActivity(remember2);
-        } else if (view.getId() == R.id.back){
+        } else if (view.getId() == R.id.back && SesionGoogle() != null){
             GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
             FirebaseAuth.getInstance().signOut();
+            Toast.makeText(this, "Sesión cerrada Google", Toast.LENGTH_SHORT).show();
+            Intent remember2 = new Intent(Main_Usuario.this, Main_Login.class);
+            startActivity(remember2);
+        }
+        else if (view.getId() == R.id.back && SesionAuth() != null){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
+            Toast.makeText(this, "Sesión cerrada Auth", Toast.LENGTH_SHORT).show();
             Intent remember2 = new Intent(Main_Usuario.this, Main_Login.class);
             startActivity(remember2);
         }
