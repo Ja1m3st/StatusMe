@@ -27,23 +27,41 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Main_Usuario extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
     private StorageReference storageRef;
+    private FirebaseStorage storage;
     private  ImageView image;
+    private TextView name, lastname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_usuario);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        String nombre = account.getGivenName();
+        String apellido = account.getFamilyName();
+
 
         image = findViewById(R.id.image);
-        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+        name = findViewById(R.id.name);
+        lastname = findViewById(R.id.lastaname);
+        name.setText(nombre);
+        lastname.setText(apellido);
+
 
         CargarImagen();
         // Manejar el clic del botón o icono
@@ -71,7 +89,6 @@ public class Main_Usuario extends AppCompatActivity {
         if (imageUri != null) {
             String imageName = "";
             String ruta = "";
-            FirebaseStorage storage = FirebaseStorage.getInstance();
 
             if(SesionAuth() != null){
                 imageName = "logo"+ SesionAuth();
@@ -81,8 +98,7 @@ public class Main_Usuario extends AppCompatActivity {
                 ruta = SesionGoogle();
             }
 
-            storageRef = storage.getReference().child(ruta);
-            StorageReference imageRef = storageRef.child(imageName);
+            StorageReference imageRef = storageRef.child(ruta).child(imageName);
 
             // Subir el archivo a Firebase Storage
             imageRef.putFile(imageUri)
@@ -105,7 +121,6 @@ public class Main_Usuario extends AppCompatActivity {
     private void CargarImagen(){
         String imageName = "";
         String ruta = "";
-        FirebaseStorage storage = FirebaseStorage.getInstance();
 
         if(SesionAuth() != null){
             imageName = "logo"+ SesionAuth();
@@ -115,51 +130,57 @@ public class Main_Usuario extends AppCompatActivity {
             ruta = SesionGoogle();
         }
 
-        storageRef = storage.getReference().child(ruta);
-        StorageReference imageRef = storageRef.child(imageName);
+        StorageReference imageRef = storageRef.child(ruta).child(imageName);
 
-        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // La URL de descarga se obtuvo exitosamente
-                String downloadUrl = uri.toString();
+        if (imageRef != null){
+            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    // La URL de descarga se obtuvo exitosamente
+                    String downloadUrl = uri.toString();
 
-                // Cargar la imagen en el ImageView utilizando Glide
-                Glide.with(image)
-                        .load(downloadUrl)
-                        .into(image);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Ocurrió un error al obtener la URL de descarga de la imagen
-                Log.e(TAG, "Error al obtener la URL de descarga de la imagen: " + exception.getMessage());
-            }
-        });
+                    // Cargar la imagen en el ImageView utilizando Glide
+                    Glide.with(image)
+                            .load(downloadUrl)
+                            .into(image);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    Log.e(TAG, "Error al obtener la URL de descarga de la imagen: " + exception.getMessage());
+                }
+            });
+        } else {
+            imageRef = storageRef.child("noregistrado.png");
+            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    // La URL de descarga se obtuvo exitosamente
+                    String downloadUrl = uri.toString();
+
+                    // Cargar la imagen en el ImageView utilizando Glide
+                    Glide.with(image)
+                            .load(downloadUrl)
+                            .into(image);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    Log.e(TAG, "Error al obtener la URL de descarga de la imagen: " + exception.getMessage());
+                }
+            });
+        }
     }
 
     private String SesionGoogle(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         String email = account.getEmail();
-        if (account != null) {
-            // Aquí puedes utilizar el correo electrónico como lo necesites
-            Log.d(TAG, "Correo electrónico del usuario: " + email);
-        } else {
-            // El usuario no ha iniciado sesión con Google
-        }
         return email;
     }
     private String SesionAuth(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String email = currentUser.getEmail();
-
-        if (currentUser != null) {
-            // Aquí puedes utilizar el correo electrónico como lo necesites
-            Log.d(TAG, "Correo electrónico del usuario: " + email);
-        } else {
-            // El usuario no ha iniciado sesión con Firebase Auth
-        }
         return email;
     }
 

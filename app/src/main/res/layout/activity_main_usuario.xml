@@ -63,20 +63,22 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre"
                     android:fontFamily="@font/medio"
-                    android:textSize="30dp"
+                    android:textSize="20dp"
                     android:textColor="@color/green_main"/>
 
                 <TextView
+                    android:id="@+id/lastaname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Apellido"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/medio"
-                    android:textSize="30dp"
+                    android:textSize="20dp"
                     android:textColor="@color/green_main"/>
 
             </LinearLayout>
