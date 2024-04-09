@@ -158,8 +158,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             } catch (ApiException e) {
                 // Manejar errores específicos
                 Log.e(TAG, "Google sign in failed", e);
-                String errorMessage = "Google sign in failed: " + e.getMessage();
-                Toast.makeText(Main_Login.this, errorMessage, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -173,9 +171,9 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(Main_Login.this, Main_Home.class);
                             startActivity(intent);
-                            Toast.makeText(Main_Login.this, "Authentication successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Main_Login.this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(Main_Login.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Main_Login.this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -198,8 +196,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             });
         } catch (ApiException e) {
             Log.e(TAG, "Google sign in failed", e);
-            String errorMessage = "Google sign in failed: " + e.getMessage();
-            Toast.makeText(Main_Login.this, errorMessage, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -210,13 +206,11 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         folderRef.child(email).putBytes(new byte[0]).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // La carpeta se creó exitosamente
                 Log.d(TAG, "Carpeta creada correctamente.");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // Ocurrió un error al crear la carpeta
                 Log.e(TAG, "Error al crear la carpeta: " + e.getMessage());
             }
         });

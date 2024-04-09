@@ -64,7 +64,6 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
         String etlastname = lastname.getText().toString();
         String etmail = mail.getText().toString();
         String etpassord = password.getText().toString();
-
         firebaseManager.agregarContactoJson(etname, etlastname, etmail, etpassord);
     }
 
@@ -74,7 +73,6 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
         String etmail = mail.getText().toString();
         String etpassword = password.getText().toString();
         String etrepassword = repassword.getText().toString();
-
 
         if (!TextUtils.isEmpty(etmail) && !TextUtils.isEmpty(etname) && !TextUtils.isEmpty(etlastname)) {
             if (etpassword.equals(etrepassword)) {
@@ -108,13 +106,11 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.button_scale);
         view.startAnimation(animation);
-
         if (view.getId() == R.id.Back) {
             Intent back = new Intent(Main_Signup.this, Main_Login.class);
             startActivity(back);
         }
     }
-
     private void crearCarpetaStorage(String email){
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
