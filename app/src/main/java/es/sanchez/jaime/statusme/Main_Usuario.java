@@ -50,16 +50,18 @@ public class Main_Usuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_usuario);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        String nombre = account.getGivenName();
-        String apellido = account.getFamilyName();
 
-        image = findViewById(R.id.image);
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+
+        image = findViewById(R.id.image);
         name = findViewById(R.id.name);
         lastname = findViewById(R.id.lastaname);
+        String nombre = account.getGivenName();
+        String apellido = account.getFamilyName();
         name.setText(nombre);
         lastname.setText(apellido);
+
         CargarImagen();
         findViewById(R.id.image).setOnClickListener(v -> openGallery());
     }
@@ -121,39 +123,37 @@ public class Main_Usuario extends AppCompatActivity {
         }
 
         StorageReference imageRef = storageRef.child(ruta).child(imageName);
+        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String downloadUrl = uri.toString();
+                Glide.with(image)
+                        .load(downloadUrl)
+                        .into(image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.e(TAG, "Error al obtener la URL de descarga de la imagen: " + exception.getMessage());
+                // Cargar la imagen predeterminada "noregistrado.png"
+                StorageReference defaultImageRef = storageRef.child("noregistrado.png");
+                defaultImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String defaultDownloadUrl = uri.toString();
+                        Glide.with(image)
+                                .load(defaultDownloadUrl)
+                                .into(image);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Log.e(TAG, "Error al cargar la imagen predeterminada: " + exception.getMessage());
+                    }
+                });
+            }
+        });
 
-        if (imageRef != null){
-            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    String downloadUrl = uri.toString();
-                    Glide.with(image)
-                            .load(downloadUrl)
-                            .into(image);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    Log.e(TAG, "Error al obtener la URL de descarga de la imagen: " + exception.getMessage());
-                }
-            });
-        } else {
-            imageRef = storageRef.child("noregistrado.png");
-            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    String downloadUrl = uri.toString();
-                    Glide.with(image)
-                            .load(downloadUrl)
-                            .into(image);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    Log.e(TAG, "Error al obtener la URL de descarga de la imagen: " + exception.getMessage());
-                }
-            });
-        }
     }
 
     private String SesionGoogle(){

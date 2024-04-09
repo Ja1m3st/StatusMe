@@ -51,7 +51,7 @@
                     android:id="@+id/image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/grafico_de_barras"
+                    android:src="@drawable/libro"
                     android:scaleType="centerCrop"
                     android:layout_marginTop="30dp"/>
             </LinearLayout>
@@ -149,7 +149,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/libro"
+                android:src="@drawable/usuario"
                 android:background="@null"
                 android:scaleType="centerInside"
                 android:padding="10dp"
