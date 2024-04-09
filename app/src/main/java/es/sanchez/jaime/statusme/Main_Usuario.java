@@ -53,7 +53,6 @@ public class Main_Usuario extends AppCompatActivity {
         String nombre = account.getGivenName();
         String apellido = account.getFamilyName();
 
-
         image = findViewById(R.id.image);
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
@@ -62,9 +61,7 @@ public class Main_Usuario extends AppCompatActivity {
         name.setText(nombre);
         lastname.setText(apellido);
 
-
         CargarImagen();
-        // Manejar el clic del botón o icono
         findViewById(R.id.image).setOnClickListener(v -> openGallery());
     }
 
@@ -80,7 +77,6 @@ public class Main_Usuario extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
-            // Subir la imagen seleccionada al almacenamiento en la nube
             uploadImageToCloudStorage();
         }
     }
@@ -99,15 +95,10 @@ public class Main_Usuario extends AppCompatActivity {
             }
 
             StorageReference imageRef = storageRef.child(ruta).child(imageName);
-
-            // Subir el archivo a Firebase Storage
             imageRef.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> {
-                        // La carga se completó exitosamente
-                        // Aquí puedes manejar la URL de descarga del archivo
                         imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                             String downloadUrl = uri.toString();
-                            // Cargar la imagen en el ImageView usando Glide
                             Glide.with(Main_Usuario.this)
                                     .load(downloadUrl)
                                     .into(image);
@@ -136,10 +127,7 @@ public class Main_Usuario extends AppCompatActivity {
             imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    // La URL de descarga se obtuvo exitosamente
                     String downloadUrl = uri.toString();
-
-                    // Cargar la imagen en el ImageView utilizando Glide
                     Glide.with(image)
                             .load(downloadUrl)
                             .into(image);
@@ -155,10 +143,7 @@ public class Main_Usuario extends AppCompatActivity {
             imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    // La URL de descarga se obtuvo exitosamente
                     String downloadUrl = uri.toString();
-
-                    // Cargar la imagen en el ImageView utilizando Glide
                     Glide.with(image)
                             .load(downloadUrl)
                             .into(image);
