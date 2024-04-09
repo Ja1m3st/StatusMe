@@ -57,11 +57,20 @@ public class Main_Usuario extends AppCompatActivity {
         image = findViewById(R.id.image);
         name = findViewById(R.id.name);
         lastname = findViewById(R.id.lastaname);
-        String nombre = account.getGivenName();
-        String apellido = account.getFamilyName();
+
+        String nombre = "";
+        String apellido = "";
+
+        if (SesionGoogle() != null) {
+            nombre = account.getGivenName();
+            apellido = account.getFamilyName();
+        } else if (SesionAuth() != null) {
+            nombre = "Usuario";
+            apellido = "Auth";
+        }
+
         name.setText(nombre);
         lastname.setText(apellido);
-
         CargarImagen();
         findViewById(R.id.image).setOnClickListener(v -> openGallery());
     }
@@ -87,12 +96,12 @@ public class Main_Usuario extends AppCompatActivity {
             String imageName = "";
             String ruta = "";
 
-            if(SesionAuth() != null){
-                imageName = "logo"+ SesionAuth();
-                ruta = SesionAuth();
-            } else if(SesionGoogle() != null){
+            if (SesionGoogle() != null){
                 imageName = "logo"+ SesionGoogle();
                 ruta = SesionGoogle();
+            } else if (SesionAuth() != null){
+                imageName = "logo"+ SesionAuth();
+                ruta = SesionAuth();
             }
 
             StorageReference imageRef = storageRef.child(ruta).child(imageName);
@@ -114,12 +123,12 @@ public class Main_Usuario extends AppCompatActivity {
         String imageName = "";
         String ruta = "";
 
-        if(SesionAuth() != null){
-            imageName = "logo"+ SesionAuth();
-            ruta = SesionAuth();
-        } else if(SesionGoogle() != null){
+        if (SesionGoogle() != null){
             imageName = "logo"+ SesionGoogle();
             ruta = SesionGoogle();
+        } else if (SesionAuth() != null){
+            imageName = "logo"+ SesionAuth();
+            ruta = SesionAuth();
         }
 
         StorageReference imageRef = storageRef.child(ruta).child(imageName);
@@ -153,19 +162,25 @@ public class Main_Usuario extends AppCompatActivity {
                 });
             }
         });
-
     }
 
     private String SesionGoogle(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        String email = account.getEmail();
-        return email;
+        if (account != null) {
+            return account.getEmail();
+        } else {
+            return null;
+        }
     }
     private String SesionAuth(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        String email = currentUser.getEmail();
-        return email;
+        if(currentUser != null) {
+            String email = currentUser.getEmail();
+            return email;
+        } else {
+            return null;
+        }
     }
 
     public void onClick(View view) {
