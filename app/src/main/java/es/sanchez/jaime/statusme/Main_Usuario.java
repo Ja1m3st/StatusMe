@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
-
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -190,6 +190,11 @@ public class Main_Usuario extends AppCompatActivity {
             startActivity(signup);
         } else if (view.getId() == R.id.icono5){
             Intent remember2 = new Intent(Main_Usuario.this, Main_Usuario.class);
+            startActivity(remember2);
+        } else if (view.getId() == R.id.back){
+            GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
+            FirebaseAuth.getInstance().signOut();
+            Intent remember2 = new Intent(Main_Usuario.this, Main_Login.class);
             startActivity(remember2);
         }
     }

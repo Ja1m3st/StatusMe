@@ -22,7 +22,8 @@
                 android:text="Sign out"
                 android:textSize="20sp"
                 android:fontFamily="@font/medio"
-                android:textColor="@color/green_main"/>
+                android:textColor="@color/green_main"
+                android:onClick="onClick"/>
 
         </RelativeLayout>
 
