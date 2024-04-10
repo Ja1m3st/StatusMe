@@ -29,9 +29,9 @@ public class FirebaseManager {
         Usuario nuevoContacto = new Usuario(name, lastname, mail, password, estadosDeAnimo);
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
-    public void agregarContactoGoogleJson(String name, String lastname, String mail) {
+    public void agregarContactoGoogleJson(String name, String lastname, String mail,  ArrayList<String> estadosDeAnimo) {
         String contactoId = databaseReference.push().getKey();
-        Usuario nuevoContacto = new Usuario.UsuarioGoogle(name, lastname, mail); // Corregir el nombre de la variable
+        Usuario nuevoContacto = new Usuario.UsuarioGoogle(name, lastname, mail, estadosDeAnimo); // Corregir el nombre de la variable
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
     public void obtenerContactos(ValueEventListener listener) {

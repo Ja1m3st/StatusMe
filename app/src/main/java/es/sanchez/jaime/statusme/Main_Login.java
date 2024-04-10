@@ -41,6 +41,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+
 public class Main_Login extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mail, password;
@@ -185,7 +187,10 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                     if (found == false) { // Si el email no existe en la base de datos, agrégalo
                         firstName = account.getGivenName();
                         lastName = account.getFamilyName();
-                        firebaseManager.agregarContactoGoogleJson(firstName, lastName, email);
+                        ArrayList<String> estadosDeAnimo = new ArrayList<>();
+                        estadosDeAnimo.add("Feliz");
+                        estadosDeAnimo.add("Triste");
+                        firebaseManager.agregarContactoGoogleJson(firstName, lastName, email, estadosDeAnimo);
                         crearCarpetaStorage(email);
                     }
 

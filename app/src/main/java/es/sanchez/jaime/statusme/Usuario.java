@@ -19,8 +19,8 @@ public class Usuario {
     }
 
     public static class UsuarioGoogle extends Usuario {
-        public UsuarioGoogle(String name, String lastname, String mail) {
-            super(name, lastname, mail, null, null); // Asignar contraseña a null para usuarios de Google
+        public UsuarioGoogle(String name, String lastname, String mail, ArrayList<String> estadosDeAnimo) {
+            super(name, lastname, mail, null, estadosDeAnimo); // Asignar contraseña a null para usuarios de Google
         }
     }
 
