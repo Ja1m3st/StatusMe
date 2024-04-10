@@ -118,13 +118,11 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
         folderRef.child(email).putBytes(new byte[0]).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // La carpeta se creó exitosamente
                 Log.d(TAG, "Carpeta creada correctamente.");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // Ocurrió un error al crear la carpeta
                 Log.e(TAG, "Error al crear la carpeta: " + e.getMessage());
             }
         });

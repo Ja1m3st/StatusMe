@@ -50,8 +50,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
     private GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN = 1;
     private FirebaseManager firebaseManager;
-    private FirebaseStorage firebaseStorage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +58,18 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
 
         TextView signup = findViewById(R.id.SignUp);
         TextView remember = findViewById(R.id.Remember);
+
         mail = findViewById(R.id.User);
         password = findViewById(R.id.Password);
         google = findViewById(R.id.card);
+
         signup.setOnClickListener(this);
         remember.setOnClickListener(this);
-        firebaseManager = new FirebaseManager();
 
+        firebaseManager = new FirebaseManager();
         mAuth = FirebaseAuth.getInstance();
+
+        // ----------------------------------- LOGIN GOOGLE ---------------------------------//
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -82,7 +84,9 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                 signInWithGoogle();
             }
         });
-        // MODO OSCURO
+
+        // ----------------------------------- MODO OSCURO ---------------------------------//
+
         SwitchMaterial switchDarkMode = findViewById(R.id.DarkMode);
         switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -95,6 +99,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             }
         });
 
+        // ----------------------------------- LOGIN AUTH ---------------------------------//
         myButton = findViewById(R.id.Login);
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +109,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    // Método para iniciar sesión con Auth
+    // ----------------------------------- METODO LOGIN AUTH ---------------------------------//
     public void login() {
         String etemail = mail.getText().toString();
         String etpassword = password.getText().toString();
@@ -128,28 +133,16 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.button_scale);
-        view.startAnimation(animation);
 
-        if (view.getId() == R.id.SignUp) {
-            Intent signup = new Intent(Main_Login.this, Main_Signup.class);
-            startActivity(signup);
-        } else if (view.getId() == R.id.Remember){
-            Intent remember2 = new Intent(Main_Login.this, Main_Remember.class);
-            startActivity(remember2);
-        }
-    }
-
+    // ----------------------------------- METODOS GOOGLE ---------------------------------//
     public void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
@@ -157,7 +150,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                 firebaseAuthWithGoogle(account.getIdToken());
                 handleSignInResult(task);
             } catch (ApiException e) {
-                // Manejar errores específicos
                 Log.e(TAG, "Google sign in failed", e);
             }
         }
@@ -179,6 +171,8 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                     }
                 });
     }
+
+    // --------------------------------- METODOS STORAGE GOOGLE ---------------------------------//
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -186,9 +180,11 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             firebaseManager.buscarEmail(email, new FirebaseManager.EmailCallback() {
                 @Override
                 public void onEmailFound(boolean found) {
+                    String firstName = "";
+                    String lastName = "";
                     if (found == false) { // Si el email no existe en la base de datos, agrégalo
-                        String firstName = account.getGivenName();
-                        String lastName = account.getFamilyName();
+                        firstName = account.getGivenName();
+                        lastName = account.getFamilyName();
                         firebaseManager.agregarContactoGoogleJson(firstName, lastName, email);
                         crearCarpetaStorage(email);
                     }
@@ -215,5 +211,17 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                 Log.e(TAG, "Error al crear la carpeta: " + e.getMessage());
             }
         });
+    }
+
+    // ----------------------------------- METODO ONCLICK ---------------------------------//
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.SignUp) {
+            Intent signup = new Intent(Main_Login.this, Main_Signup.class);
+            startActivity(signup);
+        } else if (view.getId() == R.id.Remember){
+            Intent remember2 = new Intent(Main_Login.this, Main_Remember.class);
+            startActivity(remember2);
+        }
     }
 }

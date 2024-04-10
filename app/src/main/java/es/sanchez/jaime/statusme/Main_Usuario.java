@@ -42,7 +42,7 @@ public class Main_Usuario extends AppCompatActivity {
     private Uri imageUri;
     private StorageReference storageRef;
     private FirebaseStorage storage;
-    private  ImageView image;
+    private ImageView image;
     private TextView name, lastname;
 
     @Override
@@ -55,6 +55,7 @@ public class Main_Usuario extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+
         image = findViewById(R.id.image);
         name = findViewById(R.id.name);
         lastname = findViewById(R.id.lastaname);
@@ -69,17 +70,18 @@ public class Main_Usuario extends AppCompatActivity {
 
         name.setText(nombre);
         lastname.setText(apellido);
+
         CargarImagen();
         findViewById(R.id.image).setOnClickListener(v -> openGallery());
     }
 
-    // Método para abrir la galería de imágenes
+    // --------------------------------- METODO ABRIR GALERIA ---------------------------------//
     private void openGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
     }
 
-    // Método para manejar el resultado de la selección de la imagen desde la galería
+    // --------------------------------- METODO SELECCION IMAGEN ---------------------------------//
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -88,6 +90,8 @@ public class Main_Usuario extends AppCompatActivity {
             uploadImageToCloudStorage();
         }
     }
+
+    // --------------------------------- METODOS IMAGEN USUARIO---------------------------------//
 
     private void uploadImageToCloudStorage() {
         if (imageUri != null) {
@@ -162,6 +166,7 @@ public class Main_Usuario extends AppCompatActivity {
         });
     }
 
+    // --------------------------------- METODO IDENTIFICACIÓN ---------------------------------//
     private String SesionGoogle(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
@@ -181,6 +186,7 @@ public class Main_Usuario extends AppCompatActivity {
         }
     }
 
+    // --------------------------------- METODO ONLICK ---------------------------------//
     public void onClick(View view) {
         if (view.getId() == R.id.icono1) {
             Intent signup = new Intent(Main_Usuario.this, Main_Home.class);
