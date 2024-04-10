@@ -192,6 +192,7 @@ public class Main_Usuario extends AppCompatActivity {
         if (view.getId() == R.id.icono1) {
             Intent signup = new Intent(Main_Usuario.this, Main_Home.class);
             startActivity(signup);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } else if (view.getId() == R.id.icono5){
             Intent remember2 = new Intent(Main_Usuario.this, Main_Usuario.class);
             startActivity(remember2);
