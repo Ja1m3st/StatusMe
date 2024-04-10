@@ -42,6 +42,7 @@ public class Main_Home extends AppCompatActivity {
         } else if (view.getId() == R.id.icono5){
             Intent remember2 = new Intent(Main_Home.this, Main_Usuario.class);
             startActivity(remember2);
+            overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
         }
     }
 }

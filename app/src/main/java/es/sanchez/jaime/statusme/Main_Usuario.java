@@ -49,6 +49,7 @@ public class Main_Usuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_usuario);
+        overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
         String nombre = "";
         String apellido = "";
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
