@@ -27,6 +27,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+
 public class Main_Signup extends AppCompatActivity implements View.OnClickListener {
 
     private EditText name, lastname , mail, password, repassword;
@@ -59,12 +61,12 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    private void agregarContactoJson() {
+    private void agregarContactoJson(ArrayList<String> estadosDeAnimo) {
         String etname = name.getText().toString();
         String etlastname = lastname.getText().toString();
         String etmail = mail.getText().toString();
         String etpassord = password.getText().toString();
-        firebaseManager.agregarContactoJson(etname, etlastname, etmail, etpassord);
+        firebaseManager.agregarContactoJson(etname, etlastname, etmail, etpassord,estadosDeAnimo);
     }
 
     public void registrarUsuario() {
@@ -86,8 +88,11 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
                                     FirebaseUser currentUser = mAuth.getCurrentUser();
                                     String email = currentUser.getEmail();
                                     crearCarpetaStorage(email);
+                                    ArrayList<String> estadosDeAnimo = new ArrayList<>();
+                                    estadosDeAnimo.add("Feliz");
+                                    estadosDeAnimo.add("Triste");
+                                    agregarContactoJson(estadosDeAnimo);
                                     Intent login = new Intent(Main_Signup.this, Main_Login.class);
-                                    agregarContactoJson();
                                     startActivity(login);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Contraseña o Usuario incorrectos", Toast.LENGTH_SHORT).show();

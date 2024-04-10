@@ -3,6 +3,7 @@ package es.sanchez.jaime.statusme;
 import static android.content.ContentValues.TAG;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -12,6 +13,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class FirebaseManager {
     private DatabaseReference databaseReference;
 
@@ -19,9 +24,9 @@ public class FirebaseManager {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Usuarios");
     }
-    public void agregarContactoJson(String name, String lastname, String mail, String password) {
+    public void agregarContactoJson(String name, String lastname, String mail, String password, ArrayList<String> estadosDeAnimo) {
         String contactoId = databaseReference.push().getKey();
-        Usuario nuevoContacto = new Usuario(name, lastname, mail, password);
+        Usuario nuevoContacto = new Usuario(name, lastname, mail, password, estadosDeAnimo);
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
     public void agregarContactoGoogleJson(String name, String lastname, String mail) {
