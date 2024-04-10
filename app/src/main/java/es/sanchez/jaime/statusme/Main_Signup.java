@@ -27,6 +27,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main_Signup extends AppCompatActivity implements View.OnClickListener {
 
     private EditText name, lastname , mail, password, repassword;

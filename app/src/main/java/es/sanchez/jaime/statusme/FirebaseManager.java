@@ -12,6 +12,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FirebaseManager {
     private DatabaseReference databaseReference;
 
@@ -21,11 +24,13 @@ public class FirebaseManager {
     }
     public void agregarContactoJson(String name, String lastname, String mail, String password) {
         String contactoId = databaseReference.push().getKey();
-        Usuario nuevoContacto = new Usuario(name, lastname, mail, password);
+        Estados estados_de_animo = new Estados(new ArrayList<>());
+        Usuario nuevoContacto = new Usuario(name, lastname, mail, password,estados_de_animo);
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
     public void agregarContactoGoogleJson(String name, String lastname, String mail) {
         String contactoId = databaseReference.push().getKey();
+        //List<String> lista_de_estados = new ArrayList<>();
         Usuario nuevoContacto = new Usuario.UsuarioGoogle(name, lastname, mail); // Corregir el nombre de la variable
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }

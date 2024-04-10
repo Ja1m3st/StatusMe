@@ -41,6 +41,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main_Login extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mail, password;
@@ -172,7 +175,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                 });
     }
 
-    // --------------------------------- METODOS STORAGE GOOGLE ---------------------------------//
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -180,11 +182,9 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             firebaseManager.buscarEmail(email, new FirebaseManager.EmailCallback() {
                 @Override
                 public void onEmailFound(boolean found) {
-                    String firstName = "";
-                    String lastName = "";
-                    if (found == false) { // Si el email no existe en la base de datos, agrégalo
-                        firstName = account.getGivenName();
-                        lastName = account.getFamilyName();
+                    if (found == false) {
+                        String firstName = account.getGivenName();
+                        String lastName = account.getFamilyName();
                         firebaseManager.agregarContactoGoogleJson(firstName, lastName, email);
                         crearCarpetaStorage(email);
                     }
@@ -195,7 +195,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             Log.e(TAG, "Google sign in failed", e);
         }
     }
-
+    // --------------------------------- METODOS STORAGE GOOGLE ---------------------------------//
     private void crearCarpetaStorage(String email){
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
