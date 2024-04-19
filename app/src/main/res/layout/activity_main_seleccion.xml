@@ -100,7 +100,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/corriendo"
+                    android:src="@drawable/correr"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
