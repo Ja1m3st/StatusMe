@@ -1,9 +1,213 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main_Seleccion">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/animo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/TituloAnimo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Selecciona tu estado de Animo:"
+                android:fontFamily="@font/medio"
+                android:textSize="20dp"
+                android:textColor="@color/green_main"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/estados"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/TituloAnimo"
+            android:orientation="horizontal" >
+                <ImageButton
+                    android:id="@+id/Bien"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/circulo"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="Bien">
+                </ImageButton>
+
+                <ImageButton
+                    android:id="@+id/disgustado"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/disgustado"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="Disgustado">
+                </ImageButton>
+                <ImageButton
+                    android:id="@+id/inexpresivo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/inexpresivo"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="Inexpresivo">
+                </ImageButton>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/TituloExtras"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/estados">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Selecciona tu estado de Animo:"
+                android:fontFamily="@font/medio"
+                android:textSize="20dp"
+                android:textColor="@color/green_main"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Extras"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/TituloExtras">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/checkBoxCorriendo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/corriendo"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+            </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/jugando"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/controlador"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:onClick="Disgustado">
+            </ImageButton>
+            <ImageButton
+                android:id="@+id/trabajando"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/portafolio"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:onClick="Inexpresivo">
+            </ImageButton>
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/Bottomnav"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/animo"
+        android:layout_above="@+id/card_view">
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:cardBackgroundColor="?attr/colorPrimary">
+
+        <LinearLayout
+            android:id="@+id/Topnav2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/icono1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/libro"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:onClick="onClick"/>
+
+            <ImageButton
+                android:id="@+id/icono2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/estadisticas"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:onClick="onClick"/>
+
+            <ImageButton
+                android:id="@+id/icono3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/mas"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:onClick="onClick"/>
+
+            <ImageButton
+                android:id="@+id/icono4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/calendario"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:onClick="onClick"/>
+
+            <ImageButton
+                android:id="@+id/icono5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/usuario"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:onClick="onClick"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+

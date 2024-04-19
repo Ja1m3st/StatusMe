@@ -19,15 +19,13 @@ public class Main_Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
-        overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
-
+        //overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
         // Obtener la fecha actual
         Date fechaActual = new Date();
 
         // Formatear la fecha en el formato deseado
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String fechaFormateada = formatoFecha.format(fechaActual);
-
     }
 
     public void onClick(View view) {
@@ -38,7 +36,10 @@ public class Main_Home extends AppCompatActivity {
         } else if (view.getId() == R.id.icono5){
             Intent remember2 = new Intent(Main_Home.this, Main_Usuario.class);
             startActivity(remember2);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else if (view.getId() == R.id.icono3) {
+            Intent animo = new Intent(Main_Home.this, Main_Seleccion.class);
+            startActivity(animo);
         }
     }
 }
