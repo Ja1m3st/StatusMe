@@ -1,6 +1,8 @@
 package es.sanchez.jaime.statusme;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Usuario {
     private int id;
@@ -8,22 +10,20 @@ public class Usuario {
     private String lastname; // Make a Split for separate the name to the lastname
     private String mail; // Make a control for caracters
     private String password; // Make a system that controls the caracters
-    private ArrayList<String> estadosDeAnimo;
-    private ArrayList<String> actividades;
+    private ArrayList<ArrayList> totaldias;
 
 
-    public Usuario(String name, String lastname, String mail, String password, ArrayList<String> estadosDeAnimo, ArrayList<String> actividades) {
+    public Usuario(String name, String lastname, String mail, String password, ArrayList<ArrayList> totaldias) {
         this.name = name;
         this.lastname = lastname;
         this.mail = mail;
         this.password = password;
-        this.estadosDeAnimo = estadosDeAnimo;
-        this.actividades = actividades;
+        this.totaldias = totaldias;
     }
 
     public static class UsuarioGoogle extends Usuario {
-        public UsuarioGoogle(String name, String lastname, String mail, ArrayList<String> estadosDeAnimo, ArrayList<String> actividades) {
-            super(name, lastname, mail, null, estadosDeAnimo, actividades); // Asignar contraseña a null para usuarios de Google
+        public UsuarioGoogle(String name, String lastname, String mail, ArrayList<ArrayList> totaldias) {
+            super(name, lastname, mail, null, totaldias); // Asignar contraseña a null para usuarios de Google
         }
     }
 
@@ -67,20 +67,12 @@ public class Usuario {
         this.password = password;
     }
 
-    public ArrayList<String> getEstadosDeAnimo() {
-        return estadosDeAnimo;
+    public ArrayList<ArrayList> getTotaldias() {
+        return totaldias;
     }
 
-    public void setEstadosDeAnimo(ArrayList<String> estadosDeAnimo) {
-        this.estadosDeAnimo = estadosDeAnimo;
-    }
-
-    public ArrayList<String> getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(ArrayList<String> actividades) {
-        this.actividades = actividades;
+    public void setTotaldias(ArrayList<ArrayList> totaldias) {
+        this.totaldias = totaldias;
     }
 
     @Override

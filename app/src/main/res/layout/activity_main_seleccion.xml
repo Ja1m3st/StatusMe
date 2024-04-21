@@ -175,6 +175,20 @@
 
             </FrameLayout>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Extras2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/Extras">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/green_main"
+                android:text="GUARDAR">
+            </Button>
+        </LinearLayout>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/Bottomnav"

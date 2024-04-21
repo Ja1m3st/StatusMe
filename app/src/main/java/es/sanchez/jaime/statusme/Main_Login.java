@@ -41,6 +41,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main_Login extends AppCompatActivity implements View.OnClickListener {
@@ -187,13 +188,19 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                     if (found == false) { // Si el email no existe en la base de datos, agrégalo
                         firstName = account.getGivenName();
                         lastName = account.getFamilyName();
-                        ArrayList<String> estadosDeAnimo = new ArrayList<String>();
-                        ArrayList<String> actividades = new ArrayList<String>();
-                        estadosDeAnimo.add("Feliz");
-                        estadosDeAnimo.add("Medio");
-                        actividades.add("Trabajando");
-                        actividades.add("Jugando");
-                        firebaseManager.agregarContactoGoogleJson(firstName, lastName, email, estadosDeAnimo, actividades);
+
+                        ArrayList<ArrayList> totaldias = new ArrayList<>();
+                        ArrayList<ArrayList> arrayListDiaActual = new ArrayList<ArrayList>();
+                        ArrayList<String> estadosDeAnimo = new ArrayList<>();
+                        ArrayList<String> actividades = new ArrayList<>();
+                        totaldias.add(arrayListDiaActual);
+                        arrayListDiaActual.add(estadosDeAnimo);
+                        arrayListDiaActual.add(actividades);
+                        estadosDeAnimo.add(" ");
+                        estadosDeAnimo.add(" ");
+                        actividades.add(" ");
+                        actividades.add(" ");
+                        firebaseManager.agregarContactoGoogleJson(firstName, lastName, email, totaldias);
                         crearCarpetaStorage(email);
                     }
 

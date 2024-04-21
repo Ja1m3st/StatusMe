@@ -27,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main_Signup extends AppCompatActivity implements View.OnClickListener {
@@ -61,12 +62,12 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    private void agregarContactoJson(ArrayList<String> estadosDeAnimo, ArrayList<String> actividades) {
+    private void agregarContactoJson(ArrayList<ArrayList> totaldias) {
         String etname = name.getText().toString();
         String etlastname = lastname.getText().toString();
         String etmail = mail.getText().toString();
         String etpassord = password.getText().toString();
-        firebaseManager.agregarContactoJson(etname, etlastname, etmail, etpassord,estadosDeAnimo, actividades);
+        firebaseManager.agregarContactoJson(etname, etlastname, etmail, etpassord, totaldias);
     }
 
     public void registrarUsuario() {
@@ -88,14 +89,19 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
                                     FirebaseUser currentUser = mAuth.getCurrentUser();
                                     String email = currentUser.getEmail();
                                     crearCarpetaStorage(email);
-                                    // Estado de animo y actividades, creo los array
+
+                                    ArrayList<ArrayList> totaldias = new ArrayList<>();
+                                    ArrayList<ArrayList> arrayListDiaActual = new ArrayList<ArrayList>();
                                     ArrayList<String> estadosDeAnimo = new ArrayList<>();
                                     ArrayList<String> actividades = new ArrayList<>();
-                                    estadosDeAnimo.add("Feliz");
-                                    estadosDeAnimo.add("Medio");
-                                    actividades.add("Trabajando");
-                                    actividades.add("Jugando");
-                                    agregarContactoJson(estadosDeAnimo, actividades);
+                                    totaldias.add(arrayListDiaActual);
+                                    arrayListDiaActual.add(estadosDeAnimo);
+                                    arrayListDiaActual.add(actividades);
+                                    agregarContactoJson(totaldias);
+                                    estadosDeAnimo.add(" ");
+                                    estadosDeAnimo.add(" ");
+                                    actividades.add(" ");
+                                    actividades.add(" ");
                                     Intent login = new Intent(Main_Signup.this, Main_Login.class);
                                     startActivity(login);
                                 } else {
