@@ -29,40 +29,68 @@
             android:layout_height="60dp"
             android:layout_below="@+id/TituloAnimo"
             android:orientation="horizontal" >
-                <ImageButton
-                    android:id="@+id/Bien"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/circulo"
-                    android:background="@null"
-                    android:scaleType="centerInside"
-                    android:padding="10dp"
-                    android:onClick="Bien">
-                </ImageButton>
 
-                <ImageButton
-                    android:id="@+id/disgustado"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/feliz"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/circulo"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/medio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:src="@drawable/disgustado"
-                    android:background="@null"
-                    android:scaleType="centerInside"
-                    android:padding="10dp"
-                    android:onClick="Disgustado">
-                </ImageButton>
-                <ImageButton
-                    android:id="@+id/inexpresivo"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/mal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:src="@drawable/inexpresivo"
-                    android:background="@null"
-                    android:scaleType="centerInside"
-                    android:padding="10dp"
-                    android:onClick="Inexpresivo">
-                </ImageButton>
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+            </FrameLayout>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/TituloExtras"
@@ -73,7 +101,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Selecciona tu estado de Animo:"
+                android:text="Selecciona las actividades:"
                 android:fontFamily="@font/medio"
                 android:textSize="20dp"
                 android:textColor="@color/green_main"/>
@@ -106,28 +134,46 @@
 
             </FrameLayout>
 
-            <ImageButton
-                android:id="@+id/jugando"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/controlador"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="Disgustado">
-            </ImageButton>
-            <ImageButton
-                android:id="@+id/trabajando"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/jugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/controlador"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+            </FrameLayout>
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/portafolio"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="Inexpresivo">
-            </ImageButton>
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/jgar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/portafolio"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+            </FrameLayout>
         </LinearLayout>
     </RelativeLayout>
     <RelativeLayout

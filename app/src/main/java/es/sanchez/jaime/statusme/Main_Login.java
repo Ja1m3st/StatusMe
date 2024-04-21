@@ -187,10 +187,13 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                     if (found == false) { // Si el email no existe en la base de datos, agrégalo
                         firstName = account.getGivenName();
                         lastName = account.getFamilyName();
-                        ArrayList<String> estadosDeAnimo = new ArrayList<>();
+                        ArrayList<String> estadosDeAnimo = new ArrayList<String>();
+                        ArrayList<String> actividades = new ArrayList<String>();
                         estadosDeAnimo.add("Feliz");
-                        estadosDeAnimo.add("Triste");
-                        firebaseManager.agregarContactoGoogleJson(firstName, lastName, email, estadosDeAnimo);
+                        estadosDeAnimo.add("Medio");
+                        actividades.add("Trabajando");
+                        actividades.add("Jugando");
+                        firebaseManager.agregarContactoGoogleJson(firstName, lastName, email, estadosDeAnimo, actividades);
                         crearCarpetaStorage(email);
                     }
 

@@ -24,14 +24,14 @@ public class FirebaseManager {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Usuarios");
     }
-    public void agregarContactoJson(String name, String lastname, String mail, String password, ArrayList<String> estadosDeAnimo) {
+    public void agregarContactoJson(String name, String lastname, String mail, String password, ArrayList<String> estadosDeAnimo, ArrayList<String> actividades) {
         String contactoId = databaseReference.push().getKey();
-        Usuario nuevoContacto = new Usuario(name, lastname, mail, password, estadosDeAnimo);
+        Usuario nuevoContacto = new Usuario(name, lastname, mail, password, estadosDeAnimo, actividades);
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
-    public void agregarContactoGoogleJson(String name, String lastname, String mail,  ArrayList<String> estadosDeAnimo) {
+    public void agregarContactoGoogleJson(String name, String lastname, String mail,  ArrayList<String> estadosDeAnimo, ArrayList<String> actividades) {
         String contactoId = databaseReference.push().getKey();
-        Usuario nuevoContacto = new Usuario.UsuarioGoogle(name, lastname, mail, estadosDeAnimo); // Corregir el nombre de la variable
+        Usuario nuevoContacto = new Usuario.UsuarioGoogle(name, lastname, mail, estadosDeAnimo, actividades); // Corregir el nombre de la variable
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
     public void obtenerContactos(ValueEventListener listener) {
