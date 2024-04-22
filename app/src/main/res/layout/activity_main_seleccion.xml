@@ -33,7 +33,8 @@
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:layout_marginRight="4dp">
 
                 <CheckBox
                     android:id="@+id/feliz"
@@ -54,7 +55,8 @@
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:layout_marginRight="4dp">
 
                 <CheckBox
                     android:id="@+id/medio"
@@ -116,28 +118,43 @@
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:layout_marginRight="4dp">
 
                 <CheckBox
-                    android:id="@+id/checkBoxCorriendo"
+                    android:id="@+id/correr"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/checkbox_background"
-                    android:button="@null"/>
+                    android:button="@null" />
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/correr"
+                    android:layout_height="50dp"
+                    android:src="@drawable/corriendo"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Corriendo" />
+
+                </LinearLayout>
             </FrameLayout>
 
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@drawable/rounded_frame"
+                android:layout_marginRight="4dp">
 
                 <CheckBox
                     android:id="@+id/jugar"
@@ -148,19 +165,34 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:src="@drawable/controlador"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jugar" />
+
+                </LinearLayout>
+
             </FrameLayout>
+
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@drawable/rounded_frame">
 
                 <CheckBox
-                    android:id="@+id/jgar"
+                    android:id="@+id/trabajar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/checkbox_background"
@@ -168,10 +200,23 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:src="@drawable/portafolio"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Trabajando" />
+
+                </LinearLayout>
 
             </FrameLayout>
         </LinearLayout>
@@ -180,23 +225,241 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/Extras">
+            android:layout_below="@+id/Extras"
+            android:layout_marginTop="10dp">
 
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="4dp">
+
+                <CheckBox
+                    android:id="@+id/familia"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:src="@drawable/familia"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Familia" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/rounded_frame">
+
+                <CheckBox
+                    android:id="@+id/amigos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:src="@drawable/abrazo"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amigos" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/amor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:src="@drawable/amor"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cita" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Extras3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/Extras2"
+            android:layout_marginTop="10dp">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="4dp">
+
+                <CheckBox
+                    android:id="@+id/television"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:src="@drawable/television"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Television" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="4dp">
+
+                <CheckBox
+                    android:id="@+id/compras"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:src="@drawable/cesta"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cestas" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/leer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:src="@drawable/leer"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Leer" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/guardar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/Extras3"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal">
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/green_main"
                 android:text="GUARDAR">
             </Button>
         </LinearLayout>
     </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/Bottomnav"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/animo"
-        android:layout_above="@+id/card_view">
-    </RelativeLayout>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
