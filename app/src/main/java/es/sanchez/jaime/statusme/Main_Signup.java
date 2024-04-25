@@ -97,11 +97,11 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
                                     totaldias.add(arrayListDiaActual);
                                     arrayListDiaActual.add(estadosDeAnimo);
                                     arrayListDiaActual.add(actividades);
+                                    estadosDeAnimo.add(" ");
+                                    estadosDeAnimo.add(" ");
+                                    actividades.add(" ");
+                                    actividades.add(" ");
                                     agregarContactoJson(totaldias);
-                                    estadosDeAnimo.add(" ");
-                                    estadosDeAnimo.add(" ");
-                                    actividades.add(" ");
-                                    actividades.add(" ");
                                     Intent login = new Intent(Main_Signup.this, Main_Login.class);
                                     startActivity(login);
                                 } else {

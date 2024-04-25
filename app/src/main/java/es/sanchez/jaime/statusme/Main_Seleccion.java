@@ -2,24 +2,37 @@ package es.sanchez.jaime.statusme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main_Seleccion extends AppCompatActivity implements View.OnClickListener{
 
+    FirebaseManager firebaseManager;
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_seleccion);
 
+        firebaseManager = new FirebaseManager();
+
+
         CheckBox checkBoxFeliz = findViewById(R.id.feliz);
         CheckBox checkBoxMedio = findViewById(R.id.medio);
         CheckBox checkBoxMal = findViewById(R.id.mal);
+        Button guardar = findViewById(R.id.botonguardar);
 
         checkBoxFeliz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,28 +64,49 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        CheckBox checkBox = findViewById(R.id.correr); // Obtén la referencia del CheckBox desde el layout
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        guardar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Se llama cuando el estado del CheckBox cambia
-                if (isChecked) {
-                    // El CheckBox está marcado
-                    // Realiza las acciones que desees cuando el CheckBox esté marcado
-                    Log.d("CheckBox", "Está marcado");
-                } else {
-                    // El CheckBox no está marcado
-                    // Realiza las acciones que desees cuando el CheckBox no esté marcado
-                    Log.d("CheckBox", "No está marcado");
-                }
+            public void onClick(View v) {
+                FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+                String nombreUsuario = usuario.getEmail();
+                firebaseManager.guardarArrayListEnFirebase(nombreUsuario, guardarRegistro());
+                Intent back = new Intent(Main_Seleccion.this, Main_Home.class);
+                startActivity(back);
             }
         });
+    }
 
+    public ArrayList<ArrayList<String>> guardarRegistro() {
+        ArrayList<String> valoresSeleccionados = new ArrayList<>();
+
+        CheckBox checkBox_bien = findViewById(R.id.feliz);
+        CheckBox checkBox_normal = findViewById(R.id.medio);
+        CheckBox checkBox_mal = findViewById(R.id.mal);
+
+        // CheckBox "Bien"
+        if (checkBox_bien.isChecked()) {
+            valoresSeleccionados.add("Bien");
+        }
+
+        // CheckBox "Normal"
+        if (checkBox_normal.isChecked()) {
+            valoresSeleccionados.add("Normal");
+        }
+
+        // CheckBox "Mal"
+        if (checkBox_mal.isChecked()) {
+            valoresSeleccionados.add("Mal");
+        }
+
+        ArrayList<ArrayList<String>> dia = new ArrayList<>();
+        dia.add(valoresSeleccionados);
+        return dia;
     }
 
     @Override
     public void onClick(View v) {
 
     }
+
 }

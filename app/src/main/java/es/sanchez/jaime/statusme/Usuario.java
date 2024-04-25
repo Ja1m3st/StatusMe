@@ -23,7 +23,7 @@ public class Usuario {
 
     public static class UsuarioGoogle extends Usuario {
         public UsuarioGoogle(String name, String lastname, String mail, ArrayList<ArrayList> totaldias) {
-            super(name, lastname, mail, null, totaldias); // Asignar contraseña a null para usuarios de Google
+            super(name, lastname, mail, null, totaldias);
         }
     }
 
