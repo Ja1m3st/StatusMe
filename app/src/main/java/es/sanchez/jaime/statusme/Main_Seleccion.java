@@ -77,32 +77,66 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    public ArrayList<ArrayList<String>> guardarRegistro() {
+    public ArrayList<ArrayList> guardarRegistro() {
         ArrayList<String> valoresSeleccionados = new ArrayList<>();
+        ArrayList<String> actividadesSeleccionadas = new ArrayList<>();
 
         CheckBox checkBox_bien = findViewById(R.id.feliz);
         CheckBox checkBox_normal = findViewById(R.id.medio);
         CheckBox checkBox_mal = findViewById(R.id.mal);
+        CheckBox checkBox_correr = findViewById(R.id.correr);
+        CheckBox checkBox_jugar = findViewById(R.id.jugar);
+        CheckBox checkBox_trabajar = findViewById(R.id.trabajar);
+        CheckBox checkBox_familia = findViewById(R.id.familia);
+        CheckBox checkBox_amigos = findViewById(R.id.amigos);
+        CheckBox checkBox_cita = findViewById(R.id.amor);
+        CheckBox checkBox_television = findViewById(R.id.television);
+        CheckBox checkBox_compras = findViewById(R.id.compras);
+        CheckBox checkBox_leer = findViewById(R.id.leer);
 
-        // CheckBox "Bien"
         if (checkBox_bien.isChecked()) {
             valoresSeleccionados.add("Bien");
         }
-
-        // CheckBox "Normal"
         if (checkBox_normal.isChecked()) {
             valoresSeleccionados.add("Normal");
         }
-
-        // CheckBox "Mal"
         if (checkBox_mal.isChecked()) {
             valoresSeleccionados.add("Mal");
         }
+        if (checkBox_correr.isChecked()) {
+            actividadesSeleccionadas.add("Correr");
+        }
+        if (checkBox_jugar.isChecked()) {
+            actividadesSeleccionadas.add("Jugar");
+        }
+        if (checkBox_trabajar.isChecked()) {
+            actividadesSeleccionadas.add("Trabjar");
+        }
+        if (checkBox_familia.isChecked()) {
+            actividadesSeleccionadas.add("Familia");
+        }
+        if (checkBox_amigos.isChecked()) {
+            actividadesSeleccionadas.add("Amigos");
+        }
+        if (checkBox_cita.isChecked()) {
+            actividadesSeleccionadas.add("Cita");
+        }
+        if (checkBox_television.isChecked()) {
+            actividadesSeleccionadas.add("TV");
+        }
+        if (checkBox_compras.isChecked()) {
+            actividadesSeleccionadas.add("Compras");
+        }
+        if (checkBox_leer.isChecked()) {
+            actividadesSeleccionadas.add("Leer");
+        }
 
-        ArrayList<ArrayList<String>> dia = new ArrayList<>();
+        ArrayList<ArrayList> dia = new ArrayList<>();
         dia.add(valoresSeleccionados);
+        dia.add(actividadesSeleccionadas);
         return dia;
     }
+
 
     @Override
     public void onClick(View v) {
