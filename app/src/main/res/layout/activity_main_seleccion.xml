@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
     <RelativeLayout
         android:id="@+id/animo"
         android:layout_width="match_parent"
@@ -26,7 +24,7 @@
         <LinearLayout
             android:id="@+id/estados"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
             android:layout_below="@+id/TituloAnimo"
             android:orientation="horizontal" >
 
@@ -111,11 +109,11 @@
         <LinearLayout
             android:id="@+id/Extras"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
             android:orientation="horizontal"
             android:layout_below="@+id/TituloExtras">
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -130,14 +128,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/corriendo"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 
@@ -147,7 +145,7 @@
                         android:text="Corriendo" />
 
                 </LinearLayout>
-            </FrameLayout>
+            </RelativeLayout>
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -165,14 +163,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/controlador"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 
@@ -200,14 +198,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/portafolio"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 
@@ -223,7 +221,7 @@
         <LinearLayout
             android:id="@+id/Extras2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
             android:orientation="horizontal"
             android:layout_below="@+id/Extras"
             android:layout_marginTop="10dp">
@@ -243,14 +241,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/familia"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 
@@ -279,14 +277,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/abrazo"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 
@@ -312,14 +310,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/amor"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 
@@ -335,7 +333,7 @@
         <LinearLayout
             android:id="@+id/Extras3"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
             android:orientation="horizontal"
             android:layout_below="@+id/Extras2"
             android:layout_marginTop="10dp">
@@ -355,14 +353,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/television"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 
@@ -390,21 +388,21 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="71dp"
                     android:src="@drawable/cesta"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cestas" />
+                        android:text="Compras" />
 
                 </LinearLayout>
 
@@ -423,14 +421,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/leer"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
+                    android:layout_height="78dp"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
 

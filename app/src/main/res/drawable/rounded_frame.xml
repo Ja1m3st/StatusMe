@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <corners android:radius="50dp" /> <!-- Ajusta el radio según tus preferencias -->
-    <solid android:color="@android:color/white" /> <!-- Puedes cambiar el color de fondo si lo deseas -->
+    <solid android:color="@android:color/white"/>
+    <corners android:radius="20dp"/>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:drawable="@color/green_main" android:state_checked="true" />
+        <item android:drawable="@color/main_color" android:state_checked="false"/>
+    </selector><!-- Ajusta el radio según tu preferencia -->
 </shape>
