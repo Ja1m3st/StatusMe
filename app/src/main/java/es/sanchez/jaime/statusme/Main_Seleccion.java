@@ -140,7 +140,13 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-
+        if (v.getId() == R.id.icono1) {
+            Intent view = new Intent(Main_Seleccion.this, Main_Home.class);
+            startActivity(view);
+        } else if (v.getId() == R.id.icono5){
+            Intent view = new Intent(Main_Seleccion.this, Main_Usuario.class);
+            startActivity(view);
+        }
     }
 
 }

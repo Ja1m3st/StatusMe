@@ -50,7 +50,7 @@ public class FirebaseManager {
                 if (dataSnapshot.exists()) {
                     // Iterar sobre los resultados (debería haber solo uno)
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String userId = snapshot.getKey(); // Obtener el UID del usuario
+                        String userId = snapshot.getKey();
 
                         // Obtener una referencia al nodo totaldias del usuario
                         DatabaseReference userTotalDiasReference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(userId).child("totaldias");
@@ -118,6 +118,32 @@ public class FirebaseManager {
             }
         });
     }
+
+    public void obtenerTotalDiasDeUsuario(String emailUsuario, ValueEventListener listener) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        databaseReference.orderByChild("mail").equalTo(emailUsuario).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        DataSnapshot totalDiasSnapshot = snapshot.child("totaldias");
+                        listener.onDataChange(totalDiasSnapshot); // Llama al listener con el snapshot del totaldias
+                        return;
+                    }
+                }
+                // Si no se encuentra ningún totaldias para el usuario, llama al listener con null
+                listener.onDataChange(null);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Maneja errores de cancelación
+                Log.e("Firebase", "Error al buscar totaldias del usuario: " + databaseError.getMessage());
+                listener.onCancelled(databaseError);
+            }
+        });
+    }
+
 
 
     public FirebaseUser obtenerUsuarioActual() {

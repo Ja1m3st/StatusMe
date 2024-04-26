@@ -3,11 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <LinearLayout
+        android:id="@+id/topnav"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/main_color">
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/animo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topnav">
         <LinearLayout
             android:id="@+id/TituloAnimo"
             android:layout_width="match_parent"
@@ -43,10 +53,23 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/circulo"
+                    android:layout_height="70dp"
+                    android:src="@drawable/muyfeliz"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bien" />
+
+                </LinearLayout>
 
             </FrameLayout>
 
@@ -65,10 +88,22 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/inexpresivo"
+                    android:layout_height="70dp"
+                    android:src="@drawable/caraseria"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Normal" />
+
+                </LinearLayout>
 
             </FrameLayout>
             <FrameLayout
@@ -85,10 +120,22 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/disgustado"
+                    android:layout_height="70dp"
+                    android:src="@drawable/caratriste"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mal" />
+
+                </LinearLayout>
 
             </FrameLayout>
         </LinearLayout>
@@ -114,7 +161,7 @@
             android:layout_below="@+id/TituloExtras">
 
             <RelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="4dp">
@@ -451,14 +498,13 @@
             android:gravity="center_horizontal">
             <Button
                 android:id="@+id/botonguardar"
-                android:layout_width="200dp"
+                android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/green_main"
                 android:text="GUARDAR">
             </Button>
         </LinearLayout>
     </RelativeLayout>
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
