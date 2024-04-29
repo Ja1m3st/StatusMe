@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -67,9 +69,6 @@ public class Main_Home extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Manejar el error en la lectura de datos
-                Log.e("Firebase", "Error al leer datos de Firebase: " + databaseError.getMessage());
-                // Aquí puedes implementar la lógica para manejar el error
             }
         });
     }
@@ -96,7 +95,7 @@ public class Main_Home extends AppCompatActivity {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         if (totalDias != null) {
-            for (int i = totalDias.size() - 1; i >= 0; i--) {
+            for (int i = totalDias.size() - 1; i > 0; i--) {
                 ArrayList<ArrayList<String>> dia = totalDias.get(i);
                 if (dia != null) {
                     CardView cardView = new CardView(this);
@@ -107,8 +106,8 @@ public class Main_Home extends AppCompatActivity {
                     cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
                     cardView.setLayoutParams(cardLayoutParams);
                     cardView.setCardBackgroundColor(getResources().getColor(android.R.color.white)); // Fondo blanco
-                    cardView.setRadius(8); // Radio de esquina de 8dp
-                    cardView.setCardElevation(4); // Elevación de la tarjeta
+                    cardView.setRadius(8);
+                    cardView.setCardElevation(4);
 
                     // Crea un nuevo LinearLayout horizontal dentro del CardView
                     LinearLayout innerLinearLayout = new LinearLayout(this);
@@ -125,6 +124,10 @@ public class Main_Home extends AppCompatActivity {
                             1
                     );
                     textViewDia.setLayoutParams(diaLayoutParams);
+                    textViewDia.setTextColor(getResources().getColor(R.color.green_main));
+                    Typeface typeface = ResourcesCompat.getFont(this, R.font.medio);
+
+                    textViewDia.setTypeface(typeface);
                     textViewDia.setText("Dia:" + (dias));
                     textViewDia.setTextSize(20); // Tamaño del texto 20sp
                     textViewDia.setPadding(16, 16, 16, 16); // Relleno de 16dp dentro de la tarjeta
@@ -138,6 +141,7 @@ public class Main_Home extends AppCompatActivity {
                             3
                     );
                     textViewActividades.setLayoutParams(actividadesLayoutParams);
+                    textViewActividades.setTextSize(15);
 
                     StringBuilder actividadesText = new StringBuilder();
                     for (ArrayList<String> actividades : dia) {
