@@ -7,12 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,36 +79,94 @@ public class Main_Home extends AppCompatActivity {
         StringBuilder texto = new StringBuilder();
         texto.append("Valores seleccionados:\n");
         texto.append("- ").append(totalDias.get(0)).append("\n\n");
-        texto.append("Actividades realizadas:\n");
+        texto.append("Actividades realizadas:\n\n");
+        int dias = 0;
+
         if (totalDias != null) {
             for (ArrayList<ArrayList<String>> dia : totalDias) {
-                Log.d("Firebase", "Dia: " + dia);
                 if (dia != null) {
+                    dias++;
+                }
+            }
+        }
+        dias--;
+
+        ScrollView scrollView = findViewById(R.id.Main);
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+        if (totalDias != null) {
+            for (int i = totalDias.size() - 1; i >= 0; i--) {
+                ArrayList<ArrayList<String>> dia = totalDias.get(i);
+                if (dia != null) {
+                    CardView cardView = new CardView(this);
+                    LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    );
+                    cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
+                    cardView.setLayoutParams(cardLayoutParams);
+                    cardView.setCardBackgroundColor(getResources().getColor(android.R.color.white)); // Fondo blanco
+                    cardView.setRadius(8); // Radio de esquina de 8dp
+                    cardView.setCardElevation(4); // Elevación de la tarjeta
+
+                    // Crea un nuevo LinearLayout horizontal dentro del CardView
+                    LinearLayout innerLinearLayout = new LinearLayout(this);
+                    innerLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                    innerLinearLayout.setLayoutParams(new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    ));
+                    // Crea un nuevo TextView dentro del LinearLayout para el día
+                    TextView textViewDia = new TextView(this);
+                    LinearLayout.LayoutParams diaLayoutParams = new LinearLayout.LayoutParams(
+                            0,
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            1
+                    );
+                    textViewDia.setLayoutParams(diaLayoutParams);
+                    textViewDia.setText("Dia:" + (dias));
+                    textViewDia.setTextSize(20); // Tamaño del texto 20sp
+                    textViewDia.setPadding(16, 16, 16, 16); // Relleno de 16dp dentro de la tarjeta
+                    innerLinearLayout.addView(textViewDia);
+
+                    // Agrega un TextView para el contenido de las actividades
+                    TextView textViewActividades = new TextView(this);
+                    LinearLayout.LayoutParams actividadesLayoutParams = new LinearLayout.LayoutParams(
+                            0,
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            3
+                    );
+                    textViewActividades.setLayoutParams(actividadesLayoutParams);
+
+                    StringBuilder actividadesText = new StringBuilder();
                     for (ArrayList<String> actividades : dia) {
                         if (actividades != null) {
                             for (String actividad : actividades) {
-                                texto.append(actividad);
+                                actividadesText.append(actividad).append("\n");
                             }
                         }
                     }
+                    textViewActividades.setText(actividadesText.toString());
+                    innerLinearLayout.addView(textViewActividades);
+
+                    // Agrega el LinearLayout horizontal al CardView
+                    cardView.addView(innerLinearLayout);
+
+                    // Agrega el CardView al LinearLayout vertical
+                    linearLayout.addView(cardView);
                 }
+                dias--;
             }
+            scrollView.addView(linearLayout);
         } else {
-            // Manejar el caso en el que totalDias es null
             texto.append("No hay datos disponibles.");
         }
-        TextView textView = findViewById(R.id.registro);
-
-        // Establecer el texto generado en el TextView
-        textView.setText(texto.toString());
-        //textView.setText(totalDias.toString());
     }
     private void mostrarMensaje(String mensaje) {
         // Mostrar un Toast con el mensaje proporcionado
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }
-
-
 
     public void onClick(View view) {
 
