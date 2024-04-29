@@ -12,13 +12,15 @@
 
     </ScrollView>
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:cardBackgroundColor="?attr/colorPrimary">
+        android:layout_margin="10sp"
+        app:cardCornerRadius="20dp"
+        android:background="@drawable/bottom_nav">
 
         <LinearLayout
             android:id="@+id/Topnav2"
@@ -82,7 +84,7 @@
                     android:onClick="onClick"/>
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </RelativeLayout>
 
 

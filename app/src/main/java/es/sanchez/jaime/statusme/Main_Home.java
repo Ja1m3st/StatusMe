@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -98,15 +99,14 @@ public class Main_Home extends AppCompatActivity {
             for (int i = totalDias.size() - 1; i > 0; i--) {
                 ArrayList<ArrayList<String>> dia = totalDias.get(i);
                 if (dia != null) {
-                    CardView cardView = new CardView(this);
+                    FrameLayout cardView = new FrameLayout(this);
                     LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT
                     );
                     cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
                     cardView.setLayoutParams(cardLayoutParams);// Fondo blanco
-                    cardView.setRadius(8);
-                    cardView.setCardElevation(4);
+                    cardView.setBackground(getResources().getDrawable(R.drawable.bottom_nav));
 
                     // Crea un nuevo LinearLayout horizontal dentro del CardView
                     LinearLayout innerLinearLayout = new LinearLayout(this);
