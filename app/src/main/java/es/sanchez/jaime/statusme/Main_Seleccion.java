@@ -71,6 +71,8 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
                 FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
                 String nombreUsuario = usuario.getEmail();
                 firebaseManager.guardarArrayListEnFirebase(nombreUsuario, guardarRegistro());
+                Intent back = new Intent(Main_Seleccion.this, Main_Home.class);
+                startActivity(back);
             }
         });
     }

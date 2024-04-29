@@ -104,8 +104,7 @@ public class Main_Home extends AppCompatActivity {
                             ViewGroup.LayoutParams.WRAP_CONTENT
                     );
                     cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
-                    cardView.setLayoutParams(cardLayoutParams);
-                    cardView.setCardBackgroundColor(getResources().getColor(android.R.color.white)); // Fondo blanco
+                    cardView.setLayoutParams(cardLayoutParams);// Fondo blanco
                     cardView.setRadius(8);
                     cardView.setCardElevation(4);
 
@@ -144,13 +143,21 @@ public class Main_Home extends AppCompatActivity {
                     textViewActividades.setTextSize(15);
 
                     StringBuilder actividadesText = new StringBuilder();
-                    for (ArrayList<String> actividades : dia) {
-                        if (actividades != null) {
-                            for (String actividad : actividades) {
-                                actividadesText.append(actividad).append("\n");
-                            }
+
+
+                    ArrayList<String> actividades = dia.get(0);
+                    if (actividades != null) {
+                        for (String actividad : actividades) {
+                            actividadesText.append(actividad).append("\n");
                         }
                     }
+                   // for (ArrayList<String> actividades : dia) {
+                     //   if (actividades != null) {
+                       //     for (String actividad : actividades) {
+                         //       actividadesText.append(actividades.get(0)).append("\n");
+                           // }
+                        //}
+                    //}
                     textViewActividades.setText(actividadesText.toString());
                     innerLinearLayout.addView(textViewActividades);
 
