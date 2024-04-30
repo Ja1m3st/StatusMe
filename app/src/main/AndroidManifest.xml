@@ -16,6 +16,9 @@
         android:theme="@style/Theme.StatusMe"
         tools:targetApi="31">
         <activity
+            android:name=".Main_Estadisticas"
+            android:exported="false" />
+        <activity
             android:name=".Main_Seleccion_Animo"
             android:exported="false" />
         <activity

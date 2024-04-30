@@ -1,25 +1,18 @@
 package es.sanchez.jaime.statusme;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -29,15 +22,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 public class Main_Home extends AppCompatActivity {
 
@@ -229,6 +218,10 @@ public class Main_Home extends AppCompatActivity {
         } else if (view.getId() == R.id.icono3) {
             Intent animo = new Intent(Main_Home.this, Main_Seleccion.class);
             startActivity(animo);
+        } else if (view.getId() == R.id.icono2) {
+            Intent animo = new Intent(Main_Home.this, Main_Estadisticas.class);
+            startActivity(animo);
         }
+
     }
 }
