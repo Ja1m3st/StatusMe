@@ -43,8 +43,8 @@ public class Main_Home extends AppCompatActivity {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String fechaFormateada = formatoFecha.format(fechaActual);
 
-        TextView dia = findViewById(R.id.dia);
-        dia.setText(fechaFormateada);
+        //TextView dia = findViewById(R.id.dia);
+        //dia.setText(fechaFormateada);
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         String emailUsuario = usuario.getEmail();
@@ -69,17 +69,21 @@ public class Main_Home extends AppCompatActivity {
             }
         });
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         TextView saludo = findViewById(R.id.saludo);
         String nombre = "";
+
         if (SesionGoogle() != null) {
             nombre = account.getGivenName();
         } else if (SesionAuth() != null) {
             nombre = "Usuario";
         }
 
-        saludo.setText("Hola," + nombre);
+        // Crear el animador de texto y configurar la velocidad de escritura
+        TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+        animator.setDuration(3000); // Duración de la animación en milisegundos
+        saludo.startAnimation(animator);
     }
 
     private String SesionGoogle(){

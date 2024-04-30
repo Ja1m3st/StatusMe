@@ -3,19 +3,20 @@ package es.sanchez.jaime.statusme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main_Estadisticas extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,60 +25,89 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_estadisticas);
 
-        // Establecer la altura del LineChart
+        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+        String emailUsuario = usuario.getEmail();
 
-        List<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(0, 1));
-        entries.add(new Entry(1, 5));
-        entries.add(new Entry(2, 3));
-        entries.add(new Entry(3, 2));
-        entries.add(new Entry(4, 6));
+        // Llamar al método para obtener los datos de totaldias del usuario
+        FirebaseManager firebaseManager = new FirebaseManager();
+        firebaseManager.obtenerTotalDiasDeUsuario(emailUsuario, new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null && dataSnapshot.exists()) {
+                    // Si hay datos, mostrarlos en la interfaz de usuario
+                    ArrayList<ArrayList> totalDias = (ArrayList<ArrayList>) dataSnapshot.getValue();
+                    datos(totalDias);
+                }
+            }
 
-        LineDataSet dataSet = new LineDataSet(entries, "Label para la línea");
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
 
-        // Crear una instancia de LineData y agregar el conjunto de datos a ella
-        LineData lineData = new LineData(dataSet);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        TextView saludo = findViewById(R.id.saludo);
+        String nombre = "";
 
-        // Obtener referencia del LineChart desde el layout
-        LineChart lineChart = findViewById(R.id.line_chart);
+        if (SesionGoogle() != null) {
+            nombre = account.getGivenName();
+        } else if (SesionAuth() != null) {
+            nombre = "Usuario";
+        }
 
-        // Configurar el LineChart con los datos
-        lineChart.setData(lineData);
-        lineChart.invalidate();
+        // Crear el animador de texto y configurar la velocidad de escritura
+        TextAnimator animator = new TextAnimator("Veamos que tal vas, " + nombre, saludo);
+        animator.setDuration(3000); // Duración de la animación en milisegundos
+        saludo.startAnimation(animator);
 
-        // Personalizar ejes
-        customizeAxes(lineChart);
     }
-    private void customizeAxes(LineChart lineChart) {
-        // Personalizar eje X
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setValueFormatter(new XAxisValueFormatter());
 
-        // Personalizar eje Y
-        lineChart.getAxisLeft().setLabelCount(7, true); // 7 etiquetas en el eje Y
-        lineChart.getAxisLeft().setAxisMinimum(0f); // Mínimo valor del eje Y
-        lineChart.getAxisLeft().setAxisMaximum(7f); // Máximo valor del eje Y
+    private String SesionGoogle(){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            return account.getEmail();
+        } else {
+            return null;
+        }
+    }
+    private String SesionAuth(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null) {
+            String email = currentUser.getEmail();
+            return email;
+        } else {
+            return null;
+        }
     }
 
+    public ArrayList<String> datos(ArrayList<ArrayList> totalDias){
+        int dias = 0;
+        ArrayList<String> info = new ArrayList<String>();
 
-    private class XAxisValueFormatter extends ValueFormatter {
-        @Override
-        public String getAxisLabel(float value, AxisBase axis) {
-            // Cambiar los valores en el eje X
-            if (value == 0f) {
-                return "Muy mal";
-            } else if (value == 1f) {
-                return "Mal";
-            } else if (value == 2f) {
-                return "Normal";
-            } else if (value == 3f) {
-                return "Bien";
-            } else if (value == 4f) {
-                return "Muy bien";
-            } else {
-                return "";
+        if (totalDias != null) {
+            for (ArrayList<ArrayList<String>> dia : totalDias) {
+                if (dia != null) {
+                    dias++;
+                }
             }
         }
+        dias--;
+        if (totalDias != null) {
+            for (int i = totalDias.size() - 1; i > 0; i--) {
+                ArrayList<ArrayList<String>> dia = totalDias.get(i);
+                if (dia != null) {
+                    ArrayList<String> actividades = dia.get(0);
+                    if (actividades != null) {
+                        for (String actividad : actividades) {
+                            info.add(actividad);
+                        }
+                    }
+                }
+                dias--;
+            }
+        }
+        return info;
     }
 
     public void onClick(View view) {
