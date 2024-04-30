@@ -22,11 +22,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import org.w3c.dom.Text;
 
@@ -38,6 +41,7 @@ import java.util.Map;
 
 public class Main_Home extends AppCompatActivity {
 
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,9 @@ public class Main_Home extends AppCompatActivity {
         // Formatear la fecha en el formato deseado
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String fechaFormateada = formatoFecha.format(fechaActual);
+
+        TextView dia = findViewById(R.id.dia);
+        dia.setText(fechaFormateada);
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         String emailUsuario = usuario.getEmail();
@@ -72,6 +79,37 @@ public class Main_Home extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        TextView saludo = findViewById(R.id.saludo);
+        String nombre = "";
+        if (SesionGoogle() != null) {
+            nombre = account.getGivenName();
+        } else if (SesionAuth() != null) {
+            nombre = "Usuario";
+        }
+
+        saludo.setText("Hola," + nombre);
+    }
+
+    private String SesionGoogle(){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            return account.getEmail();
+        } else {
+            return null;
+        }
+    }
+    private String SesionAuth(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null) {
+            String email = currentUser.getEmail();
+            return email;
+        } else {
+            return null;
+        }
     }
 
     private void mostrarDatos(ArrayList<ArrayList> totalDias) {
@@ -106,7 +144,7 @@ public class Main_Home extends AppCompatActivity {
                     );
                     cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
                     cardView.setLayoutParams(cardLayoutParams);// Fondo blanco
-                    cardView.setBackground(getResources().getDrawable(R.drawable.bottom_nav));
+                    cardView.setBackground(getResources().getDrawable(R.drawable.minitarjetas));
 
                     // Crea un nuevo LinearLayout horizontal dentro del CardView
                     LinearLayout innerLinearLayout = new LinearLayout(this);

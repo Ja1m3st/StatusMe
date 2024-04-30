@@ -41,8 +41,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class Main_Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -188,7 +191,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                     if (found == false) { // Si el email no existe en la base de datos, agrégalo
                         firstName = account.getGivenName();
                         lastName = account.getFamilyName();
-
                         ArrayList<ArrayList> totaldias = new ArrayList<>();
                         ArrayList<ArrayList> arrayListDiaActual = new ArrayList<ArrayList>();
                         ArrayList<String> estadosDeAnimo = new ArrayList<>();

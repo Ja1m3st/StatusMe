@@ -9,13 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Main_Seleccion extends AppCompatActivity implements View.OnClickListener{
 
@@ -75,6 +81,45 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
                 startActivity(back);
             }
         });
+        Date fechaActual = new Date();
+
+        // Formatear la fecha en el formato deseado
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String fechaFormateada = formatoFecha.format(fechaActual);
+
+        TextView dia = findViewById(R.id.dia);
+        dia.setText(fechaFormateada);
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        TextView saludo = findViewById(R.id.saludo);
+        String nombre = "";
+        if (SesionGoogle() != null) {
+            nombre = account.getGivenName();
+        } else if (SesionAuth() != null) {
+            nombre = "Usuario";
+        }
+
+        saludo.setText("Hola," + nombre);
+    }
+
+    private String SesionGoogle(){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            return account.getEmail();
+        } else {
+            return null;
+        }
+    }
+    private String SesionAuth(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null) {
+            String email = currentUser.getEmail();
+            return email;
+        } else {
+            return null;
+        }
     }
 
     public ArrayList<ArrayList> guardarRegistro() {

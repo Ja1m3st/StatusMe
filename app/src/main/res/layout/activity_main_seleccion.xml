@@ -3,14 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FDFBF6">
+    android:background="@color/main_color">
 
+    <RelativeLayout
+        android:id="@+id/topnav"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/saludo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="14dp"
+            android:fontFamily="@font/medio"
+            android:text="holaa"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/dia"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="holaa"
+            android:textSize="20dp"
+            android:fontFamily="@font/medio"
+            android:layout_marginRight="17dp"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/animo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/topnav">
         <LinearLayout
             android:id="@+id/TituloAnimo"
             android:layout_width="match_parent"
@@ -23,7 +50,8 @@
                 android:text="Selecciona tu estado de Animo:"
                 android:fontFamily="@font/medio"
                 android:textSize="20dp"
-                android:textColor="@color/green_main"/>
+                android:textColor="@color/green_main"
+                android:layout_marginLeft="14dp"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/estados"
@@ -60,7 +88,6 @@
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal|bottom"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,10 +151,13 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/caratriste"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -137,7 +167,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mal" />
+                        android:text="Mal"                     android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
 
@@ -157,7 +188,8 @@
                 android:text="Selecciona las actividades:"
                 android:fontFamily="@font/medio"
                 android:textSize="20dp"
-                android:textColor="@color/green_main"/>
+                android:textColor="@color/green_main"
+                android:layout_marginLeft="14dp"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/Extras"
@@ -181,10 +213,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/corriendo"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -195,7 +229,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Corriendo" />
+                        android:text="Corriendo"                     android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
             </RelativeLayout>
@@ -216,10 +251,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/controlador"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -230,7 +267,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jugar" />
+                        android:text="Jugar"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp" />
 
                 </LinearLayout>
 
@@ -252,10 +291,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/portafolio"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -266,7 +307,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Trabajando" />
+                        android:text="Trabajando"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
 
@@ -295,10 +338,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/familia"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -309,7 +354,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Familia" />
+                        android:text="Familia"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
 
@@ -331,10 +378,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/abrazo"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -345,7 +394,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Amigos" />
+                        android:text="Amigos"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
 
@@ -365,10 +416,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/amor"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -379,7 +432,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cita" />
+                        android:text="Cita"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
 
@@ -408,10 +463,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/television"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -422,7 +479,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Television" />
+                        android:text="Television"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
 
@@ -443,10 +502,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/cesta"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -457,7 +518,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Compras" />
+                        android:text="Compras"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
 
@@ -477,10 +540,12 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="62dp"
                     android:src="@drawable/leer"
                     android:scaleType="fitCenter"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -491,7 +556,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Leer" />
+                        android:text="Leer"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"/>
 
                 </LinearLayout>
 
@@ -510,7 +577,7 @@
                 android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/green_main"
-                android:text="GUARDAR">
+                android:text="Guardar">
             </Button>
         </LinearLayout>
     </RelativeLayout>
