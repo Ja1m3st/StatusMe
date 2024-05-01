@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/topnav"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:orientation="horizontal">
 
         <TextView
@@ -61,11 +61,12 @@
             android:orientation="horizontal"
             android:layout_marginBottom="15dp">
 
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/feliz"
@@ -79,9 +80,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/muyfeliz"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -97,13 +96,14 @@
 
                 </LinearLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
 
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/medio"
@@ -117,9 +117,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/caraseria"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -129,18 +127,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Normal"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:text="Normal" />
 
                 </LinearLayout>
 
-            </FrameLayout>
-            <FrameLayout
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/mal"
@@ -154,9 +151,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/caratriste"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -167,12 +162,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mal"                     android:paddingBottom="5dp"
-                        android:paddingRight="5dp"/>
+                        android:text="Mal"/>
 
                 </LinearLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>    >
         </LinearLayout>
         <LinearLayout
             android:id="@+id/TituloExtras"
@@ -198,27 +192,26 @@
             android:orientation="horizontal"
             android:layout_below="@+id/TituloExtras">
 
-            <RelativeLayout
-                android:layout_width="1dp"
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/correr"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/checkbox_background"
-                    android:button="@null" />
+                    android:button="@null"/>
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
                     android:src="@drawable/corriendo"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -229,18 +222,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Corriendo"                     android:paddingBottom="5dp"
-                        android:paddingRight="5dp"/>
+                        android:text="Correr" />
 
                 </LinearLayout>
-            </RelativeLayout>
 
-            <FrameLayout
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_frame"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/jugar"
@@ -254,9 +247,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/controlador"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp" />
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -267,20 +258,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jugar"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="5dp" />
+                        android:text="Jugar" />
 
                 </LinearLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
 
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_frame"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/trabajar"
@@ -294,9 +283,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/portafolio"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -307,13 +294,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Trabajando"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="5dp"/>
+                        android:text="Trabajando"/>
 
                 </LinearLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/Extras2"
@@ -323,11 +308,12 @@
             android:layout_below="@+id/Extras"
             android:layout_marginTop="10dp">
 
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-               android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/familia"
@@ -341,9 +327,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/familia"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -360,14 +344,14 @@
 
                 </LinearLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
 
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-               android:layout_margin="5dp"
-                android:background="@drawable/rounded_frame">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/amigos"
@@ -381,9 +365,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/abrazo"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -394,18 +376,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Amigos"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="5dp"/>
+                        android:text="Amigos" />
 
                 </LinearLayout>
 
-            </FrameLayout>
-            <FrameLayout
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/amor"
@@ -419,9 +400,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/amor"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -432,13 +411,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cita"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="5dp"/>
+                        android:text="Cita" />
 
                 </LinearLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/Extras3"
@@ -448,11 +425,12 @@
             android:layout_below="@+id/Extras2"
             android:layout_marginTop="10dp">
 
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/television"
@@ -466,9 +444,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/television"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -479,19 +455,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Television"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="5dp"/>
+                        android:text="Television" />
 
                 </LinearLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
 
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/compras"
@@ -505,9 +480,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/cesta"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -518,18 +491,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Compras"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="5dp"/>
+                        android:text="Compras" />
 
                 </LinearLayout>
 
-            </FrameLayout>
-            <FrameLayout
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <CheckBox
                     android:id="@+id/leer"
@@ -543,9 +515,7 @@
                     android:layout_height="62dp"
                     android:src="@drawable/leer"
                     android:scaleType="fitCenter"
-                    android:padding="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="5dp"/>
+                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -556,26 +526,140 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Leer"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="5dp"/>
+                        android:text="Leer" />
 
                 </LinearLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Extras4"
+            android:layout_width="match_parent"
+            android:layout_height="87dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/Extras3"
+            android:layout_marginTop="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
+
+                <CheckBox
+                    android:id="@+id/television2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:src="@drawable/television"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Television" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
+
+                <CheckBox
+                    android:id="@+id/compras2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:src="@drawable/cesta"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Compras" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
+
+                <CheckBox
+                    android:id="@+id/leer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/checkbox_background"
+                    android:button="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:src="@drawable/leer"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Leer" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/guardar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="42dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/Extras3"
+            android:layout_below="@+id/Extras4"
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal">
             <Button
                 android:id="@+id/botonguardar"
                 android:layout_width="380dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:backgroundTint="@color/green_main"
                 android:text="Guardar">
             </Button>
@@ -588,10 +672,8 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:cardBackgroundColor="?attr/colorPrimary"
         android:layout_margin="10sp"
-        app:cardCornerRadius="20dp"
-        android:background="@drawable/bottom_nav">
+        app:cardCornerRadius="20dp">
 
         <LinearLayout
             android:id="@+id/Topnav2"
@@ -599,60 +681,91 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/icono1"
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/libro"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
+                android:layout_margin="5dp">
 
-            <ImageButton
-                android:id="@+id/icono2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/estadisticas"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
 
-            <ImageButton
-                android:id="@+id/icono3"
+                <ImageButton
+                    android:id="@+id/icono1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:onClick="onClick"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/casa" />
+            </FrameLayout>
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/mas"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
+                android:layout_margin="5dp">
 
-            <ImageButton
-                android:id="@+id/icono4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/calendario"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
+                <ImageButton
+                    android:id="@+id/icono2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/estadisticas"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="onClick"/>
+            </FrameLayout>
 
-            <ImageButton
-                android:id="@+id/icono5"
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/usuario"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
+                android:layout_margin="5dp">
+
+                <ImageButton
+                    android:id="@+id/icono3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/mas"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="onClick"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp">
+
+                <ImageButton
+                    android:id="@+id/icono4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/calendario"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="onClick"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp">
+
+
+                <ImageButton
+                    android:id="@+id/icono5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/usuario"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="onClick"/>
+            </FrameLayout>
 
         </LinearLayout>
     </FrameLayout>
