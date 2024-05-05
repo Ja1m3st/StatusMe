@@ -35,7 +35,6 @@ public class Main_Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
-        //overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
         // Obtener la fecha actual
         Date fechaActual = new Date();
 
@@ -43,9 +42,25 @@ public class Main_Home extends AppCompatActivity {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String fechaFormateada = formatoFecha.format(fechaActual);
 
-        //TextView dia = findViewById(R.id.dia);
-        //dia.setText(fechaFormateada);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        TextView saludo = findViewById(R.id.saludo);
+        String nombre = "";
 
+        if (SesionGoogle() != null) {
+            nombre = account.getGivenName();
+        } else if (SesionAuth() != null) {
+            nombre = "Usuario";
+        }
+
+        // Crear el animador de texto y configurar la velocidad de escritura
+        TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+        animator.setDuration(3000); // Duración de la animación en milisegundos
+        saludo.startAnimation(animator);
+
+        obtenerYMostrarDatos();
+    }
+
+    private void obtenerYMostrarDatos() {
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         String emailUsuario = usuario.getEmail();
 
@@ -66,25 +81,11 @@ public class Main_Home extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar el error en caso de que ocurra
             }
         });
-
-
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        TextView saludo = findViewById(R.id.saludo);
-        String nombre = "";
-
-        if (SesionGoogle() != null) {
-            nombre = account.getGivenName();
-        } else if (SesionAuth() != null) {
-            nombre = "Usuario";
-        }
-
-        // Crear el animador de texto y configurar la velocidad de escritura
-        TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
-        animator.setDuration(3000); // Duración de la animación en milisegundos
-        saludo.startAnimation(animator);
     }
+
 
     private String SesionGoogle(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -159,6 +160,7 @@ public class Main_Home extends AppCompatActivity {
 
                     textViewDia.setTypeface(typeface);
                     textViewDia.setText("Dia:" + (dias));
+                    textViewDia.setTypeface(null, Typeface.BOLD);
                     textViewDia.setTextSize(20); // Tamaño del texto 20sp
                     textViewDia.setPadding(16, 16, 16, 16); // Relleno de 16dp dentro de la tarjeta
                     innerLinearLayout.addView(textViewDia);
@@ -172,6 +174,8 @@ public class Main_Home extends AppCompatActivity {
                     );
                     textViewActividades.setLayoutParams(actividadesLayoutParams);
                     textViewActividades.setTextSize(15);
+                    textViewActividades.setTextColor(getResources().getColor(R.color.green_main));
+
 
                     StringBuilder actividadesText = new StringBuilder();
 
@@ -215,17 +219,15 @@ public class Main_Home extends AppCompatActivity {
         if (view.getId() == R.id.icono1) {
             Intent signup = new Intent(Main_Home.this, Main_Home.class);
             startActivity(signup);
-        } else if (view.getId() == R.id.icono5){
-            Intent remember2 = new Intent(Main_Home.this, Main_Usuario.class);
-            startActivity(remember2);
-            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (view.getId() == R.id.icono3) {
-            Intent animo = new Intent(Main_Home.this, Main_Seleccion.class);
-            startActivity(animo);
         } else if (view.getId() == R.id.icono2) {
             Intent animo = new Intent(Main_Home.this, Main_Estadisticas.class);
             startActivity(animo);
+        } else if (view.getId() == R.id.icono3) {
+            Intent animo = new Intent(Main_Home.this, Main_Seleccion.class);
+            startActivity(animo);
+        }else if (view.getId() == R.id.icono5){
+            Intent remember2 = new Intent(Main_Home.this, Main_Usuario.class);
+            startActivity(remember2);
         }
-
     }
 }

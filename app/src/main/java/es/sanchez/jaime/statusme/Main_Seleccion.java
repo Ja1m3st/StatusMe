@@ -1,26 +1,24 @@
 package es.sanchez.jaime.statusme;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class Main_Seleccion extends AppCompatActivity implements View.OnClickListener{
@@ -77,8 +75,8 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
                 FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
                 String nombreUsuario = usuario.getEmail();
                 firebaseManager.guardarArrayListEnFirebase(nombreUsuario, guardarRegistro());
-                Intent back = new Intent(Main_Seleccion.this, Main_Home.class);
-                startActivity(back);
+                Context context = v.getContext();
+                Toast.makeText(context, "Nuevo registro añadido", Toast.LENGTH_SHORT).show();
             }
         });
         Date fechaActual = new Date();
@@ -100,7 +98,9 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             nombre = "Usuario";
         }
 
-        saludo.setText("Hola," + nombre);
+        TextAnimator animator = new TextAnimator("A ver que tal", saludo);
+        animator.setDuration(3000); // Duración de la animación en milisegundos
+        saludo.startAnimation(animator);
     }
 
     private String SesionGoogle(){
@@ -187,6 +187,12 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if (v.getId() == R.id.icono1) {
             Intent view = new Intent(Main_Seleccion.this, Main_Home.class);
+            startActivity(view);
+        }  else if (v.getId() == R.id.icono2){
+                Intent view = new Intent(Main_Seleccion.this, Main_Estadisticas.class);
+                startActivity(view);
+        }  else if (v.getId() == R.id.icono3){
+            Intent view = new Intent(Main_Seleccion.this, Main_Seleccion.class);
             startActivity(view);
         } else if (v.getId() == R.id.icono5){
             Intent view = new Intent(Main_Seleccion.this, Main_Usuario.class);

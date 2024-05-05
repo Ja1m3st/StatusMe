@@ -11,30 +11,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Main_Usuario extends AppCompatActivity {
 
@@ -208,6 +199,15 @@ public class Main_Usuario extends AppCompatActivity {
             mAuth.signOut();
             Toast.makeText(this, "Sesión cerrada Auth", Toast.LENGTH_SHORT).show();
             Intent remember2 = new Intent(Main_Usuario.this, Main_Login.class);
+            startActivity(remember2);
+        } else if (view.getId() == R.id.icono2){
+            Intent remember2 = new Intent(Main_Usuario.this, Main_Estadisticas.class);
+            startActivity(remember2);
+        }else if (view.getId() == R.id.icono3){
+            Intent remember2 = new Intent(Main_Usuario.this, Main_Seleccion.class);
+            startActivity(remember2);
+        }else if (view.getId() == R.id.icono5){
+            Intent remember2 = new Intent(Main_Usuario.this, Main_Usuario.class);
             startActivity(remember2);
         }
     }

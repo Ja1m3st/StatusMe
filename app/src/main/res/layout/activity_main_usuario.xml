@@ -88,13 +88,15 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
+
+    <FrameLayout
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:cardBackgroundColor="?attr/colorPrimary">
+        android:layout_margin="10sp"
+        app:cardCornerRadius="20dp">
 
         <LinearLayout
             android:id="@+id/Topnav2"
@@ -102,61 +104,92 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/icono1"
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/libro"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
+                android:layout_margin="5dp">
 
-            <ImageButton
-                android:id="@+id/icono2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/estadisticas"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
 
-            <ImageButton
-                android:id="@+id/icono3"
+                <ImageButton
+                    android:id="@+id/icono1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:onClick="onClick"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/casa" />
+            </FrameLayout>
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/mas"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
+                android:layout_margin="5dp">
 
-            <ImageButton
-                android:id="@+id/icono4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/calendario"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
+                <ImageButton
+                    android:id="@+id/icono2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/estadisticas"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="onClick"/>
+            </FrameLayout>
 
-            <ImageButton
-                android:id="@+id/icono5"
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/usuario"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:onClick="onClick"/>
+                android:layout_margin="5dp">
+
+                <ImageButton
+                    android:id="@+id/icono3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/mas"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="onClick"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp">
+
+                <ImageButton
+                    android:id="@+id/icono4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/calendario"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="onClick"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp">
+
+
+                <ImageButton
+                    android:id="@+id/icono5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/usuario"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:padding="10dp"
+                    android:onClick="onClick"/>
+            </FrameLayout>
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </RelativeLayout>

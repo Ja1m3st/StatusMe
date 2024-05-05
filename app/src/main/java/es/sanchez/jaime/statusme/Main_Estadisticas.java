@@ -111,14 +111,12 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
     }
 
     public void onClick(View view) {
-
         if (view.getId() == R.id.icono1) {
             Intent signup = new Intent(Main_Estadisticas.this, Main_Home.class);
             startActivity(signup);
         } else if (view.getId() == R.id.icono5) {
             Intent remember2 = new Intent(Main_Estadisticas.this, Main_Usuario.class);
             startActivity(remember2);
-            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } else if (view.getId() == R.id.icono3) {
             Intent animo = new Intent(Main_Estadisticas.this, Main_Seleccion.class);
             startActivity(animo);
@@ -126,6 +124,5 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
             Intent animo = new Intent(Main_Estadisticas.this, Main_Estadisticas.class);
             startActivity(animo);
         }
-
     }
 }

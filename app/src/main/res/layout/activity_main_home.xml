@@ -9,7 +9,8 @@
         android:id="@+id/topnav"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:backgroundTint="#F1E9D6">
 
         <TextView
             android:id="@+id/saludo"
@@ -27,7 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/card_view"
-        android:layout_below="@+id/topnav">
+        android:layout_below="@+id/topnav"
+        android:background="#FAF7F0">
 
     </ScrollView>
 
@@ -37,8 +39,11 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10sp"
-        app:cardCornerRadius="20dp">
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:cardCornerRadius="20dp"
+        android:background="@drawable/barra_abajo">
 
         <LinearLayout
             android:id="@+id/Topnav2"
