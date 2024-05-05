@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="14dp"
-            android:fontFamily="@font/medio"
+            android:fontFamily="@font/nueva"
             android:text="holaa"
             android:textSize="20dp" />
 
@@ -48,10 +48,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Selecciona tu estado de Animo:"
-                android:fontFamily="@font/medio"
                 android:textSize="20dp"
                 android:textColor="@color/green_main"
-                android:layout_marginLeft="14dp"/>
+                android:layout_marginLeft="14dp"
+                android:fontFamily="@font/nueva"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/estados"
@@ -91,7 +91,8 @@
                         android:layout_height="wrap_content"
                         android:text="Bien"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -128,7 +129,8 @@
                         android:layout_height="wrap_content"
                         android:text="Normal"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -165,11 +167,12 @@
                         android:layout_height="wrap_content"
                         android:text="Mal"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
-            </FrameLayout>    >
+            </FrameLayout>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/TituloExtras"
@@ -183,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Selecciona las actividades:"
-                android:fontFamily="@font/medio"
+                android:fontFamily="@font/nueva"
                 android:textSize="20dp"
                 android:textColor="@color/green_main"
                 android:layout_marginLeft="14dp"/>
@@ -226,7 +229,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Correr"         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -264,7 +268,8 @@
                         android:layout_height="wrap_content"
                         android:text="Jugar"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva" />
 
                 </LinearLayout>
 
@@ -349,7 +354,8 @@
                         android:layout_height="wrap_content"
                         android:text="Familia"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -388,7 +394,8 @@
                         android:layout_height="wrap_content"
                         android:text="Amigos"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -472,7 +479,9 @@
                         android:layout_height="wrap_content"
                         android:text="Television"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"
+                        />
 
                 </LinearLayout>
 
@@ -510,7 +519,8 @@
                         android:layout_height="wrap_content"
                         android:text="Compras"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -547,7 +557,8 @@
                         android:layout_height="wrap_content"
                         android:text="Leer"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -593,7 +604,8 @@
                         android:layout_height="wrap_content"
                         android:text="Television"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -631,7 +643,8 @@
                         android:layout_height="wrap_content"
                         android:text="Compras"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
@@ -668,7 +681,8 @@
                         android:layout_height="wrap_content"
                         android:text="Leer"
                         android:paddingBottom="5dp"
-                        android:paddingRight="2dp"/>
+                        android:paddingRight="2dp"
+                        android:fontFamily="@font/nueva"/>
 
                 </LinearLayout>
 
