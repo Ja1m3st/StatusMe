@@ -654,7 +654,7 @@
             android:layout_height="42dp"
             android:orientation="horizontal"
             android:layout_below="@+id/Extras4"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal">
             <Button
                 android:id="@+id/botonguardar"
@@ -673,7 +673,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="10sp"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="20dp"
+        android:background="@drawable/barra_abajo">
 
         <LinearLayout
             android:id="@+id/Topnav2"
