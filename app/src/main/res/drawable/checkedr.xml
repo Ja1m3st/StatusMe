@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Fondo con bordes redondeados -->
-
-    <!-- Sombras -->
-
+    <item android:left="6dp" android:bottom="6dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#F36056"/> <!-- Color de sombra negro con opacidad 50% -->
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
     <item  android:right="3dp" android:top="3dp">
         <shape android:shape="rectangle">
             <corners android:radius="20dp"/>
@@ -14,5 +16,3 @@
         </shape>
     </item>
 </layer-list>
-
-
