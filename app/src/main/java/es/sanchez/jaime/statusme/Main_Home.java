@@ -155,14 +155,13 @@ public class Main_Home extends AppCompatActivity {
                             1
                     );
                     textViewDia.setLayoutParams(diaLayoutParams);
-                    textViewDia.setTextColor(getResources().getColor(R.color.green_main));
                     Typeface typeface = ResourcesCompat.getFont(this, R.font.medio);
 
                     textViewDia.setTypeface(typeface);
-                    textViewDia.setText("Dia:" + (dias));
+                    textViewDia.setText("Dia " + (dias));
                     textViewDia.setTypeface(null, Typeface.BOLD);
                     textViewDia.setTextSize(20); // Tamaño del texto 20sp
-                    textViewDia.setPadding(16, 16, 16, 16); // Relleno de 16dp dentro de la tarjeta
+                    textViewDia.setPadding(50, 15, 15, 15);
                     innerLinearLayout.addView(textViewDia);
 
                     // Agrega un TextView para el contenido de las actividades
@@ -174,9 +173,6 @@ public class Main_Home extends AppCompatActivity {
                     );
                     textViewActividades.setLayoutParams(actividadesLayoutParams);
                     textViewActividades.setTextSize(15);
-                    textViewActividades.setTextColor(getResources().getColor(R.color.green_main));
-
-
                     StringBuilder actividadesText = new StringBuilder();
 
 

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#FDFBF6</color>
-    <color name="green_main">#050505</color>
+    <color name="green_main">#3DDC84</color>
+    <color name="si">#449740</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryLight">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="fondo">#FAF7F0</color>
+    <color name="barras">#F1E9D6</color>
 </resources>
