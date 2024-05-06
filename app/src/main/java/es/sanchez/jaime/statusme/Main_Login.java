@@ -209,7 +209,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
     }
 
     private void crearCarpetaStorage(String email){
-
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference folderRef = storage.getReference().child(email);
         folderRef.child(email).putBytes(new byte[0]).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

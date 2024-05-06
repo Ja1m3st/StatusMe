@@ -33,18 +33,65 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="20dp"
-                    android:background="@drawable/minitarjetas">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-                </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/tarjeta1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp"
+                android:padding="20dp"
+                android:background="@drawable/minitarjetas"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Resumen de estos ultimos 7 días"
+                    android:fontFamily="@font/nueva"
+                    android:textColor="@color/black"/>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/tarjeta2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp"
+                android:background="@drawable/minitarjetas"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tarjeta3"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp"
+                android:background="@drawable/minitarjetas"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tarjeta4"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp"
+                android:background="@drawable/minitarjetas"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
+
 
     <FrameLayout
         android:id="@+id/card_view"
