@@ -29,15 +29,22 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_seleccion);
+        String nombre = "";
 
         firebaseManager = new FirebaseManager();
+        Date fechaActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String fechaFormateada = formatoFecha.format(fechaActual);
 
 
         CheckBox checkBoxFeliz = findViewById(R.id.feliz);
         CheckBox checkBoxMedio = findViewById(R.id.medio);
         CheckBox checkBoxMal = findViewById(R.id.mal);
+        TextView fecha = findViewById(R.id.dia);
         Button guardar = findViewById(R.id.botonguardar);
+        TextView saludo = findViewById(R.id.saludo);
 
+        fecha.setText(fechaFormateada);
         checkBoxFeliz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +75,6 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,17 +88,11 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
-        TextView saludo = findViewById(R.id.saludo);
-        String nombre = "";
         if (SesionGoogle() != null) {
             nombre = account.getGivenName();
         } else if (SesionAuth() != null) {
             nombre = "Usuario";
         }
-        Date fechaActual = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String fechaFormateada = formatoFecha.format(fechaActual);
-        TextView fecha = findViewById(R.id.dia);
         fecha.setText(fechaFormateada);
 
         TextAnimator animator = new TextAnimator("A ver que tal", saludo);
@@ -122,6 +122,7 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
     public ArrayList<Object> guardarRegistro() {
         ArrayList<String> valoresSeleccionados = new ArrayList<>();
         ArrayList<String> actividadesSeleccionadas = new ArrayList<>();
+        ArrayList<Object> dia = new ArrayList<>();
 
         Date fechaActual = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -178,14 +179,12 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             actividadesSeleccionadas.add("Leer");
         }
 
-        ArrayList<Object> dia = new ArrayList<>();
         dia.add(valoresSeleccionados);
         dia.add(actividadesSeleccionadas);
         dia.add(fechaFormateada);
         dia.add(clima);
         return dia;
     }
-
 
     @Override
     public void onClick(View v) {
@@ -203,5 +202,4 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             startActivity(view);
         }
     }
-
 }

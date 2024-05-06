@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,12 +22,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class Main_Home extends AppCompatActivity {
 
@@ -37,16 +33,15 @@ public class Main_Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
-        // Obtener la fecha actual
-        Date fechaActual = new Date();
+        //---------------------- declaraciones -----------------//
+        String nombre = "";
 
-        // Formatear la fecha en el formato deseado
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String fechaFormateada = formatoFecha.format(fechaActual);
+        // ----------------------- id's -----------------//
+        TextView saludo = findViewById(R.id.saludo);
+
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        TextView saludo = findViewById(R.id.saludo);
-        String nombre = "";
+
 
         if (SesionGoogle() != null) {
             nombre = account.getGivenName();
@@ -54,9 +49,9 @@ public class Main_Home extends AppCompatActivity {
             nombre = "Usuario";
         }
 
-        // Crear el animador de texto y configurar la velocidad de escritura
+        // ------ Animación ------//
         TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
-        animator.setDuration(3000); // Duración de la animación en milisegundos
+        animator.setDuration(3000);
         saludo.startAnimation(animator);
 
         obtenerYMostrarDatos();
@@ -65,29 +60,22 @@ public class Main_Home extends AppCompatActivity {
     private void obtenerYMostrarDatos() {
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         String emailUsuario = usuario.getEmail();
-
-        // Llamar al método para obtener los datos de totaldias del usuario
         FirebaseManager firebaseManager = new FirebaseManager();
+
         firebaseManager.obtenerTotalDiasDeUsuario(emailUsuario, new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null && dataSnapshot.exists()) {
-                    // Si hay datos, mostrarlos en la interfaz de usuario
                     ArrayList<ArrayList> totalDias = (ArrayList<ArrayList>) dataSnapshot.getValue();
                     mostrarDatos(totalDias);
-                } else {
-                    // Si no hay datos, mostrar un mensaje indicando que no se encontraron datos
-                    mostrarMensaje("No se encontraron datos de totaldias para este usuario.");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Manejar el error en caso de que ocurra
             }
         });
     }
-
 
     private String SesionGoogle(){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -109,22 +97,23 @@ public class Main_Home extends AppCompatActivity {
     }
 
     private void mostrarDatos(ArrayList<ArrayList> totalDias) {
-        // Construir el texto a mostrar en el TextView
         StringBuilder texto = new StringBuilder();
+        LinearLayout linearLayout = new LinearLayout(this);
+        LocalDate fechaActual = LocalDate.now();
+        ScrollView scrollView = findViewById(R.id.Main);
+        String dia = "";
+
         texto.append("Valores seleccionados:\n");
         texto.append("- ").append(totalDias.get(0)).append("\n\n");
         texto.append("Actividades realizadas:\n\n");
-        LocalDate fechaActual = LocalDate.now();
 
-        ScrollView scrollView = findViewById(R.id.Main);
-        LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         if (totalDias != null) {
             for (int i = totalDias.size() - 1; i > 0; i--) {
                 ArrayList<Object> diaActual = totalDias.get(i);
                 if (diaActual != null) {
-                    String dia = (String) diaActual.get(2);
+                    dia = (String) diaActual.get(2);
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate fechaDia = LocalDate.parse(dia, formatter);
                     if (fechaDia.equals(fechaActual)) {
@@ -179,10 +168,8 @@ public class Main_Home extends AppCompatActivity {
                         textViewActividades.setText(actividadesText.toString());
                         innerLinearLayout.addView(textViewActividades);
 
-                        // Agrega el LinearLayout horizontal al CardView
                         cardView.addView(innerLinearLayout);
 
-                        // Agrega el CardView al LinearLayout vertical
                         linearLayout.addView(cardView);
                     }
                 }
@@ -192,13 +179,8 @@ public class Main_Home extends AppCompatActivity {
             texto.append("No hay datos disponibles.");
         }
     }
-    private void mostrarMensaje(String mensaje) {
-        // Mostrar un Toast con el mensaje proporcionado
-        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-    }
 
     public void onClick(View view) {
-
         if (view.getId() == R.id.icono1) {
             Intent signup = new Intent(Main_Home.this, Main_Home.class);
             startActivity(signup);

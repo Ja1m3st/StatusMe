@@ -193,7 +193,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                         arrayListDiaActual.add(actividades);
                         arrayListDiaActual.add(clima);
                         arrayListDiaActual.add(dia);
-
                         estadosDeAnimo.add(" ");
                         estadosDeAnimo.add(" ");
                         actividades.add(" ");
