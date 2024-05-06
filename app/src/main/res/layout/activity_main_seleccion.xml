@@ -25,7 +25,7 @@
             android:id="@+id/dia"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="holaa"
+            android:text=" "
             android:textSize="20dp"
             android:fontFamily="@font/medio"
             android:layout_marginRight="17dp"

@@ -21,8 +21,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Main_Seleccion extends AppCompatActivity implements View.OnClickListener{
 
+    private TextView weatherTextView;
     FirebaseManager firebaseManager;
     FirebaseAuth firebaseAuth;
     @Override
@@ -40,11 +45,11 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         CheckBox checkBoxFeliz = findViewById(R.id.feliz);
         CheckBox checkBoxMedio = findViewById(R.id.medio);
         CheckBox checkBoxMal = findViewById(R.id.mal);
-        TextView fecha = findViewById(R.id.dia);
+        //TextView fecha = findViewById(R.id.dia);
         Button guardar = findViewById(R.id.botonguardar);
         TextView saludo = findViewById(R.id.saludo);
 
-        fecha.setText(fechaFormateada);
+        //fecha.setText(fechaFormateada);
         checkBoxFeliz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,9 +85,40 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
                 String nombreUsuario = usuario.getEmail();
-                firebaseManager.guardarArrayListEnFirebase(nombreUsuario, guardarRegistro());
-                Context context = v.getContext();
-                Toast.makeText(context, "Nuevo registro añadido", Toast.LENGTH_SHORT).show();
+
+                if (checkBoxFeliz.isChecked() || checkBoxMedio.isChecked() || checkBoxMal.isChecked()) {
+                    firebaseManager.guardarArrayListEnFirebase(nombreUsuario, guardarRegistro());
+                    Context context = v.getContext();
+                    Toast.makeText(context, "Nuevo registro añadido", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Main_Seleccion.this, "Por favor, selecciona al menos una opción", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        weatherTextView = findViewById(R.id.dia);
+
+        WeatherAPI weatherAPI = WeatherService.getWeatherAPI();
+        // Introduce las coordenadas de tu ubicación
+        double latitude = 40.416775 ;
+        double longitude = -3.703790 ;
+        Call<WeatherData> call = weatherAPI.getWeatherByCoords(latitude, longitude, WeatherService.getApiKey());
+
+        call.enqueue(new Callback<WeatherData>() {
+            @Override
+            public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    WeatherData weatherData = response.body();
+                    double tempCelsius = weatherData.getMain().getTemp() - 273.15; // Convertir de Kelvin a Celsius
+                    weatherTextView.setText("Temperatura en tus coordenadas: " + tempCelsius + "°C");
+                } else {
+                    Toast.makeText(Main_Seleccion.this, "Error al obtener datos del clima", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherData> call, Throwable t) {
+                Toast.makeText(Main_Seleccion.this, "Error de red", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,7 +129,7 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         } else if (SesionAuth() != null) {
             nombre = "Usuario";
         }
-        fecha.setText(fechaFormateada);
+        //fecha.setText(fechaFormateada);
 
         TextAnimator animator = new TextAnimator("A ver que tal", saludo);
         animator.setDuration(3000);
@@ -178,6 +214,7 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         if (checkBox_leer.isChecked()) {
             actividadesSeleccionadas.add("Leer");
         }
+
 
         dia.add(valoresSeleccionados);
         dia.add(actividadesSeleccionadas);
