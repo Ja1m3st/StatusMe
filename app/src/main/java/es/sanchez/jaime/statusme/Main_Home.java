@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -112,16 +114,7 @@ public class Main_Home extends AppCompatActivity {
         texto.append("Valores seleccionados:\n");
         texto.append("- ").append(totalDias.get(0)).append("\n\n");
         texto.append("Actividades realizadas:\n\n");
-        int dias = 0;
-
-        if (totalDias != null) {
-            for (ArrayList<ArrayList<String>> dia : totalDias) {
-                if (dia != null) {
-                    dias++;
-                }
-            }
-        }
-        dias--;
+        LocalDate fechaActual = LocalDate.now();
 
         ScrollView scrollView = findViewById(R.id.Main);
         LinearLayout linearLayout = new LinearLayout(this);
@@ -129,76 +122,70 @@ public class Main_Home extends AppCompatActivity {
 
         if (totalDias != null) {
             for (int i = totalDias.size() - 1; i > 0; i--) {
-                ArrayList<ArrayList<String>> dia = totalDias.get(i);
-                if (dia != null) {
-                    FrameLayout cardView = new FrameLayout(this);
-                    LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    );
-                    cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
-                    cardView.setLayoutParams(cardLayoutParams);// Fondo blanco
-                    cardView.setBackground(getResources().getDrawable(R.drawable.minitarjetas));
+                ArrayList<Object> diaActual = totalDias.get(i);
+                if (diaActual != null) {
+                    String dia = (String) diaActual.get(2);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate fechaDia = LocalDate.parse(dia, formatter);
+                    if (fechaDia.equals(fechaActual)) {
+                        FrameLayout cardView = new FrameLayout(this);
+                        LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        );
+                        cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
+                        cardView.setLayoutParams(cardLayoutParams);// Fondo blanco
+                        cardView.setBackground(getResources().getDrawable(R.drawable.minitarjetas));
 
-                    // Crea un nuevo LinearLayout horizontal dentro del CardView
-                    LinearLayout innerLinearLayout = new LinearLayout(this);
-                    innerLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                    innerLinearLayout.setLayoutParams(new ViewGroup.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    ));
-                    // Crea un nuevo TextView dentro del LinearLayout para el día
-                    TextView textViewDia = new TextView(this);
-                    LinearLayout.LayoutParams diaLayoutParams = new LinearLayout.LayoutParams(
-                            0,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            1
-                    );
-                    textViewDia.setLayoutParams(diaLayoutParams);
-                    Typeface typeface = ResourcesCompat.getFont(this, R.font.medio);
+                        LinearLayout innerLinearLayout = new LinearLayout(this);
+                        innerLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                        innerLinearLayout.setLayoutParams(new ViewGroup.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        ));
 
-                    textViewDia.setTypeface(typeface);
-                    textViewDia.setText("Dia " + (dias));
-                    textViewDia.setTypeface(null, Typeface.BOLD);
-                    textViewDia.setTextSize(20); // Tamaño del texto 20sp
-                    textViewDia.setPadding(50, 15, 15, 15);
-                    innerLinearLayout.addView(textViewDia);
+                        TextView textViewDia = new TextView(this);
+                        LinearLayout.LayoutParams diaLayoutParams = new LinearLayout.LayoutParams(
+                                0,
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                1
+                        );
+                        textViewDia.setLayoutParams(diaLayoutParams);
+                        Typeface typeface = ResourcesCompat.getFont(this, R.font.medio);
+                        textViewDia.setTypeface(typeface);
+                        textViewDia.setText(dia);
+                        textViewDia.setTypeface(null, Typeface.BOLD);
+                        textViewDia.setTextSize(20); // Tamaño del texto 20sp
+                        textViewDia.setPadding(50, 15, 15, 15);
+                        innerLinearLayout.addView(textViewDia);
 
-                    // Agrega un TextView para el contenido de las actividades
-                    TextView textViewActividades = new TextView(this);
-                    LinearLayout.LayoutParams actividadesLayoutParams = new LinearLayout.LayoutParams(
-                            0,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            3
-                    );
-                    textViewActividades.setLayoutParams(actividadesLayoutParams);
-                    textViewActividades.setTextSize(15);
-                    StringBuilder actividadesText = new StringBuilder();
+                        TextView textViewActividades = new TextView(this);
+                        LinearLayout.LayoutParams actividadesLayoutParams = new LinearLayout.LayoutParams(
+                                0,
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                1
+                        );
+                        textViewActividades.setLayoutParams(actividadesLayoutParams);
+                        textViewActividades.setTextSize(15);
 
-
-                    ArrayList<String> actividades = dia.get(0);
-                    if (actividades != null) {
-                        for (String actividad : actividades) {
-                            actividadesText.append(actividad).append("\n");
+                        StringBuilder actividadesText = new StringBuilder();
+                        ArrayList<String> estadosDeAnimo = (ArrayList<String>) diaActual.get(0);
+                        if (estadosDeAnimo != null) {
+                            for (String estado : estadosDeAnimo) {
+                                actividadesText.append(estado).append("\n");
+                            }
                         }
+
+                        textViewActividades.setText(actividadesText.toString());
+                        innerLinearLayout.addView(textViewActividades);
+
+                        // Agrega el LinearLayout horizontal al CardView
+                        cardView.addView(innerLinearLayout);
+
+                        // Agrega el CardView al LinearLayout vertical
+                        linearLayout.addView(cardView);
                     }
-                   // for (ArrayList<String> actividades : dia) {
-                     //   if (actividades != null) {
-                       //     for (String actividad : actividades) {
-                         //       actividadesText.append(actividades.get(0)).append("\n");
-                           // }
-                        //}
-                    //}
-                    textViewActividades.setText(actividadesText.toString());
-                    innerLinearLayout.addView(textViewActividades);
-
-                    // Agrega el LinearLayout horizontal al CardView
-                    cardView.addView(innerLinearLayout);
-
-                    // Agrega el CardView al LinearLayout vertical
-                    linearLayout.addView(cardView);
                 }
-                dias--;
             }
             scrollView.addView(linearLayout);
         } else {

@@ -2,31 +2,27 @@ package es.sanchez.jaime.statusme;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.cardview.widget.CardView;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.gms.auth.api.Auth;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,17 +31,12 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class Main_Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -192,12 +183,17 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                         firstName = account.getGivenName();
                         lastName = account.getFamilyName();
                         ArrayList<ArrayList> totaldias = new ArrayList<>();
-                        ArrayList<ArrayList> arrayListDiaActual = new ArrayList<ArrayList>();
+                        ArrayList<Object> arrayListDiaActual = new ArrayList<>();
                         ArrayList<String> estadosDeAnimo = new ArrayList<>();
                         ArrayList<String> actividades = new ArrayList<>();
+                        String clima = " ";
+                        String dia = " ";
                         totaldias.add(arrayListDiaActual);
                         arrayListDiaActual.add(estadosDeAnimo);
                         arrayListDiaActual.add(actividades);
+                        arrayListDiaActual.add(clima);
+                        arrayListDiaActual.add(dia);
+
                         estadosDeAnimo.add(" ");
                         estadosDeAnimo.add(" ");
                         actividades.add(" ");

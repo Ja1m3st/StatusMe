@@ -36,7 +36,7 @@ public class FirebaseManager {
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
 
-    public void guardarArrayListEnFirebase(String emailUsuario, ArrayList<ArrayList> lista) {
+    public void guardarArrayListEnFirebase(String emailUsuario, ArrayList<Object> lista) {
         // Obtener una referencia a la raíz de la base de datos
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
 
@@ -57,7 +57,7 @@ public class FirebaseManager {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
-                                    ArrayList<ArrayList<ArrayList>> totalDias = (ArrayList<ArrayList<ArrayList>>) dataSnapshot.getValue();
+                                    ArrayList<ArrayList<Object>> totalDias = (ArrayList<ArrayList<Object>>) dataSnapshot.getValue();
                                     totalDias.add(lista);
                                     // Actualizar el ArrayList en Firebase
                                     userTotalDiasReference.setValue(totalDias)

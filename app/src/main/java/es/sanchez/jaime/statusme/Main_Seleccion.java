@@ -79,14 +79,6 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(context, "Nuevo registro añadido", Toast.LENGTH_SHORT).show();
             }
         });
-        Date fechaActual = new Date();
-
-        // Formatear la fecha en el formato deseado
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String fechaFormateada = formatoFecha.format(fechaActual);
-
-        TextView dia = findViewById(R.id.dia);
-        dia.setText(fechaFormateada);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
@@ -97,9 +89,14 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         } else if (SesionAuth() != null) {
             nombre = "Usuario";
         }
+        Date fechaActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String fechaFormateada = formatoFecha.format(fechaActual);
+        TextView fecha = findViewById(R.id.dia);
+        fecha.setText(fechaFormateada);
 
         TextAnimator animator = new TextAnimator("A ver que tal", saludo);
-        animator.setDuration(3000); // Duración de la animación en milisegundos
+        animator.setDuration(3000);
         saludo.startAnimation(animator);
     }
 
@@ -122,9 +119,14 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public ArrayList<ArrayList> guardarRegistro() {
+    public ArrayList<Object> guardarRegistro() {
         ArrayList<String> valoresSeleccionados = new ArrayList<>();
         ArrayList<String> actividadesSeleccionadas = new ArrayList<>();
+
+        Date fechaActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String fechaFormateada = formatoFecha.format(fechaActual);
+        String clima = "Soleado";
 
         CheckBox checkBox_bien = findViewById(R.id.feliz);
         CheckBox checkBox_normal = findViewById(R.id.medio);
@@ -176,9 +178,11 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             actividadesSeleccionadas.add("Leer");
         }
 
-        ArrayList<ArrayList> dia = new ArrayList<>();
+        ArrayList<Object> dia = new ArrayList<>();
         dia.add(valoresSeleccionados);
         dia.add(actividadesSeleccionadas);
+        dia.add(fechaFormateada);
+        dia.add(clima);
         return dia;
     }
 
