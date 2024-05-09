@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -132,21 +134,22 @@ public class Main_Home extends AppCompatActivity {
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT
                         ));
+                        innerLinearLayout.setPadding(10,10,10,10);
 
                         TextView textViewDia = new TextView(this);
                         LinearLayout.LayoutParams diaLayoutParams = new LinearLayout.LayoutParams(
                                 0,
                                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                                1
+                                2
                         );
+                        diaLayoutParams.setMargins(30,0,0,0);
                         textViewDia.setLayoutParams(diaLayoutParams);
                         Typeface typeface = ResourcesCompat.getFont(this, R.font.medio);
                         textViewDia.setTypeface(typeface);
                         textViewDia.setText(dia);
                         textViewDia.setTypeface(null, Typeface.BOLD);
-                        textViewDia.setTextSize(20); // Tamaño del texto 20sp
-                        textViewDia.setPadding(50, 15, 15, 15);
-                        innerLinearLayout.addView(textViewDia);
+                        textViewDia.setTextSize(18);
+                        textViewDia.setPadding(0, 15, 0, 15);
 
                         TextView textViewActividades = new TextView(this);
                         LinearLayout.LayoutParams actividadesLayoutParams = new LinearLayout.LayoutParams(
@@ -154,8 +157,11 @@ public class Main_Home extends AppCompatActivity {
                                 ViewGroup.LayoutParams.WRAP_CONTENT,
                                 1
                         );
-                        textViewActividades.setLayoutParams(actividadesLayoutParams);
+                        actividadesLayoutParams.setMargins(0,0,200,0);
                         textViewActividades.setTextSize(15);
+                        textViewActividades.setPadding(0,0,0,0);
+                        textViewActividades.setLayoutParams(actividadesLayoutParams);
+
 
                         StringBuilder actividadesText = new StringBuilder();
                         ArrayList<String> estadosDeAnimo = (ArrayList<String>) diaActual.get(0);
@@ -164,9 +170,25 @@ public class Main_Home extends AppCompatActivity {
                                 actividadesText.append(estado).append("\n");
                             }
                         }
-
                         textViewActividades.setText(actividadesText.toString());
+
+                        ImageButton botonEliminar = new ImageButton(this);
+                        LinearLayout.LayoutParams botonLayoutParams = new LinearLayout.LayoutParams(
+                                0,
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                1
+                        );
+                        botonEliminar.setImageResource(R.drawable.basura);
+                        botonEliminar.setScaleType(ImageView.ScaleType.CENTER);
+                        botonEliminar.setPadding(20,15,10,20);
+                        botonEliminar.setAdjustViewBounds(true);
+                        botonEliminar.setBackground(getResources().getDrawable(R.drawable.checkedr));
+                        botonLayoutParams.setMargins(50,10,10,10);
+                        botonEliminar.setLayoutParams(botonLayoutParams);
+
+                        innerLinearLayout.addView(textViewDia);
                         innerLinearLayout.addView(textViewActividades);
+                        innerLinearLayout.addView(botonEliminar);
 
                         cardView.addView(innerLinearLayout);
 

@@ -21,10 +21,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class Main_Seleccion extends AppCompatActivity implements View.OnClickListener{
 
     private TextView weatherTextView;
@@ -96,31 +92,6 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        weatherTextView = findViewById(R.id.dia);
-
-        WeatherAPI weatherAPI = WeatherService.getWeatherAPI();
-        // Introduce las coordenadas de tu ubicación
-        double latitude = 40.416775 ;
-        double longitude = -3.703790 ;
-        Call<WeatherData> call = weatherAPI.getWeatherByCoords(latitude, longitude, WeatherService.getApiKey());
-
-        call.enqueue(new Callback<WeatherData>() {
-            @Override
-            public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    WeatherData weatherData = response.body();
-                    double tempCelsius = weatherData.getMain().getTemp() - 273.15; // Convertir de Kelvin a Celsius
-                    weatherTextView.setText("Temperatura en tus coordenadas: " + tempCelsius + "°C");
-                } else {
-                    Toast.makeText(Main_Seleccion.this, "Error al obtener datos del clima", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<WeatherData> call, Throwable t) {
-                Toast.makeText(Main_Seleccion.this, "Error de red", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
@@ -215,7 +186,6 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             actividadesSeleccionadas.add("Leer");
         }
 
-
         dia.add(valoresSeleccionados);
         dia.add(actividadesSeleccionadas);
         dia.add(fechaFormateada);
@@ -229,8 +199,8 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             Intent view = new Intent(Main_Seleccion.this, Main_Home.class);
             startActivity(view);
         }  else if (v.getId() == R.id.icono2){
-                Intent view = new Intent(Main_Seleccion.this, Main_Estadisticas.class);
-                startActivity(view);
+            Intent view = new Intent(Main_Seleccion.this, Main_Estadisticas.class);
+            startActivity(view);
         }  else if (v.getId() == R.id.icono3){
             Intent view = new Intent(Main_Seleccion.this, Main_Seleccion.class);
             startActivity(view);
