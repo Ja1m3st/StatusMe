@@ -36,12 +36,12 @@ public class FirebaseManager {
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
 
-    public void guardarArrayListEnFirebase(String emailUsuario, ArrayList<Object> lista) {
+    public void guardarArrayListEnFirebase(ArrayList<Object> lista) {
         // Obtener una referencia a la raíz de la base de datos
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
 
         // Realizar la consulta para buscar al usuario por su correo electrónico
-        databaseReference.orderByChild("mail").equalTo(emailUsuario).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.orderByChild("mail").equalTo(getMailUser()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -116,9 +116,9 @@ public class FirebaseManager {
         });
     }
 
-    public void obtenerTotalDiasDeUsuario(String emailUsuario, ValueEventListener listener) {
+    public void obtenerTotalDiasDeUsuario(ValueEventListener listener) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-        databaseReference.orderByChild("mail").equalTo(emailUsuario).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.orderByChild("mail").equalTo(getMailUser()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -141,18 +141,16 @@ public class FirebaseManager {
         });
     }
 
-    public static void eliminarRegistroUsuario(String emailUsuario, String firebaseKey) {
+    public static void eliminarRegistroUsuario( String firebaseKey) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-        databaseReference.orderByChild("mail").equalTo(emailUsuario).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.orderByChild("mail").equalTo(getMailUser()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        // Encontrar la entrada correspondiente al firebaseKey en totaldias
                         DataSnapshot totalDiasSnapshot = snapshot.child("totaldias");
                         for (DataSnapshot diaSnapshot : totalDiasSnapshot.getChildren()) {
                             if (diaSnapshot.getKey().equals(firebaseKey)) {
-                                // Eliminar la entrada encontrada
                                 diaSnapshot.getRef().removeValue()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -168,7 +166,7 @@ public class FirebaseManager {
                                                 Log.e("Firebase", "Error al eliminar la entrada", e);
                                             }
                                         });
-                                return; // Salir del bucle una vez que se haya eliminado la entrada
+                                return;
                             }
                         }
                     }
@@ -182,7 +180,11 @@ public class FirebaseManager {
             }
         });
     }
-
+    public static String getMailUser(){
+        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+        String emailUsuario = usuario.getEmail();
+        return(emailUsuario);
+    }
     public FirebaseUser obtenerUsuarioActual() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         return firebaseAuth.getCurrentUser();
@@ -217,5 +219,4 @@ public class FirebaseManager {
     public interface EmailCallback {
         void onEmailFound(boolean found);
     }
-
 }

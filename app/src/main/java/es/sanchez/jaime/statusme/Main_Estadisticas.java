@@ -25,16 +25,11 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_estadisticas);
 
-        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-        String emailUsuario = usuario.getEmail();
-
-        // Llamar al método para obtener los datos de totaldias del usuario
         FirebaseManager firebaseManager = new FirebaseManager();
-        firebaseManager.obtenerTotalDiasDeUsuario(emailUsuario, new ValueEventListener() {
+        firebaseManager.obtenerTotalDiasDeUsuario(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null && dataSnapshot.exists()) {
-                    // Si hay datos, mostrarlos en la interfaz de usuario
                     ArrayList<ArrayList> totalDias = (ArrayList<ArrayList>) dataSnapshot.getValue();
                     datos(totalDias);
                 }
@@ -55,9 +50,8 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
             nombre = "Usuario";
         }
 
-        // Crear el animador de texto y configurar la velocidad de escritura
         TextAnimator animator = new TextAnimator("Veamos que tal vas, " + nombre, saludo);
-        animator.setDuration(3000); // Duración de la animación en milisegundos
+        animator.setDuration(3000);
         saludo.startAnimation(animator);
 
     }

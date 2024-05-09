@@ -61,11 +61,9 @@ public class Main_Home extends AppCompatActivity {
     }
 
     private void obtenerYMostrarDatos() {
-        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-        String emailUsuario = usuario.getEmail();
         FirebaseManager firebaseManager = new FirebaseManager();
 
-        firebaseManager.obtenerTotalDiasDeUsuario(emailUsuario, new ValueEventListener() {
+        firebaseManager.obtenerTotalDiasDeUsuario(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null && dataSnapshot.exists()) {
@@ -101,8 +99,6 @@ public class Main_Home extends AppCompatActivity {
     }
 
     private void mostrarDatos(ArrayList<ArrayList> totalDias) {
-        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-        String emailUsuario = usuario.getEmail();
         StringBuilder texto = new StringBuilder();
         LinearLayout linearLayout = new LinearLayout(this);
         LocalDate fechaActual = LocalDate.now();
@@ -198,7 +194,7 @@ public class Main_Home extends AppCompatActivity {
                                 String posi = String.valueOf(posicionEliminar);
                                 if (posicionEliminar >= 0 && posicionEliminar < totalDias.size()) {
 
-                                    FirebaseManager.eliminarRegistroUsuario(emailUsuario, posi);
+                                    FirebaseManager.eliminarRegistroUsuario(posi);
 
                                     // Eliminar el elemento del ArrayList local
                                     totalDias.remove(posicionEliminar);

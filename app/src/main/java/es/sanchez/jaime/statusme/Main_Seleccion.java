@@ -79,11 +79,8 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-                String nombreUsuario = usuario.getEmail();
-
                 if (checkBoxFeliz.isChecked() || checkBoxMedio.isChecked() || checkBoxMal.isChecked()) {
-                    firebaseManager.guardarArrayListEnFirebase(nombreUsuario, guardarRegistro());
+                    firebaseManager.guardarArrayListEnFirebase(guardarRegistro());
                     Context context = v.getContext();
                     Toast.makeText(context, "Nuevo registro añadido", Toast.LENGTH_SHORT).show();
                 } else {
