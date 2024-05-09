@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class Main_Home extends AppCompatActivity {
 
     FirebaseAuth mAuth;
+    private ArrayList<String> firebaseKeys = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,7 @@ public class Main_Home extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
     }
 
     private String SesionGoogle(){
@@ -99,6 +101,8 @@ public class Main_Home extends AppCompatActivity {
     }
 
     private void mostrarDatos(ArrayList<ArrayList> totalDias) {
+        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+        String emailUsuario = usuario.getEmail();
         StringBuilder texto = new StringBuilder();
         LinearLayout linearLayout = new LinearLayout(this);
         LocalDate fechaActual = LocalDate.now();
@@ -185,6 +189,25 @@ public class Main_Home extends AppCompatActivity {
                         botonEliminar.setBackground(getResources().getDrawable(R.drawable.checkedr));
                         botonLayoutParams.setMargins(50,10,10,10);
                         botonEliminar.setLayoutParams(botonLayoutParams);
+
+                        botonEliminar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                int index = linearLayout.indexOfChild((View) v.getParent().getParent());
+                                int posicionEliminar = totalDias.size() - 1 - index;
+                                String posi = String.valueOf(posicionEliminar);
+                                if (posicionEliminar >= 0 && posicionEliminar < totalDias.size()) {
+
+                                    FirebaseManager.eliminarRegistroUsuario(emailUsuario, posi);
+
+                                    // Eliminar el elemento del ArrayList local
+                                    totalDias.remove(posicionEliminar);
+
+                                    // Eliminar la vista correspondiente
+                                    linearLayout.removeViewAt(index);
+                                }
+                            }
+                        });
 
                         innerLinearLayout.addView(textViewDia);
                         innerLinearLayout.addView(textViewActividades);

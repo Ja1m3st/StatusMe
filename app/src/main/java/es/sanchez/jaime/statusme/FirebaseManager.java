@@ -141,14 +141,52 @@ public class FirebaseManager {
         });
     }
 
+    public static void eliminarRegistroUsuario(String emailUsuario, String firebaseKey) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        databaseReference.orderByChild("mail").equalTo(emailUsuario).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        // Encontrar la entrada correspondiente al firebaseKey en totaldias
+                        DataSnapshot totalDiasSnapshot = snapshot.child("totaldias");
+                        for (DataSnapshot diaSnapshot : totalDiasSnapshot.getChildren()) {
+                            if (diaSnapshot.getKey().equals(firebaseKey)) {
+                                // Eliminar la entrada encontrada
+                                diaSnapshot.getRef().removeValue()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                // Éxito al eliminar la entrada de Firebase
+                                                Log.d("Firebase", "Entrada eliminada con éxito");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                // Error al eliminar la entrada de Firebase
+                                                Log.e("Firebase", "Error al eliminar la entrada", e);
+                                            }
+                                        });
+                                return; // Salir del bucle una vez que se haya eliminado la entrada
+                            }
+                        }
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Maneja errores de cancelación
+                Log.e("Firebase", "Error al buscar totaldias del usuario: " + databaseError.getMessage());
+            }
+        });
+    }
 
     public FirebaseUser obtenerUsuarioActual() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         return firebaseAuth.getCurrentUser();
     }
-
-
     public void obtenerContactos(ValueEventListener listener) {
         databaseReference.addValueEventListener(listener);
     }
