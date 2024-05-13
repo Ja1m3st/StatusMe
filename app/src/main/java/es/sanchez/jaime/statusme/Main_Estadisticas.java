@@ -3,6 +3,7 @@ package es.sanchez.jaime.statusme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,8 @@ import java.util.HashMap;
 
 public class Main_Estadisticas extends AppCompatActivity implements View.OnClickListener {
 
+    ImageView imagenActividad, imagenEstado;
+    TextView textActividad, textEstado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,15 +73,18 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         return dias;
     }
 
+
+
     public void datos(ArrayList<ArrayList> totalDias){
-        int dias = totalDias(totalDias);
+        String animoMasRepetido = null;
+        String actividadMasRepetida = null;
         ArrayList<String> infoAnimo = new ArrayList<String>();
         ArrayList<String> infoActividad = new ArrayList<String>();
-        TextView textEstado = findViewById(R.id.estado);
-        TextView textActividad = findViewById(R.id.actividad);
+        textEstado = findViewById(R.id.estado2);
+        textActividad = findViewById(R.id.actividad2);
 
-        if (totalDias != null) {
-            for (int i = totalDias.size() - 1; i >= totalDias.size() - 8; i--) {
+        if (totalDias != null && totalDias.size() >= 16) {
+            for (int i = totalDias.size() - 16; i < totalDias.size() - 8; i++) {
                 ArrayList<ArrayList<String>> dia = totalDias.get(i);
                 if (dia != null) {
                     ArrayList<String> estadosAnimo = dia.get(0);
@@ -94,11 +100,14 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
                         }
                     }
                 }
-                dias--;
             }
         }
-        textEstado.setText(buscarMasRepetido(infoAnimo));
-        textActividad.setText(buscarMasRepetido(infoActividad));
+        animoMasRepetido = buscarMasRepetido(infoAnimo);
+        textEstado.setText(animoMasRepetido);
+        cargarImagen(animoMasRepetido);
+        actividadMasRepetida = buscarMasRepetido(infoActividad);
+        textActividad.setText(actividadMasRepetida);
+        cargarImagen(actividadMasRepetida);
     }
 
     public static String buscarMasRepetido(ArrayList<String> listaDeStrings) {
@@ -127,6 +136,56 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         }
 
         return stringMasRepetido;
+    }
+
+    public void cargarImagen(String stringMasRepetido){
+        imagenActividad = findViewById(R.id.imagen2actividad);
+        imagenEstado = findViewById(R.id.imagen2estado);
+
+        String tipoImagen = stringMasRepetido;
+
+        switch (tipoImagen) {
+            case "Bien":
+                imagenEstado.setImageResource(R.drawable.muyfeliz);
+                break;
+            case "Normal":
+                imagenEstado.setImageResource(R.drawable.caraseria);
+                break;
+            case "Mal":
+                imagenEstado.setImageResource(R.drawable.caratriste);
+                break;
+            case "Correr":
+                imagenActividad.setImageResource(R.drawable.corriendo);
+                break;
+            case "Jugar":
+                imagenActividad.setImageResource(R.drawable.controlador);
+                break;
+            case "Trabajando":
+                imagenActividad.setImageResource(R.drawable.portafolio);
+                break;
+            case "Familia":
+                imagenActividad.setImageResource(R.drawable.familia);
+                break;
+            case "Amigos":
+                imagenActividad.setImageResource(R.drawable.abrazo);
+                break;
+            case "Cita":
+                imagenActividad.setImageResource(R.drawable.amor);
+                break;
+            case "Television":
+                imagenActividad.setImageResource(R.drawable.television);
+                break;
+            case "Compras":
+                imagenActividad.setImageResource(R.drawable.cesta);
+                break;
+            case "Leer":
+                imagenActividad.setImageResource(R.drawable.leer);
+                break;
+            default:
+                imagenActividad.setImageResource(android.R.color.transparent);
+                imagenEstado.setImageResource(android.R.color.transparent);
+                break;
+        }
     }
 
     private String SesionGoogle(){
