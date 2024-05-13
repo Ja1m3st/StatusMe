@@ -83,8 +83,27 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         textEstado = findViewById(R.id.estado2);
         textActividad = findViewById(R.id.actividad2);
 
-        if (totalDias != null && totalDias.size() >= 16) {
-            for (int i = totalDias.size() - 16; i < totalDias.size() - 8; i++) {
+        if (totalDias != null && totalDias.size() > 7){
+            if (totalDias.size() >= 16) {
+                for (int i = totalDias.size() - 16; i < totalDias.size() - 8; i++) {
+                    ArrayList<ArrayList<String>> dia = totalDias.get(i);
+                    if (dia != null) {
+                        ArrayList<String> estadosAnimo = dia.get(0);
+                        ArrayList<String> actividades = dia.get(1);
+                        if (estadosAnimo != null) {
+                            for (String estado : estadosAnimo) {
+                                infoAnimo.add(estado);
+                            }
+                        }
+                        if (actividades != null){
+                            for (String actividad : actividades) {
+                                infoActividad.add(actividad);
+                            }
+                        }
+                    }
+                }
+            } else if (totalDias.size() > 7){
+                for (int i = totalDias.size() - 1; i >= 0 ; i--) {
                 ArrayList<ArrayList<String>> dia = totalDias.get(i);
                 if (dia != null) {
                     ArrayList<String> estadosAnimo = dia.get(0);
@@ -100,14 +119,14 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
                         }
                     }
                 }
-            }
+            }}
+            animoMasRepetido = buscarMasRepetido(infoAnimo);
+            textEstado.setText(animoMasRepetido);
+            cargarImagen(animoMasRepetido);
+            actividadMasRepetida = buscarMasRepetido(infoActividad);
+            textActividad.setText(actividadMasRepetida);
+            cargarImagen(actividadMasRepetida);
         }
-        animoMasRepetido = buscarMasRepetido(infoAnimo);
-        textEstado.setText(animoMasRepetido);
-        cargarImagen(animoMasRepetido);
-        actividadMasRepetida = buscarMasRepetido(infoActividad);
-        textActividad.setText(actividadMasRepetida);
-        cargarImagen(actividadMasRepetida);
     }
 
     public static String buscarMasRepetido(ArrayList<String> listaDeStrings) {

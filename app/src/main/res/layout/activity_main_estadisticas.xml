@@ -65,7 +65,7 @@
                             android:id="@+id/titulo1estado"
                             android:layout_width="0dp"
                             android:layout_height="50dp"
-                            android:layout_weight="1"
+                            android:layout_weight="2"
                             android:text="Estado promedio:"
                             android:fontFamily="@font/nueva"
                             android:textColor="@color/black"/>
@@ -74,7 +74,7 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:text="null"
+                            android:text="Sin datos"
                             android:fontFamily="@font/nueva"
                             android:textColor="@color/black"/>
 
@@ -94,7 +94,7 @@
                         android:layout_below="@+id/titulo1"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text="Actividad promedio:"
                         android:fontFamily="@font/nueva"
                         android:textColor="@color/black"/>
@@ -104,7 +104,7 @@
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
-                        android:text="null"
+                        android:text="Sin datos"
                         android:fontFamily="@font/nueva"
                         android:textColor="@color/black"/>
                     <ImageView
@@ -145,7 +145,7 @@
                             android:id="@+id/titulo2estado"
                             android:layout_width="0dp"
                             android:layout_height="50dp"
-                            android:layout_weight="1"
+                            android:layout_weight="2"
                             android:text="Estado promedio:"
                             android:fontFamily="@font/nueva"
                             android:textColor="@color/black"/>
@@ -154,7 +154,7 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:text="null"
+                            android:text="Sin datos"
                             android:fontFamily="@font/nueva"
                             android:textColor="@color/black"/>
 
@@ -174,7 +174,7 @@
                             android:layout_below="@+id/titulo1"
                             android:layout_width="0dp"
                             android:layout_height="50dp"
-                            android:layout_weight="1"
+                            android:layout_weight="2"
                             android:text="Actividad promedio:"
                             android:fontFamily="@font/nueva"
                             android:textColor="@color/black"/>
@@ -184,7 +184,7 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:text="null"
+                            android:text="Sin datos"
                             android:fontFamily="@font/nueva"
                             android:textColor="@color/black"/>
                         <ImageView
