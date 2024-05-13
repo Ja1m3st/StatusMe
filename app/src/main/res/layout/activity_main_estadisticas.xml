@@ -53,18 +53,20 @@
                     android:text="Resumen de estos ultimos 7 días"
                     android:fontFamily="@font/nueva"
                     android:textColor="@color/black"
-                    />
+                    android:textStyle="bold"
+                    android:textSize="20dp" />
 
                 <LinearLayout
+                    android:id="@+id/layout1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_below="@+id/titulo1">
                         <TextView
                             android:id="@+id/titulo1estado"
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:text="Estado promedio"
+                            android:text="Estado promedio:"
                             android:fontFamily="@font/nueva"
                             android:textColor="@color/black"/>
                         <TextView
@@ -75,24 +77,41 @@
                             android:text="null"
                             android:fontFamily="@font/nueva"
                             android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/tituloactividad"
-                            android:layout_below="@+id/titulo1"
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:text="Actividades promedias"
-                            android:fontFamily="@font/nueva"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/actividad"
-                            android:layout_below="@+id/titulo1"
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:text="null"
-                            android:fontFamily="@font/nueva"
-                            android:textColor="@color/black"/>
+
+                            <ImageView
+                                android:id="@+id/imagen1estado"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layout1">
+                    <TextView
+                        android:id="@+id/titulo1actividad"
+                        android:layout_below="@+id/titulo1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="Actividad promedio:"
+                        android:fontFamily="@font/nueva"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/actividad"
+                        android:layout_below="@+id/titulo1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="null"
+                        android:fontFamily="@font/nueva"
+                        android:textColor="@color/black"/>
+                    <ImageView
+                        android:id="@+id/imagen1actividad"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1" />
                 </LinearLayout>
 
             </RelativeLayout>
