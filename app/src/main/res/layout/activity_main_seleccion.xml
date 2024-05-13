@@ -18,7 +18,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="14dp"
             android:fontFamily="@font/nueva"
-            android:text="holaa"
+            android:text=" "
             android:textSize="20dp" />
 
         <TextView
@@ -43,15 +43,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Selecciona tu estado de Animo:"
                 android:textSize="20dp"
                 android:textColor="@color/green_main"
-                android:layout_marginLeft="14dp"
-                android:fontFamily="@font/nueva"/>
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/nueva"
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/estados"
@@ -180,7 +181,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@+id/estados"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -189,7 +190,8 @@
                 android:fontFamily="@font/nueva"
                 android:textSize="20dp"
                 android:textColor="@color/green_main"
-                android:layout_marginLeft="14dp"/>
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/Extras"
@@ -344,18 +346,17 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="72dp"
                     android:gravity="center_horizontal|bottom"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Familia"
-                        android:paddingBottom="5dp"
+                        android:fontFamily="@font/nueva"
                         android:paddingRight="2dp"
-                        android:fontFamily="@font/nueva"/>
+                        android:paddingBottom="5dp"
+                        android:text="Familia" />
 
                 </LinearLayout>
 
@@ -697,13 +698,27 @@
             android:layout_below="@+id/Extras4"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal">
-            <Button
-                android:id="@+id/botonguardar"
-                android:layout_width="380dp"
+
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/green_main"
-                android:text="Guardar">
-            </Button>
+                app:cardCornerRadius="20dp"
+                android:background="@drawable/rounded_checkbox_checked"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+
+                <Button
+                    android:id="@+id/botonguardar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Guardar"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/nueva"
+                    android:backgroundTint="@android:color/transparent"/>
+
+
+            </FrameLayout>
+
         </LinearLayout>
     </RelativeLayout>
 
@@ -797,8 +812,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="5dp">
-
-
                 <ImageButton
                     android:id="@+id/icono5"
                     android:layout_width="match_parent"
