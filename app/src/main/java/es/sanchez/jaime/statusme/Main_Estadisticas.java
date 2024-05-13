@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main_Estadisticas extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,7 +54,79 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         TextAnimator animator = new TextAnimator("Veamos que tal vas, " + nombre, saludo);
         animator.setDuration(3000);
         saludo.startAnimation(animator);
+    }
 
+
+    public int totalDias(ArrayList<ArrayList> totalDias){
+        int dias = 0;
+        if (totalDias != null) {
+            for (ArrayList<ArrayList<String>> dia : totalDias) {
+                if (dia != null) {
+                    dias++;
+                }
+            }
+        }
+        dias--;
+        return dias;
+    }
+
+    public void datos(ArrayList<ArrayList> totalDias){
+        int dias = totalDias(totalDias);
+        ArrayList<String> infoAnimo = new ArrayList<String>();
+        ArrayList<String> infoActividad = new ArrayList<String>();
+        TextView textEstado = findViewById(R.id.estado);
+        TextView textActividad = findViewById(R.id.actividad);
+
+        if (totalDias != null) {
+            for (int i = totalDias.size() - 1; i >= totalDias.size() - 8; i--) {
+                ArrayList<ArrayList<String>> dia = totalDias.get(i);
+                if (dia != null) {
+                    ArrayList<String> estadosAnimo = dia.get(0);
+                    ArrayList<String> actividades = dia.get(1);
+                    if (estadosAnimo != null) {
+                        for (String estado : estadosAnimo) {
+                            infoAnimo.add(estado);
+                        }
+                    }
+                    if (actividades != null){
+                        for (String actividad : actividades) {
+                            infoActividad.add(actividad);
+                        }
+                    }
+                }
+                dias--;
+            }
+        }
+        textEstado.setText(buscarMasRepetido(infoAnimo));
+        textActividad.setText(buscarMasRepetido(infoActividad));
+    }
+
+    public static String buscarMasRepetido(ArrayList<String> listaDeStrings) {
+        HashMap<String, Integer> conteoDeStrings = new HashMap<>();
+        String stringMasRepetido = null;
+        int maxRepeticiones = 0;
+
+        // Contar la frecuencia de cada string en el ArrayList
+        for (String str : listaDeStrings) {
+            if (conteoDeStrings.containsKey(str)) {
+                // Si encuentra otro str igual le añade uno mas a la clave
+                conteoDeStrings.put(str, conteoDeStrings.get(str) + 1);
+            } else {
+                // Si no encuentra otro str crea otra entrada n ueva
+                conteoDeStrings.put(str, 1);
+            }
+        }
+
+        // Encontrar el string con el recuento más alto
+        for (String str : conteoDeStrings.keySet()) {
+            int repeticiones = conteoDeStrings.get(str);
+            if (repeticiones > maxRepeticiones) {
+                stringMasRepetido = str;
+                maxRepeticiones = repeticiones;
+            }
+        }
+
+        return stringMasRepetido;
     }
 
     private String SesionGoogle(){
@@ -73,35 +146,6 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         } else {
             return null;
         }
-    }
-
-    public ArrayList<String> datos(ArrayList<ArrayList> totalDias){
-        int dias = 0;
-        ArrayList<String> info = new ArrayList<String>();
-
-        if (totalDias != null) {
-            for (ArrayList<ArrayList<String>> dia : totalDias) {
-                if (dia != null) {
-                    dias++;
-                }
-            }
-        }
-        dias--;
-        if (totalDias != null) {
-            for (int i = totalDias.size() - 1; i > 0; i--) {
-                ArrayList<ArrayList<String>> dia = totalDias.get(i);
-                if (dia != null) {
-                    ArrayList<String> actividades = dia.get(0);
-                    if (actividades != null) {
-                        for (String actividad : actividades) {
-                            info.add(actividad);
-                        }
-                    }
-                }
-                dias--;
-            }
-        }
-        return info;
     }
 
     public void onClick(View view) {

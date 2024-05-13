@@ -45,14 +45,55 @@
                 android:padding="20dp"
                 android:background="@drawable/minitarjetas"
                 android:orientation="horizontal">
-
                 <TextView
+                    android:gravity="center"
+                    android:id="@+id/titulo1"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Resumen de estos ultimos 7 días"
                     android:fontFamily="@font/nueva"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/titulo1">
+                        <TextView
+                            android:id="@+id/titulo1estado"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:text="Estado promedio"
+                            android:fontFamily="@font/nueva"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:id="@+id/estado"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:text="null"
+                            android:fontFamily="@font/nueva"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:id="@+id/tituloactividad"
+                            android:layout_below="@+id/titulo1"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:text="Actividades promedias"
+                            android:fontFamily="@font/nueva"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:id="@+id/actividad"
+                            android:layout_below="@+id/titulo1"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:text="null"
+                            android:fontFamily="@font/nueva"
+                            android:textColor="@color/black"/>
+                </LinearLayout>
 
             </RelativeLayout>
 
