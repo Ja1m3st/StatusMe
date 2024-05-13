@@ -63,10 +63,12 @@
             android:layout_marginBottom="15dp">
 
             <FrameLayout
+                android:id="@+id/frame_bien"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:onClick="onButtonPress">
 
                 <CheckBox
                     android:id="@+id/feliz"
@@ -581,7 +583,7 @@
                 app:cardCornerRadius="20dp">
 
                 <CheckBox
-                    android:id="@+id/television2"
+                    android:id="@+id/programar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/checkbox_background"
@@ -590,7 +592,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:src="@drawable/television"
+                    android:src="@drawable/programar"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
@@ -603,7 +605,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Television"
+                        android:text="Programar"
                         android:paddingBottom="5dp"
                         android:paddingRight="2dp"
                         android:fontFamily="@font/nueva"/>
@@ -620,7 +622,7 @@
                 app:cardCornerRadius="20dp">
 
                 <CheckBox
-                    android:id="@+id/compras2"
+                    android:id="@+id/estudiar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/checkbox_background"
@@ -629,7 +631,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:src="@drawable/cesta"
+                    android:src="@drawable/estudiar"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
@@ -642,7 +644,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Compras"
+                        android:text="Estudiar"
                         android:paddingBottom="5dp"
                         android:paddingRight="2dp"
                         android:fontFamily="@font/nueva"/>
@@ -658,7 +660,7 @@
                 app:cardCornerRadius="20dp">
 
                 <CheckBox
-                    android:id="@+id/leer2"
+                    android:id="@+id/nadar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/checkbox_background"
@@ -667,7 +669,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:src="@drawable/leer"
+                    android:src="@drawable/nadar"
                     android:scaleType="fitCenter"
                     android:padding="10dp" />
 
@@ -680,7 +682,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Leer"
+                        android:text="Nadar"
                         android:paddingBottom="5dp"
                         android:paddingRight="2dp"
                         android:fontFamily="@font/nueva"/>
@@ -703,7 +705,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="20dp"
-                android:background="@drawable/rounded_checkbox_checked"
+                android:background="@drawable/minitarjetas"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp">
 

@@ -145,6 +145,9 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         CheckBox checkBox_television = findViewById(R.id.television);
         CheckBox checkBox_compras = findViewById(R.id.compras);
         CheckBox checkBox_leer = findViewById(R.id.leer);
+        CheckBox checkBox_programar = findViewById(R.id.programar);
+        CheckBox checkBox_nadar = findViewById(R.id.nadar);
+        CheckBox checkBox_estudiar = findViewById(R.id.estudiar);
 
         if (checkBox_bien.isChecked()) {
             valoresSeleccionados.add("Bien");
@@ -156,13 +159,13 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             valoresSeleccionados.add("Mal");
         }
         if (checkBox_correr.isChecked()) {
-            actividadesSeleccionadas.add("Correr");
+            actividadesSeleccionadas.add("Corriendo");
         }
         if (checkBox_jugar.isChecked()) {
-            actividadesSeleccionadas.add("Jugar");
+            actividadesSeleccionadas.add("Jugando");
         }
         if (checkBox_trabajar.isChecked()) {
-            actividadesSeleccionadas.add("Trabjar");
+            actividadesSeleccionadas.add("Trabajando");
         }
         if (checkBox_familia.isChecked()) {
             actividadesSeleccionadas.add("Familia");
@@ -180,7 +183,16 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
             actividadesSeleccionadas.add("Compras");
         }
         if (checkBox_leer.isChecked()) {
-            actividadesSeleccionadas.add("Leer");
+            actividadesSeleccionadas.add("Leyendo");
+        }
+        if (checkBox_programar.isChecked()) {
+            actividadesSeleccionadas.add("Programando");
+        }
+        if (checkBox_nadar.isChecked()) {
+            actividadesSeleccionadas.add("Nadando");
+        }
+        if (checkBox_estudiar.isChecked()) {
+            actividadesSeleccionadas.add("Estudiando");
         }
 
         dia.add(valoresSeleccionados);

@@ -182,7 +182,7 @@ public class Main_Home extends AppCompatActivity {
                         botonEliminar.setScaleType(ImageView.ScaleType.CENTER);
                         botonEliminar.setPadding(20,15,10,20);
                         botonEliminar.setAdjustViewBounds(true);
-                        botonEliminar.setBackground(getResources().getDrawable(R.drawable.checkedr));
+                        botonEliminar.setBackground(getResources().getDrawable(R.drawable.eliminar));
                         botonLayoutParams.setMargins(50,10,10,10);
                         botonEliminar.setLayoutParams(botonLayoutParams);
 

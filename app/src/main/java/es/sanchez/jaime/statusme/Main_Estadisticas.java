@@ -102,24 +102,25 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
                         }
                     }
                 }
-            } else if (totalDias.size() > 7){
-                for (int i = totalDias.size() - 1; i >= 0 ; i--) {
-                ArrayList<ArrayList<String>> dia = totalDias.get(i);
-                if (dia != null) {
-                    ArrayList<String> estadosAnimo = dia.get(0);
-                    ArrayList<String> actividades = dia.get(1);
-                    if (estadosAnimo != null) {
-                        for (String estado : estadosAnimo) {
-                            infoAnimo.add(estado);
+            } else if (totalDias.size() > 7) {
+                for (int i = totalDias.size() - 1; i >= 0; i--) {
+                    ArrayList<ArrayList<String>> dia = totalDias.get(i);
+                    if (dia != null) {
+                        ArrayList<String> estadosAnimo = dia.get(0);
+                        ArrayList<String> actividades = dia.get(1);
+                        if (estadosAnimo != null) {
+                            for (String estado : estadosAnimo) {
+                                infoAnimo.add(estado);
+                            }
                         }
-                    }
-                    if (actividades != null){
-                        for (String actividad : actividades) {
-                            infoActividad.add(actividad);
+                        if (actividades != null) {
+                            for (String actividad : actividades) {
+                                infoActividad.add(actividad);
+                            }
                         }
                     }
                 }
-            }}
+            }
             animoMasRepetido = buscarMasRepetido(infoAnimo);
             textEstado.setText(animoMasRepetido);
             cargarImagen(animoMasRepetido);
@@ -173,10 +174,10 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
             case "Mal":
                 imagenEstado.setImageResource(R.drawable.caratriste);
                 break;
-            case "Correr":
+            case "Corriendo":
                 imagenActividad.setImageResource(R.drawable.corriendo);
                 break;
-            case "Jugar":
+            case "Jugando":
                 imagenActividad.setImageResource(R.drawable.controlador);
                 break;
             case "Trabajando":
@@ -191,14 +192,23 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
             case "Cita":
                 imagenActividad.setImageResource(R.drawable.amor);
                 break;
-            case "Television":
+            case "TV":
                 imagenActividad.setImageResource(R.drawable.television);
                 break;
             case "Compras":
                 imagenActividad.setImageResource(R.drawable.cesta);
                 break;
-            case "Leer":
+            case "Leyendo":
                 imagenActividad.setImageResource(R.drawable.leer);
+                break;
+            case "Programando":
+                imagenActividad.setImageResource(R.drawable.programar);
+                break;
+            case "Estudiando":
+                imagenActividad.setImageResource(R.drawable.estudiar);
+                break;
+            case "Nadando":
+                imagenActividad.setImageResource(R.drawable.nadar);
                 break;
             default:
                 imagenActividad.setImageResource(android.R.color.transparent);

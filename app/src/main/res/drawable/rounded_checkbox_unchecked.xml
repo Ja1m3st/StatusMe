@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Fondo con bordes redondeados -->
-
-    <!-- Sombras -->
-
-    <item  android:right="3dp" android:top="3dp">
+    <item  android:left="2dp" android:top="2dp">
         <shape android:shape="rectangle">
-            <corners android:radius="20dp"/>
+            <solid android:color="#000000" />
+            <corners android:radius="20dp" />
             <stroke
-                android:width="2dp"
-                android:color="@android:color/black" />
-            <size android:height="40dp" />
+                android:color="@color/black"
+                android:width="2dp" />
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+    <item android:right="5dp" android:bottom="5dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="@android:color/white" />
+            <stroke
+                android:color="@android:color/black"
+                android:width="2dp"/>
+            <corners android:radius="20dp" />
         </shape>
     </item>
 </layer-list>
