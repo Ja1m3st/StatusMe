@@ -1,11 +1,8 @@
 package es.sanchez.jaime.statusme;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,15 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
@@ -88,18 +80,16 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
                                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                                     FirebaseUser currentUser = mAuth.getCurrentUser();
                                     String email = currentUser.getEmail();
-                                    crearCarpetaStorage(email);
+                                    firebaseManager.crearCarpetaStorage(email);
 
                                     ArrayList<ArrayList> totaldias = new ArrayList<>();
                                     ArrayList<Object> arrayListDiaActual = new ArrayList<>();
                                     ArrayList<String> estadosDeAnimo = new ArrayList<>();
                                     ArrayList<String> actividades = new ArrayList<>();
-                                    String clima = " ";
                                     String dia = " ";
                                     totaldias.add(arrayListDiaActual);
                                     arrayListDiaActual.add(estadosDeAnimo);
                                     arrayListDiaActual.add(actividades);
-                                    arrayListDiaActual.add(clima);
                                     arrayListDiaActual.add(dia);
 
                                     estadosDeAnimo.add(" ");
@@ -130,21 +120,5 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
             Intent back = new Intent(Main_Signup.this, Main_Login.class);
             startActivity(back);
         }
-    }
-    private void crearCarpetaStorage(String email){
-
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference folderRef = storage.getReference().child(email);
-        folderRef.child(email).putBytes(new byte[0]).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d(TAG, "Carpeta creada correctamente.");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "Error al crear la carpeta: " + e.getMessage());
-            }
-        });
     }
 }

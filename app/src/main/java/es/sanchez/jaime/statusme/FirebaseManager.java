@@ -15,80 +15,78 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
 public class FirebaseManager {
+
+    // ----------------------------------- ZONA DECLARATIVA ----------------------------------- //
     private DatabaseReference databaseReference;
 
+    // ----------------------------------- CONSTRUCTOR ----------------------------------- //
     public FirebaseManager() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Usuarios");
     }
+
+    // ----------------------------------- MÉTODOS PARA AGREGAR CONTACTOS ----------------------------------- //
     public void agregarContactoJson(String name, String lastname, String mail, String password, ArrayList<ArrayList> totaldias) {
         String contactoId = databaseReference.push().getKey();
         Usuario nuevoContacto = new Usuario(name, lastname, mail, password, totaldias);
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
-    public void agregarContactoGoogleJson(String name, String lastname, String mail,  ArrayList<ArrayList> totaldias) {
+
+    public void agregarContactoGoogleJson(String name, String lastname, String mail, ArrayList<ArrayList> totaldias) {
         String contactoId = databaseReference.push().getKey();
-        Usuario nuevoContacto = new Usuario.UsuarioGoogle(name, lastname, mail, totaldias); // Corregir el nombre de la variable
+        Usuario nuevoContacto = new Usuario.UsuarioGoogle(name, lastname, mail, totaldias);
         databaseReference.child(contactoId).setValue(nuevoContacto);
     }
 
+    // ----------------------------------- MÉTODO PARA GUARDAR ARRAYLIST EN FIREBASE ----------------------------------- //
     public void guardarArrayListEnFirebase(ArrayList<Object> lista) {
-        // Obtener una referencia a la raíz de la base de datos
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
 
-        // Realizar la consulta para buscar al usuario por su correo electrónico
         databaseReference.orderByChild("mail").equalTo(getMailUser()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    // Iterar sobre los resultados (debería haber solo uno)
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String userId = snapshot.getKey();
-
-                        // Obtener una referencia al nodo totaldias del usuario
                         DatabaseReference userTotalDiasReference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(userId).child("totaldias");
 
-                        // Obtener el ArrayList actual del usuario
                         userTotalDiasReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
                                     ArrayList<ArrayList<Object>> totalDias = (ArrayList<ArrayList<Object>>) dataSnapshot.getValue();
                                     totalDias.add(lista);
-                                    // Actualizar el ArrayList en Firebase
                                     userTotalDiasReference.setValue(totalDias)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    // El ArrayList se ha actualizado correctamente en Firebase
                                                     Log.d("Firebase", "ArrayList actualizado en Firebase correctamente");
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    // Ocurrió un error al actualizar el ArrayList en Firebase
                                                     Log.e("Firebase", "Error al actualizar ArrayList en Firebase", e);
                                                 }
                                             });
                                 } else {
-                                    // Si no hay un ArrayList para este usuario, creamos uno nuevo con los datos proporcionados
                                     userTotalDiasReference.setValue(lista)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    // El ArrayList se ha guardado correctamente en Firebase
                                                     Log.d("Firebase", "ArrayList guardado en Firebase correctamente");
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    // Ocurrió un error al guardar el ArrayList en Firebase
                                                     Log.e("Firebase", "Error al guardar ArrayList en Firebase", e);
                                                 }
                                             });
@@ -97,25 +95,23 @@ public class FirebaseManager {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
-                                // Manejar el error en la lectura de datos
                                 Log.e("Firebase", "Error al leer datos de Firebase: " + databaseError.getMessage());
                             }
                         });
                     }
                 } else {
-                    // No se encontró ningún usuario con el correo electrónico proporcionado
                     Log.d("Firebase", "No se encontró ningún usuario con el correo electrónico proporcionado");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Manejar el error en la consulta
                 Log.e("Firebase", "Error al buscar el usuario por correo electrónico: " + databaseError.getMessage());
             }
         });
     }
 
+    // ----------------------------------- MÉTODO PARA OBTENER TOTAL DIAS DE USUARIO ----------------------------------- //
     public void obtenerTotalDiasDeUsuario(ValueEventListener listener) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         databaseReference.orderByChild("mail").equalTo(getMailUser()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -124,24 +120,23 @@ public class FirebaseManager {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         DataSnapshot totalDiasSnapshot = snapshot.child("totaldias");
-                        listener.onDataChange(totalDiasSnapshot); // Llama al listener con el snapshot del totaldias
+                        listener.onDataChange(totalDiasSnapshot);
                         return;
                     }
                 }
-                // Si no se encuentra ningún totaldias para el usuario, llama al listener con null
                 listener.onDataChange(null);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Maneja errores de cancelación
                 Log.e("Firebase", "Error al buscar totaldias del usuario: " + databaseError.getMessage());
                 listener.onCancelled(databaseError);
             }
         });
     }
 
-    public static void eliminarRegistroUsuario( String firebaseKey) {
+    // ----------------------------------- MÉTODO PARA ELIMINAR REGISTRO DE USUARIO ----------------------------------- //
+    public static void eliminarRegistroUsuario(String firebaseKey) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         databaseReference.orderByChild("mail").equalTo(getMailUser()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -155,14 +150,12 @@ public class FirebaseManager {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                // Éxito al eliminar la entrada de Firebase
                                                 Log.d("Firebase", "Entrada eliminada con éxito");
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                // Error al eliminar la entrada de Firebase
                                                 Log.e("Firebase", "Error al eliminar la entrada", e);
                                             }
                                         });
@@ -175,27 +168,35 @@ public class FirebaseManager {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Maneja errores de cancelación
                 Log.e("Firebase", "Error al buscar totaldias del usuario: " + databaseError.getMessage());
             }
         });
     }
-    public static String getMailUser(){
+
+    // ----------------------------------- MÉTODO PARA OBTENER EMAIL DEL USUARIO ACTUAL ----------------------------------- //
+    public static String getMailUser() {
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-        String emailUsuario = usuario.getEmail();
-        return(emailUsuario);
+        return usuario.getEmail();
     }
+
+    // ----------------------------------- MÉTODO PARA OBTENER USUARIO ACTUAL ----------------------------------- //
     public FirebaseUser obtenerUsuarioActual() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         return firebaseAuth.getCurrentUser();
     }
+
+    // ----------------------------------- MÉTODO PARA OBTENER CONTACTOS ----------------------------------- //
     public void obtenerContactos(ValueEventListener listener) {
         databaseReference.addValueEventListener(listener);
     }
-    public void actualizarContacto(String id,String contraseña) {
+
+    // ----------------------------------- MÉTODO PARA ACTUALIZAR CONTACTO ----------------------------------- //
+    public void actualizarContacto(String id, String contraseña) {
         DatabaseReference contactoRef = databaseReference.child(id);
         contactoRef.child("password").setValue(contraseña);
     }
+
+    // ----------------------------------- MÉTODO PARA BUSCAR EMAIL ----------------------------------- //
     public void buscarEmail(String email, EmailCallback callback) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Usuarios");
@@ -203,12 +204,9 @@ public class FirebaseManager {
         databaseReference.orderByChild("mail").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    callback.onEmailFound(true); // Llama al método del callback si el email se encuentra
-                } else {
-                    callback.onEmailFound(false); // Llama al método del callback si el email no se encuentra
-                }
+                callback.onEmailFound(dataSnapshot.exists());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "Error al buscar el email: " + databaseError.getMessage());
@@ -216,6 +214,25 @@ public class FirebaseManager {
             }
         });
     }
+
+    // ----------------------------------- MÉTODO PARA CREAR CARPETA EN STORAGE ----------------------------------- //
+    public void crearCarpetaStorage(String email) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference folderRef = storage.getReference().child(email);
+        folderRef.child(email).putBytes(new byte[0]).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG, "Carpeta creada correctamente.");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "Error al crear la carpeta: " + e.getMessage());
+            }
+        });
+    }
+
+    // ----------------------------------- INTERFACE CALLBACK PARA EMAIL ----------------------------------- //
     public interface EmailCallback {
         void onEmailFound(boolean found);
     }

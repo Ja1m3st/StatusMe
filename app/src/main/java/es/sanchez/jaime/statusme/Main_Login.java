@@ -24,67 +24,70 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
 public class Main_Login extends AppCompatActivity implements View.OnClickListener {
 
+    // Declaración de variables
     private EditText mail, password;
     private Button myButton;
     private FirebaseAuth mAuth;
     private CardView google;
     private GoogleSignInClient mGoogleSignInClient;
-    private final int RC_SIGN_IN = 1;
     private FirebaseManager firebaseManager;
+    private SwitchMaterial switchDarkMode;
+    private final int RC_SIGN_IN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
 
+        // Inicialización de variables de interfaz
+
         TextView signup = findViewById(R.id.SignUp);
         TextView remember = findViewById(R.id.Remember);
-
         mail = findViewById(R.id.User);
         password = findViewById(R.id.Password);
         google = findViewById(R.id.card);
+        switchDarkMode = findViewById(R.id.DarkMode);
+        myButton = findViewById(R.id.Login);
 
+        // Configuración de listeners
         signup.setOnClickListener(this);
         remember.setOnClickListener(this);
-
-        firebaseManager = new FirebaseManager();
-        mAuth = FirebaseAuth.getInstance();
-
-        // ----------------------------------- LOGIN GOOGLE ---------------------------------//
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInWithGoogle();
             }
         });
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
 
-        // ----------------------------------- MODO OSCURO ---------------------------------//
+        // Configuración de FirebaseAuth y FirebaseManager
+        mAuth = FirebaseAuth.getInstance();
+        firebaseManager = new FirebaseManager();
 
-        SwitchMaterial switchDarkMode = findViewById(R.id.DarkMode);
+        // Configuración de Google Sign-In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        // Configuración del modo oscuro
         switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -95,18 +98,9 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                 }
             }
         });
-
-        // ----------------------------------- LOGIN AUTH ---------------------------------//
-        myButton = findViewById(R.id.Login);
-        myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
     }
 
-    // ----------------------------------- METODO LOGIN AUTH ---------------------------------//
+    // Método para iniciar sesión con correo y contraseña
     public void login() {
         String etemail = mail.getText().toString();
         String etpassword = password.getText().toString();
@@ -130,8 +124,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-
-    // ----------------------------------- METODOS GOOGLE ---------------------------------//
+    // Método para iniciar sesión con Google
     public void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -152,6 +145,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    // Método para autenticar con Firebase usando el token de Google
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
@@ -168,8 +162,8 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                     }
                 });
     }
-
     // --------------------------------- METODOS STORAGE GOOGLE ---------------------------------//
+    // Método para manejar el resultado de la autenticación de Google
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -177,30 +171,25 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
             firebaseManager.buscarEmail(email, new FirebaseManager.EmailCallback() {
                 @Override
                 public void onEmailFound(boolean found) {
-                    String firstName = "";
-                    String lastName = "";
-                    if (found == false) { // Si el email no existe en la base de datos, agrégalo
-                        firstName = account.getGivenName();
-                        lastName = account.getFamilyName();
+                    if (!found) { // Si el email no existe en la base de datos, agrégalo
+                        String firstName = account.getGivenName();
+                        String lastName = account.getFamilyName();
                         ArrayList<ArrayList> totaldias = new ArrayList<>();
                         ArrayList<Object> arrayListDiaActual = new ArrayList<>();
                         ArrayList<String> estadosDeAnimo = new ArrayList<>();
                         ArrayList<String> actividades = new ArrayList<>();
-                        String clima = " ";
                         String dia = " ";
                         totaldias.add(arrayListDiaActual);
                         arrayListDiaActual.add(estadosDeAnimo);
                         arrayListDiaActual.add(actividades);
-                        arrayListDiaActual.add(clima);
                         arrayListDiaActual.add(dia);
                         estadosDeAnimo.add(" ");
                         estadosDeAnimo.add(" ");
                         actividades.add(" ");
                         actividades.add(" ");
                         firebaseManager.agregarContactoGoogleJson(firstName, lastName, email, totaldias);
-                        crearCarpetaStorage(email);
+                        firebaseManager.crearCarpetaStorage(email);
                     }
-
                 }
             });
         } catch (ApiException e) {
@@ -208,29 +197,13 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    private void crearCarpetaStorage(String email){
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference folderRef = storage.getReference().child(email);
-        folderRef.child(email).putBytes(new byte[0]).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d(TAG, "Carpeta creada correctamente.");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "Error al crear la carpeta: " + e.getMessage());
-            }
-        });
-    }
-
-    // ----------------------------------- METODO ONCLICK ---------------------------------//
+    // Método para manejar los clics en la interfaz
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.SignUp) {
             Intent signup = new Intent(Main_Login.this, Main_Signup.class);
             startActivity(signup);
-        } else if (view.getId() == R.id.Remember){
+        } else if (view.getId() == R.id.Remember) {
             Intent remember2 = new Intent(Main_Login.this, Main_Remember.class);
             startActivity(remember2);
         }

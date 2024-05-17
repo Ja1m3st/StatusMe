@@ -22,13 +22,25 @@ import java.util.HashMap;
 
 public class Main_Estadisticas extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imagenActividad, imagenEstado;
-    TextView textActividad, textEstado;
+    private ImageView imagenActividad, imagenEstado;
+    private TextView textActividad, textEstado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_estadisticas);
 
+        // Inicialización de vistas
+        imagenActividad = findViewById(R.id.imagen2actividad);
+        imagenEstado = findViewById(R.id.imagen2estado);
+        textEstado = findViewById(R.id.estado2);
+        textActividad = findViewById(R.id.actividad2);
+        TextView saludo = findViewById(R.id.saludo);
+
+        // Declaracion de variables
+        String nombre = "";
+
+        // Obtener datos de Firebase
         FirebaseManager firebaseManager = new FirebaseManager();
         firebaseManager.obtenerTotalDiasDeUsuario(new ValueEventListener() {
             @Override
@@ -41,109 +53,78 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejo de error
             }
         });
 
+        // Obtener la cuenta de Google y mostrar saludo
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        TextView saludo = findViewById(R.id.saludo);
-        String nombre = "";
 
-        if (SesionGoogle() != null) {
+        if (account != null) {
             nombre = account.getGivenName();
-        } else if (SesionAuth() != null) {
-            nombre = "Usuario";
+        } else {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                nombre = "Usuario";
+            }
         }
 
+        // Animación de texto
         TextAnimator animator = new TextAnimator("Veamos que tal vas, " + nombre, saludo);
         animator.setDuration(3000);
         saludo.startAnimation(animator);
     }
 
+    // Método para calcular el total de días
+    private int totalDias(ArrayList<ArrayList> totalDias) {
+        return totalDias == null ? 0 : totalDias.size() - 1;
+    }
 
-    public int totalDias(ArrayList<ArrayList> totalDias){
-        int dias = 0;
-        if (totalDias != null) {
-            for (ArrayList<ArrayList<String>> dia : totalDias) {
-                if (dia != null) {
-                    dias++;
+    // Método para procesar los datos y actualizar la UI
+    private void datos(ArrayList<ArrayList> totalDias) {
+        if (totalDias == null || totalDias.size() <= 7) {
+            return;
+        }
+
+        int startIndex = totalDias.size() >= 16 ? totalDias.size() - 16 : 0;
+        int endIndex = totalDias.size() >= 16 ? totalDias.size() - 8 : totalDias.size() - 1;
+
+        ArrayList<String> infoAnimo = new ArrayList<>();
+        ArrayList<String> infoActividad = new ArrayList<>();
+
+        // Recopilación de información de estado de ánimo y actividad
+        for (int i = startIndex; i <= endIndex; i++) {
+            ArrayList<ArrayList<String>> dia = totalDias.get(i);
+            if (dia != null) {
+                if (dia.size() > 0 && dia.get(0) != null) {
+                    infoAnimo.addAll(dia.get(0));
+                }
+                if (dia.size() > 1 && dia.get(1) != null) {
+                    infoActividad.addAll(dia.get(1));
                 }
             }
         }
-        dias--;
-        return dias;
+
+        // Encontrar el estado de ánimo y la actividad más repetidos
+        String animoMasRepetido = buscarMasRepetido(infoAnimo);
+        String actividadMasRepetida = buscarMasRepetido(infoActividad);
+
+        // Actualizar la UI con los datos obtenidos
+        textEstado.setText(animoMasRepetido);
+        cargarImagen(animoMasRepetido, true);
+        textActividad.setText(actividadMasRepetida);
+        cargarImagen(actividadMasRepetida, false);
     }
 
-
-
-    public void datos(ArrayList<ArrayList> totalDias){
-        String animoMasRepetido = null;
-        String actividadMasRepetida = null;
-        ArrayList<String> infoAnimo = new ArrayList<String>();
-        ArrayList<String> infoActividad = new ArrayList<String>();
-        textEstado = findViewById(R.id.estado2);
-        textActividad = findViewById(R.id.actividad2);
-
-        if (totalDias != null && totalDias.size() > 7){
-            if (totalDias.size() >= 16) {
-                for (int i = totalDias.size() - 16; i < totalDias.size() - 8; i++) {
-                    ArrayList<ArrayList<String>> dia = totalDias.get(i);
-                    if (dia != null) {
-                        ArrayList<String> estadosAnimo = dia.get(0);
-                        ArrayList<String> actividades = dia.get(1);
-                        if (estadosAnimo != null) {
-                            for (String estado : estadosAnimo) {
-                                infoAnimo.add(estado);
-                            }
-                        }
-                        if (actividades != null){
-                            for (String actividad : actividades) {
-                                infoActividad.add(actividad);
-                            }
-                        }
-                    }
-                }
-            } else if (totalDias.size() > 7) {
-                for (int i = totalDias.size() - 1; i >= 0; i--) {
-                    ArrayList<ArrayList<String>> dia = totalDias.get(i);
-                    if (dia != null) {
-                        ArrayList<String> estadosAnimo = dia.get(0);
-                        ArrayList<String> actividades = dia.get(1);
-                        if (estadosAnimo != null) {
-                            for (String estado : estadosAnimo) {
-                                infoAnimo.add(estado);
-                            }
-                        }
-                        if (actividades != null) {
-                            for (String actividad : actividades) {
-                                infoActividad.add(actividad);
-                            }
-                        }
-                    }
-                }
-            }
-            animoMasRepetido = buscarMasRepetido(infoAnimo);
-            textEstado.setText(animoMasRepetido);
-            cargarImagen(animoMasRepetido);
-            actividadMasRepetida = buscarMasRepetido(infoActividad);
-            textActividad.setText(actividadMasRepetida);
-            cargarImagen(actividadMasRepetida);
-        }
-    }
-
-    public static String buscarMasRepetido(ArrayList<String> listaDeStrings) {
+    // Método para buscar el elemento más repetido en una lista
+    private static String buscarMasRepetido(ArrayList<String> listaDeStrings) {
         HashMap<String, Integer> conteoDeStrings = new HashMap<>();
         String stringMasRepetido = null;
         int maxRepeticiones = 0;
 
         // Contar la frecuencia de cada string en el ArrayList
         for (String str : listaDeStrings) {
-            if (conteoDeStrings.containsKey(str)) {
-                // Si encuentra otro str igual le añade uno mas a la clave
-                conteoDeStrings.put(str, conteoDeStrings.get(str) + 1);
-            } else {
-                // Si no encuentra otro str crea otra entrada n ueva
-                conteoDeStrings.put(str, 1);
-            }
+            conteoDeStrings.put(str, conteoDeStrings.getOrDefault(str, 0) + 1);
         }
 
         // Encontrar el string con el recuento más alto
@@ -158,84 +139,81 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         return stringMasRepetido;
     }
 
-    public void cargarImagen(String stringMasRepetido){
-        imagenActividad = findViewById(R.id.imagen2actividad);
-        imagenEstado = findViewById(R.id.imagen2estado);
+    // Método para cargar la imagen correspondiente según el tipo de estado o actividad
+    private void cargarImagen(String stringMasRepetido, boolean isEstado) {
+        int imagenId = android.R.color.transparent;
 
-        String tipoImagen = stringMasRepetido;
-
-        switch (tipoImagen) {
+        switch (stringMasRepetido) {
             case "Bien":
-                imagenEstado.setImageResource(R.drawable.muyfeliz);
+                imagenId = R.drawable.muyfeliz;
                 break;
             case "Normal":
-                imagenEstado.setImageResource(R.drawable.caraseria);
+                imagenId = R.drawable.caraseria;
                 break;
             case "Mal":
-                imagenEstado.setImageResource(R.drawable.caratriste);
+                imagenId = R.drawable.caratriste;
                 break;
             case "Corriendo":
-                imagenActividad.setImageResource(R.drawable.corriendo);
+                imagenId = R.drawable.corriendo;
                 break;
             case "Jugando":
-                imagenActividad.setImageResource(R.drawable.controlador);
+                imagenId = R.drawable.controlador;
                 break;
             case "Trabajando":
-                imagenActividad.setImageResource(R.drawable.portafolio);
+                imagenId = R.drawable.portafolio;
                 break;
             case "Familia":
-                imagenActividad.setImageResource(R.drawable.familia);
+                imagenId = R.drawable.familia;
                 break;
             case "Amigos":
-                imagenActividad.setImageResource(R.drawable.abrazo);
+                imagenId = R.drawable.abrazo;
                 break;
             case "Cita":
-                imagenActividad.setImageResource(R.drawable.amor);
+                imagenId = R.drawable.amor;
                 break;
             case "TV":
-                imagenActividad.setImageResource(R.drawable.television);
+                imagenId = R.drawable.television;
                 break;
             case "Compras":
-                imagenActividad.setImageResource(R.drawable.cesta);
+                imagenId = R.drawable.cesta;
                 break;
             case "Leyendo":
-                imagenActividad.setImageResource(R.drawable.leer);
+                imagenId = R.drawable.leer;
                 break;
             case "Programando":
-                imagenActividad.setImageResource(R.drawable.programar);
+                imagenId = R.drawable.programar;
                 break;
             case "Estudiando":
-                imagenActividad.setImageResource(R.drawable.estudiar);
+                imagenId = R.drawable.estudiar;
                 break;
             case "Nadando":
-                imagenActividad.setImageResource(R.drawable.nadar);
+                imagenId = R.drawable.nadar;
                 break;
             default:
-                imagenActividad.setImageResource(android.R.color.transparent);
-                imagenEstado.setImageResource(android.R.color.transparent);
+                imagenId = android.R.color.transparent;
                 break;
         }
+
+        // Asignar la imagen correspondiente
+        if (isEstado) {
+            imagenEstado.setImageResource(imagenId);
+        } else {
+            imagenActividad.setImageResource(imagenId);
+        }
     }
 
-    private String SesionGoogle(){
+    // Métodos para obtener la sesión de Google o Auth
+    private String SesionGoogle() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null) {
-            return account.getEmail();
-        } else {
-            return null;
-        }
-    }
-    private String SesionAuth(){
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            String email = currentUser.getEmail();
-            return email;
-        } else {
-            return null;
-        }
+        return account != null ? account.getEmail() : null;
     }
 
+    private String SesionAuth() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        return user != null ? user.getEmail() : null;
+    }
+
+    // Método onClick para manejar los clics en las vistas
     public void onClick(View view) {
         if (view.getId() == R.id.icono1) {
             Intent signup = new Intent(Main_Estadisticas.this, Main_Home.class);
@@ -252,3 +230,5 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         }
     }
 }
+
+

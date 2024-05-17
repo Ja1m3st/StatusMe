@@ -14,8 +14,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 public class CircularImageView extends AppCompatImageView {
 
     private Paint paint;
-    private int width;
-    private int height;
 
     public CircularImageView(Context context) {
         super(context);

@@ -30,33 +30,34 @@ import java.util.ArrayList;
 
 public class Main_Home extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     private ArrayList<String> firebaseKeys = new ArrayList<>();
+    private String nombre = "";
+    private TextView saludo;
+    private ScrollView scrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
-        //---------------------- declaraciones -----------------//
-        String nombre = "";
 
-        // ----------------------- id's -----------------//
-        TextView saludo = findViewById(R.id.saludo);
+        // Inicialización de vistas
+        saludo = findViewById(R.id.saludo);
+        scrollView = findViewById(R.id.Main);
 
-
+        // Obtener cuenta de Google o Auth y establecer nombre de usuario
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-
-
         if (SesionGoogle() != null) {
             nombre = account.getGivenName();
         } else if (SesionAuth() != null) {
             nombre = "Usuario";
         }
 
-        // ------ Animación ------//
+        // Animación de saludo
         TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
         animator.setDuration(3000);
         saludo.startAnimation(animator);
 
+        // Obtener y mostrar datos de Firebase
         obtenerYMostrarDatos();
     }
 
@@ -79,35 +80,24 @@ public class Main_Home extends AppCompatActivity {
 
     }
 
-    private String SesionGoogle(){
+    // Método para obtener sesión de Google
+    private String SesionGoogle() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null) {
-            return account.getEmail();
-        } else {
-            return null;
-        }
-    }
-    private String SesionAuth(){
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            String email = currentUser.getEmail();
-            return email;
-        } else {
-            return null;
-        }
+        return account != null ? account.getEmail() : null;
     }
 
+    // Método para obtener sesión de Firebase Auth
+    private String SesionAuth() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return currentUser != null ? currentUser.getEmail() : null;
+    }
+
+    // Método para mostrar los datos obtenidos en la UI
     private void mostrarDatos(ArrayList<ArrayList> totalDias) {
-        StringBuilder texto = new StringBuilder();
         LinearLayout linearLayout = new LinearLayout(this);
         LocalDate fechaActual = LocalDate.now();
         ScrollView scrollView = findViewById(R.id.Main);
         String dia = "";
-
-        texto.append("Valores seleccionados:\n");
-        texto.append("- ").append(totalDias.get(0)).append("\n\n");
-        texto.append("Actividades realizadas:\n\n");
 
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -216,8 +206,6 @@ public class Main_Home extends AppCompatActivity {
                 }
             }
             scrollView.addView(linearLayout);
-        } else {
-            texto.append("No hay datos disponibles.");
         }
     }
 

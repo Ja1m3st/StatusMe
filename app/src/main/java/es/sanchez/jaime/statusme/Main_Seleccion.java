@@ -21,199 +21,186 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class Main_Seleccion extends AppCompatActivity implements View.OnClickListener{
+public class Main_Seleccion extends AppCompatActivity implements View.OnClickListener {
 
     private TextView weatherTextView;
-    FirebaseManager firebaseManager;
-    FirebaseAuth firebaseAuth;
+    private FirebaseManager firebaseManager;
+    private FirebaseAuth firebaseAuth;
+    private CheckBox checkBoxFeliz, checkBoxMedio, checkBoxMal;
+    private Button guardar;
+    private TextView saludo;
+    private String nombre = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_seleccion);
-        String nombre = "";
 
+        // Inicialización de Firebase Manager
         firebaseManager = new FirebaseManager();
-        Date fechaActual = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String fechaFormateada = formatoFecha.format(fechaActual);
 
+        // Inicialización de vistas
+        checkBoxFeliz = findViewById(R.id.feliz);
+        checkBoxMedio = findViewById(R.id.medio);
+        checkBoxMal = findViewById(R.id.mal);
+        guardar = findViewById(R.id.botonguardar);
+        saludo = findViewById(R.id.saludo);
 
-        CheckBox checkBoxFeliz = findViewById(R.id.feliz);
-        CheckBox checkBoxMedio = findViewById(R.id.medio);
-        CheckBox checkBoxMal = findViewById(R.id.mal);
-        //TextView fecha = findViewById(R.id.dia);
-        Button guardar = findViewById(R.id.botonguardar);
-        TextView saludo = findViewById(R.id.saludo);
-
-        //fecha.setText(fechaFormateada);
-        checkBoxFeliz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkBoxFeliz.isChecked()) {
-                    checkBoxMedio.setChecked(false);
-                    checkBoxMal.setChecked(false);
-                }
+        // Configuración de CheckBox para selección única
+        checkBoxFeliz.setOnClickListener(v -> {
+            if (checkBoxFeliz.isChecked()) {
+                checkBoxMedio.setChecked(false);
+                checkBoxMal.setChecked(false);
             }
         });
 
-        checkBoxMedio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkBoxMedio.isChecked()) {
-                    checkBoxFeliz.setChecked(false);
-                    checkBoxMal.setChecked(false);
-                }
+        checkBoxMedio.setOnClickListener(v -> {
+            if (checkBoxMedio.isChecked()) {
+                checkBoxFeliz.setChecked(false);
+                checkBoxMal.setChecked(false);
             }
         });
 
-        checkBoxMal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkBoxMal.isChecked()) {
-                    checkBoxFeliz.setChecked(false);
-                    checkBoxMedio.setChecked(false);
-                }
+        checkBoxMal.setOnClickListener(v -> {
+            if (checkBoxMal.isChecked()) {
+                checkBoxFeliz.setChecked(false);
+                checkBoxMedio.setChecked(false);
             }
         });
 
-        guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkBoxFeliz.isChecked() || checkBoxMedio.isChecked() || checkBoxMal.isChecked()) {
-                    firebaseManager.guardarArrayListEnFirebase(guardarRegistro());
-                    Context context = v.getContext();
-                    Toast.makeText(context, "Nuevo registro añadido", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Main_Seleccion.this, "Por favor, selecciona al menos una opción", Toast.LENGTH_SHORT).show();
-                }
+        // Configuración del botón guardar
+        guardar.setOnClickListener(v -> {
+            if (checkBoxFeliz.isChecked() || checkBoxMedio.isChecked() || checkBoxMal.isChecked()) {
+                firebaseManager.guardarArrayListEnFirebase(guardarRegistro());
+                Context context = v.getContext();
+                Toast.makeText(context, "Nuevo registro añadido", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(Main_Seleccion.this, "Por favor, selecciona al menos una opción", Toast.LENGTH_SHORT).show();
             }
         });
 
-
+        // Obtener cuenta de Google
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
+        // Comprobar la sesión activa
         if (SesionGoogle() != null) {
             nombre = account.getGivenName();
         } else if (SesionAuth() != null) {
             nombre = "Usuario";
         }
-        //fecha.setText(fechaFormateada);
 
+        // Animación de saludo
         TextAnimator animator = new TextAnimator("A ver que tal", saludo);
         animator.setDuration(3000);
         saludo.startAnimation(animator);
     }
 
-    private String SesionGoogle(){
+    // Método para verificar la sesión de Google
+    private String SesionGoogle() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null) {
-            return account.getEmail();
-        } else {
-            return null;
-        }
-    }
-    private String SesionAuth(){
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            String email = currentUser.getEmail();
-            return email;
-        } else {
-            return null;
-        }
+        return account != null ? account.getEmail() : null;
     }
 
+    // Método para verificar la sesión de Firebase Auth
+    private String SesionAuth() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return currentUser != null ? currentUser.getEmail() : null;
+    }
+
+    // Método para guardar el registro en Firebase
     public ArrayList<Object> guardarRegistro() {
-        ArrayList<String> valoresSeleccionados = new ArrayList<>();
-        ArrayList<String> actividadesSeleccionadas = new ArrayList<>();
-        ArrayList<Object> dia = new ArrayList<>();
+        ArrayList<String> valoresSeleccionados = new ArrayList<String>();
+        ArrayList<String> actividadesSeleccionadas = new ArrayList<String>();
+        ArrayList<Object> dia = new ArrayList<Object>();
 
+        // Configuración de la fecha actual y clima
         Date fechaActual = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String fechaFormateada = formatoFecha.format(fechaActual);
-        String clima = "Soleado";
 
-        CheckBox checkBox_bien = findViewById(R.id.feliz);
-        CheckBox checkBox_normal = findViewById(R.id.medio);
-        CheckBox checkBox_mal = findViewById(R.id.mal);
-        CheckBox checkBox_correr = findViewById(R.id.correr);
-        CheckBox checkBox_jugar = findViewById(R.id.jugar);
-        CheckBox checkBox_trabajar = findViewById(R.id.trabajar);
-        CheckBox checkBox_familia = findViewById(R.id.familia);
-        CheckBox checkBox_amigos = findViewById(R.id.amigos);
-        CheckBox checkBox_cita = findViewById(R.id.amor);
-        CheckBox checkBox_television = findViewById(R.id.television);
-        CheckBox checkBox_compras = findViewById(R.id.compras);
-        CheckBox checkBox_leer = findViewById(R.id.leer);
-        CheckBox checkBox_programar = findViewById(R.id.programar);
-        CheckBox checkBox_nadar = findViewById(R.id.nadar);
-        CheckBox checkBox_estudiar = findViewById(R.id.estudiar);
+        // Inicialización de CheckBoxes para emociones y actividades
+        CheckBox checkBoxCorrer = findViewById(R.id.correr);
+        CheckBox checkBoxJugar = findViewById(R.id.jugar);
+        CheckBox checkBoxTrabajar = findViewById(R.id.trabajar);
+        CheckBox checkBoxFamilia = findViewById(R.id.familia);
+        CheckBox checkBoxAmigos = findViewById(R.id.amigos);
+        CheckBox checkBoxCita = findViewById(R.id.amor);
+        CheckBox checkBoxTelevision = findViewById(R.id.television);
+        CheckBox checkBoxCompras = findViewById(R.id.compras);
+        CheckBox checkBoxLeer = findViewById(R.id.leer);
+        CheckBox checkBoxProgramar = findViewById(R.id.programar);
+        CheckBox checkBoxNadar = findViewById(R.id.nadar);
+        CheckBox checkBoxEstudiar = findViewById(R.id.estudiar);
 
-        if (checkBox_bien.isChecked()) {
+        // Agregar emociones seleccionadas
+        if (checkBoxFeliz.isChecked()) {
             valoresSeleccionados.add("Bien");
         }
-        if (checkBox_normal.isChecked()) {
+        if (checkBoxMedio.isChecked()) {
             valoresSeleccionados.add("Normal");
         }
-        if (checkBox_mal.isChecked()) {
+        if (checkBoxMal.isChecked()) {
             valoresSeleccionados.add("Mal");
         }
-        if (checkBox_correr.isChecked()) {
+
+        // Agregar actividades seleccionadas
+        if (checkBoxCorrer.isChecked()) {
             actividadesSeleccionadas.add("Corriendo");
         }
-        if (checkBox_jugar.isChecked()) {
+        if (checkBoxJugar.isChecked()) {
             actividadesSeleccionadas.add("Jugando");
         }
-        if (checkBox_trabajar.isChecked()) {
+        if (checkBoxTrabajar.isChecked()) {
             actividadesSeleccionadas.add("Trabajando");
         }
-        if (checkBox_familia.isChecked()) {
+        if (checkBoxFamilia.isChecked()) {
             actividadesSeleccionadas.add("Familia");
         }
-        if (checkBox_amigos.isChecked()) {
+        if (checkBoxAmigos.isChecked()) {
             actividadesSeleccionadas.add("Amigos");
         }
-        if (checkBox_cita.isChecked()) {
+        if (checkBoxCita.isChecked()) {
             actividadesSeleccionadas.add("Cita");
         }
-        if (checkBox_television.isChecked()) {
+        if (checkBoxTelevision.isChecked()) {
             actividadesSeleccionadas.add("TV");
         }
-        if (checkBox_compras.isChecked()) {
+        if (checkBoxCompras.isChecked()) {
             actividadesSeleccionadas.add("Compras");
         }
-        if (checkBox_leer.isChecked()) {
+        if (checkBoxLeer.isChecked()) {
             actividadesSeleccionadas.add("Leyendo");
         }
-        if (checkBox_programar.isChecked()) {
+        if (checkBoxProgramar.isChecked()) {
             actividadesSeleccionadas.add("Programando");
         }
-        if (checkBox_nadar.isChecked()) {
+        if (checkBoxNadar.isChecked()) {
             actividadesSeleccionadas.add("Nadando");
         }
-        if (checkBox_estudiar.isChecked()) {
+        if (checkBoxEstudiar.isChecked()) {
             actividadesSeleccionadas.add("Estudiando");
         }
 
+        // Agregar datos al ArrayList
         dia.add(valoresSeleccionados);
         dia.add(actividadesSeleccionadas);
         dia.add(fechaFormateada);
-        dia.add(clima);
         return dia;
     }
 
+    // Método para manejar los clics en los íconos
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.icono1) {
             Intent view = new Intent(Main_Seleccion.this, Main_Home.class);
             startActivity(view);
-        }  else if (v.getId() == R.id.icono2){
+        } else if (v.getId() == R.id.icono2) {
             Intent view = new Intent(Main_Seleccion.this, Main_Estadisticas.class);
             startActivity(view);
-        }  else if (v.getId() == R.id.icono3){
+        } else if (v.getId() == R.id.icono3) {
             Intent view = new Intent(Main_Seleccion.this, Main_Seleccion.class);
             startActivity(view);
-        } else if (v.getId() == R.id.icono5){
+        } else if (v.getId() == R.id.icono5) {
             Intent view = new Intent(Main_Seleccion.this, Main_Usuario.class);
             startActivity(view);
         }
