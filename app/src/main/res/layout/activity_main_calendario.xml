@@ -29,7 +29,7 @@
     <ScrollView
         android:id="@+id/Main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/topnav"
         android:layout_marginTop="0dp">
 
@@ -37,7 +37,17 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:background="@drawable/minitarjetas"
+            android:layout_margin="10dp" />
+    </ScrollView>
+    <ScrollView
+        android:id="@+id/Main2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topnav"
+        android:layout_marginTop="0dp">
+
     </ScrollView>
 
     <FrameLayout
