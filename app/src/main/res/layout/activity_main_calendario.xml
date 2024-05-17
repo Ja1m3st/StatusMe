@@ -25,15 +25,20 @@
 
     </RelativeLayout>
 
+
     <ScrollView
         android:id="@+id/Main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/topnav">
+        android:layout_below="@+id/topnav"
+        android:layout_marginTop="0dp">
 
-
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
     </ScrollView>
-
 
     <FrameLayout
         android:id="@+id/card_view"
