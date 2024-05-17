@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,12 +81,6 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         // Obtener cuenta de Google
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
-        // Comprobar la sesión activa
-        if (SesionGoogle() != null) {
-            nombre = account.getGivenName();
-        } else if (SesionAuth() != null) {
-            nombre = "Usuario";
-        }
 
         // Animación de saludo
         TextAnimator animator = new TextAnimator("A ver que tal", saludo);
@@ -95,17 +88,7 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         saludo.startAnimation(animator);
     }
 
-    // Método para verificar la sesión de Google
-    private String SesionGoogle() {
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        return account != null ? account.getEmail() : null;
-    }
 
-    // Método para verificar la sesión de Firebase Auth
-    private String SesionAuth() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        return currentUser != null ? currentUser.getEmail() : null;
-    }
 
     // Método para guardar el registro en Firebase
     public ArrayList<Object> guardarRegistro() {
