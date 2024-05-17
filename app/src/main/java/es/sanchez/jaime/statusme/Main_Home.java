@@ -240,6 +240,9 @@ public class Main_Home extends AppCompatActivity {
         } else if (view.getId() == R.id.icono3) {
             Intent animo = new Intent(Main_Home.this, Main_Seleccion.class);
             startActivity(animo);
+        }else if (view.getId() == R.id.icono4){
+            Intent remember2 = new Intent(Main_Home.this, Main_Calendario.class);
+            startActivity(remember2);
         }else if (view.getId() == R.id.icono5){
             Intent remember2 = new Intent(Main_Home.this, Main_Usuario.class);
             startActivity(remember2);

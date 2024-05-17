@@ -216,6 +216,9 @@ public class Main_Usuario extends AppCompatActivity {
         } else if (view.getId() == R.id.icono3) {
             Intent remember2 = new Intent(Main_Usuario.this, Main_Seleccion.class);
             startActivity(remember2);
+        }else if (view.getId() == R.id.icono4) {
+            Intent calendario = new Intent(Main_Usuario.this, Main_Calendario.class);
+            startActivity(calendario);
         }
     }
 }

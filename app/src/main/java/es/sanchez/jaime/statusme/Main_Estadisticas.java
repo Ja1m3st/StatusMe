@@ -241,6 +241,9 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         } else if (view.getId() == R.id.icono2) {
             Intent animo = new Intent(Main_Estadisticas.this, Main_Estadisticas.class);
             startActivity(animo);
+        }else if (view.getId() == R.id.icono4) {
+            Intent calendario = new Intent(Main_Estadisticas.this, Main_Calendario.class);
+            startActivity(calendario);
         }
     }
 }

@@ -1,90 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".Main_Estadisticas"
+    android:background="@color/main_color">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/Topnav"
+    <RelativeLayout
+        android:id="@+id/topnav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:cardBackgroundColor="?attr/colorPrimary">
+        android:layout_height="45dp"
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/saludo"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="14dp"
+            android:fontFamily="@font/medio"
+            android:text=" "
+            android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign out"
-                android:textSize="20sp"
-                android:fontFamily="@font/medio"
-                android:textColor="@color/green_main"
-                android:onClick="onClick"/>
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/Bottomnav"
+        android:id="@+id/Main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/Topnav"
-        android:background="?attr/colorPrimary">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <es.sanchez.jaime.statusme.CircularImageView
-                    android:id="@+id/image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/caraseria"
-                    android:scaleType="centerCrop"
-                    android:layout_marginTop="30dp"/>
-            </LinearLayout>
+        android:layout_below="@+id/topnav">
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre"
-                    android:fontFamily="@font/medio"
-                    android:textSize="20dp"
-                    android:textColor="@color/green_main"/>
-
-                <TextView
-                    android:id="@+id/lastaname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apellido"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/medio"
-                    android:textSize="20dp"
-                    android:textColor="@color/green_main"/>
-
-            </LinearLayout>
-        </LinearLayout>
     </ScrollView>
 
 
@@ -159,7 +106,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:background="@drawable/minitarjetas">
 
                 <ImageButton
                     android:id="@+id/icono4"
@@ -176,8 +124,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/minitarjetas">
+                android:layout_margin="5dp">
 
 
                 <ImageButton
@@ -193,4 +140,5 @@
 
         </LinearLayout>
     </FrameLayout>
+
 </RelativeLayout>

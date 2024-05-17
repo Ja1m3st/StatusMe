@@ -200,7 +200,10 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
         } else if (v.getId() == R.id.icono3) {
             Intent view = new Intent(Main_Seleccion.this, Main_Seleccion.class);
             startActivity(view);
-        } else if (v.getId() == R.id.icono5) {
+        }else if (v.getId() == R.id.icono4) {
+            Intent calendario = new Intent(Main_Seleccion.this, Main_Calendario.class);
+            startActivity(calendario);
+        }else if (v.getId() == R.id.icono5) {
             Intent view = new Intent(Main_Seleccion.this, Main_Usuario.class);
             startActivity(view);
         }
