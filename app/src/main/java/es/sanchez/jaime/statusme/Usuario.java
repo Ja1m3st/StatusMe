@@ -1,8 +1,6 @@
 package es.sanchez.jaime.statusme;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.time.LocalDate;
 
 public class Usuario {
     private int id;
@@ -12,6 +10,13 @@ public class Usuario {
     private String password; // Make a system that controls the caracters
     private ArrayList<ArrayList> totaldias;
 
+    public Usuario (){
+    }
+
+    public Usuario (String nombre, String apellido){
+        this.name = nombre;
+        this.lastname = apellido;
+    }
 
     public Usuario(String name, String lastname, String mail, String password, ArrayList<ArrayList> totaldias) {
         this.name = name;

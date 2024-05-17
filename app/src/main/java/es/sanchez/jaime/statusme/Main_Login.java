@@ -51,7 +51,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_main_login);
 
         // Inicialización de variables de interfaz
-
         TextView signup = findViewById(R.id.SignUp);
         TextView remember = findViewById(R.id.Remember);
         mail = findViewById(R.id.User);

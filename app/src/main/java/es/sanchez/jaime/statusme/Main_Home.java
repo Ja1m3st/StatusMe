@@ -35,6 +35,7 @@ public class Main_Home extends AppCompatActivity {
     private String nombre = "";
     private TextView saludo;
     private ScrollView scrollView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,16 +47,36 @@ public class Main_Home extends AppCompatActivity {
 
         // Obtener cuenta de Google o Auth y establecer nombre de usuario
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        FirebaseManager firebaseManager = new FirebaseManager();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser usuarioActual = mAuth.getCurrentUser();
+
         if (SesionGoogle() != null) {
             nombre = account.getGivenName();
+
+            // Animación de saludo
+            TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+            animator.setDuration(3000);
+            saludo.startAnimation(animator);
         } else if (SesionAuth() != null) {
-            nombre = "Usuario";
+            firebaseManager.obtenerInformacionUsuarioActual(usuarioActual, new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot != null && dataSnapshot.exists()) {
+                        nombre = dataSnapshot.child("name").getValue(String.class);
+                        TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+                        animator.setDuration(3000);
+                        saludo.startAnimation(animator);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Manejar el error de la base de datos si es necesario
+                }
+            });
         }
 
-        // Animación de saludo
-        TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
-        animator.setDuration(3000);
-        saludo.startAnimation(animator);
 
         // Obtener y mostrar datos de Firebase
         obtenerYMostrarDatos();

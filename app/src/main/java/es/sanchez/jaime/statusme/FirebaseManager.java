@@ -110,6 +110,36 @@ public class FirebaseManager {
             }
         });
     }
+    public void obtenerInformacionUsuarioActual(FirebaseUser usuarioActual, ValueEventListener listener) {
+        if (usuarioActual != null) {
+            String emailUsuario = usuarioActual.getEmail();
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+            databaseReference.orderByChild("mail").equalTo(emailUsuario).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Como solo debe haber un usuario con el mismo correo electrónico, podemos obtener su información directamente
+                        DataSnapshot usuarioSnapshot = dataSnapshot.getChildren().iterator().next();
+                        listener.onDataChange(usuarioSnapshot);
+                    } else {
+                        // Si no se encuentra ningún usuario con el correo electrónico proporcionado
+                        listener.onDataChange(null);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Manejar el error de la base de datos si es necesario
+                    Log.e("Firebase", "Error al buscar información del usuario: " + databaseError.getMessage());
+                    listener.onCancelled(databaseError);
+                }
+            });
+        } else {
+            // Manejar el caso donde no hay un usuario actualmente autenticado
+            Log.e("Firebase", "No hay usuario actualmente autenticado");
+        }
+    }
 
     // ----------------------------------- MÉTODO PARA OBTENER TOTAL DIAS DE USUARIO ----------------------------------- //
     public void obtenerTotalDiasDeUsuario(ValueEventListener listener) {
@@ -121,7 +151,6 @@ public class FirebaseManager {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         DataSnapshot totalDiasSnapshot = snapshot.child("totaldias");
                         listener.onDataChange(totalDiasSnapshot);
-                        return;
                     }
                 }
                 listener.onDataChange(null);
@@ -159,7 +188,6 @@ public class FirebaseManager {
                                                 Log.e("Firebase", "Error al eliminar la entrada", e);
                                             }
                                         });
-                                return;
                             }
                         }
                     }

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -34,6 +40,8 @@ public class Main_Usuario extends AppCompatActivity {
     private TextView name, lastname;
     private String nombre = "";
     private String apellido = "";
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,29 +56,54 @@ public class Main_Usuario extends AppCompatActivity {
         image = findViewById(R.id.image);
         name = findViewById(R.id.name);
         lastname = findViewById(R.id.lastaname);
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference("Usuarios");
+        FirebaseManager firebaseManager = new FirebaseManager();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser usuarioActual = mAuth.getCurrentUser();
 
-        // Obtener cuenta de Google
+
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
-        // Comprobar la sesión activa
-        if (SesionGoogle() != null) {
-            nombre = account.getGivenName();
-            apellido = account.getFamilyName();
-        } else if (SesionAuth() != null) {
-            nombre = "Usuario";
-            apellido = "Auth";
-        }
 
-        // Establecer nombre y apellido en las vistas
-        name.setText(nombre);
-        lastname.setText(apellido);
 
         // Cargar imagen del usuario
         CargarImagen();
 
         // Asignar listener para abrir la galería
         image.setOnClickListener(v -> openGallery());
+
+        // Comprobar la sesión activa
+        if (SesionGoogle() != null) {
+            nombre = account.getGivenName();
+            apellido = account.getFamilyName();
+            name.setText(nombre);
+            lastname.setText(apellido);
+        } else if (SesionAuth() != null) {
+            firebaseManager.obtenerInformacionUsuarioActual(usuarioActual, new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot != null && dataSnapshot.exists()) {
+                        name = findViewById(R.id.name);
+                        lastname = findViewById(R.id.lastaname);
+                        String nombre= "";
+                        String apellido = "";
+                        nombre = dataSnapshot.child("name").getValue(String.class);
+                        apellido = dataSnapshot.child("lastname").getValue(String.class);
+                        name.setText(nombre);
+                        lastname.setText(apellido);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Manejar el error de la base de datos si es necesario
+                }
+            });
+        }
     }
+
 
     // Método para abrir la galería
     private void openGallery() {

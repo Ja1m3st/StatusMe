@@ -24,6 +24,7 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
 
     private ImageView imagenActividad, imagenEstado;
     private TextView textActividad, textEstado;
+    private String nombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,6 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         textActividad = findViewById(R.id.actividad2);
         TextView saludo = findViewById(R.id.saludo);
 
-        // Declaracion de variables
-        String nombre = "";
 
         // Obtener datos de Firebase
         FirebaseManager firebaseManager = new FirebaseManager();
@@ -59,20 +58,35 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
 
         // Obtener la cuenta de Google y mostrar saludo
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser usuarioActual = mAuth.getCurrentUser();
 
-        if (account != null) {
+        if (SesionGoogle() != null) {
             nombre = account.getGivenName();
-        } else {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null) {
-                nombre = "Usuario";
-            }
+            // Animación de saludo
+            TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+            animator.setDuration(3000);
+            saludo.startAnimation(animator);
+        } else if (SesionAuth() != null) {
+            firebaseManager.obtenerInformacionUsuarioActual(usuarioActual, new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot != null && dataSnapshot.exists()) {
+                        nombre = dataSnapshot.child("name").getValue(String.class);
+                        TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+                        animator.setDuration(3000);
+                        saludo.startAnimation(animator);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Manejar el error de la base de datos si es necesario
+                }
+            });
         }
 
-        // Animación de texto
-        TextAnimator animator = new TextAnimator("Veamos que tal vas, " + nombre, saludo);
-        animator.setDuration(3000);
-        saludo.startAnimation(animator);
+
     }
 
     // Método para calcular el total de días
