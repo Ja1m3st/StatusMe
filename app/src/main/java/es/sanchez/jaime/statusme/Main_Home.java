@@ -164,7 +164,7 @@ public class Main_Home extends AppCompatActivity{
                         );
                         layoutParams2.addRule(RelativeLayout.BELOW, innerLinearLayout.getId()); // Colocar debajo del primer LinearLayout
                         innerLinearLayout2.setLayoutParams(layoutParams2);
-                        innerLinearLayout2.setPadding(50, 0, 10, 60);
+                        innerLinearLayout2.setPadding(10, 0, 10, 60);
 
 
                         TextView textViewActividades3 = new TextView(this);
@@ -173,7 +173,7 @@ public class Main_Home extends AppCompatActivity{
                                 ViewGroup.LayoutParams.WRAP_CONTENT,
                                 1
                         );
-                        actividadesLayoutParams2.setMargins(0,0,200,0);
+                        actividadesLayoutParams2.setMargins(30,0,0,0);
                         textViewActividades3.setTextSize(15);
                         textViewActividades3.setPadding(0,0,0,0);
                         textViewActividades3.setLayoutParams(actividadesLayoutParams2);

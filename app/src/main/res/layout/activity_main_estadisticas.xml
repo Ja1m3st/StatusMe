@@ -7,7 +7,7 @@
     tools:context=".Main_Estadisticas"
     android:background="@color/main_color">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/topnav"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -23,7 +23,7 @@
             android:text=" "
             android:textSize="20dp" />
 
-    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
     <ScrollView
         android:id="@+id/Main"
@@ -35,91 +35,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <RelativeLayout
-                android:id="@+id/tarjeta"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="20dp"
-                android:padding="10dp"
-                android:background="@drawable/minitarjetas"
-                android:orientation="horizontal">
-                <TextView
-                    android:gravity="center"
-                    android:id="@+id/titulo2"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Resumen de estos ultimos 7 días"
-                    android:fontFamily="@font/nueva"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="15dp" />
-
-                <LinearLayout
-                    android:id="@+id/layout2.1"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_below="@+id/titulo2">
-                    <TextView
-                        android:id="@+id/titulo2estado"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="2"
-                        android:text="Estado promedio:"
-                        android:fontFamily="@font/nueva"
-                        android:textColor="@color/black"
-                        android:gravity="center|left"/>
-                    <TextView
-                        android:id="@+id/estado2"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="Sin datos"
-                        android:fontFamily="@font/nueva"
-                        android:textColor="@color/black"
-                        android:gravity="center|left"/>
-
-                    <ImageView
-                        android:id="@+id/imagen2estado"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:gravity="center|left" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/layout2.2"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_below="@+id/layout2.1">
-                    <TextView
-                        android:id="@+id/titulo2actividad"
-                        android:layout_below="@+id/titulo1"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="2"
-                        android:text="Actividad promedio:"
-                        android:fontFamily="@font/nueva"
-                        android:textColor="@color/black"
-                        android:gravity="center|left"/>
-                    <TextView
-                        android:id="@+id/actividad2"
-                        android:layout_below="@+id/titulo1"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="Sin datos"
-                        android:fontFamily="@font/nueva"
-                        android:textColor="@color/black"
-                        android:gravity="center|left"/>
-                    <ImageView
-                        android:id="@+id/imagen2actividad"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:gravity="center|left"/>
-                </LinearLayout>
-            </RelativeLayout>
-
 
             <RelativeLayout
                 android:id="@+id/tarjeta1"
@@ -204,9 +119,92 @@
                         android:layout_weight="1"
                         android:gravity="center|left"/>
                 </LinearLayout>
-
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/tarjeta"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp"
+                android:padding="10dp"
+                android:background="@drawable/minitarjetas"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/titulo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Resumen de estos ultimos 7 días"
+                    android:fontFamily="@font/nueva"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:id="@+id/layout2.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/titulo2">
+                    <TextView
+                        android:id="@+id/titulo2estado"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="2"
+                        android:text="Estado promedio:"
+                        android:fontFamily="@font/nueva"
+                        android:textColor="@color/black"
+                        android:gravity="center|left"/>
+                    <TextView
+                        android:id="@+id/estado2"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="Sin datos"
+                        android:fontFamily="@font/nueva"
+                        android:textColor="@color/black"
+                        android:gravity="center|left"/>
+
+                    <ImageView
+                        android:id="@+id/imagen2estado"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:gravity="center|left" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout2.2"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/layout2.1">
+                    <TextView
+                        android:id="@+id/titulo2actividad"
+                        android:layout_below="@+id/titulo1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="2"
+                        android:text="Actividad promedio:"
+                        android:fontFamily="@font/nueva"
+                        android:textColor="@color/black"
+                        android:gravity="center|left"/>
+                    <TextView
+                        android:id="@+id/actividad2"
+                        android:layout_below="@+id/titulo1"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="Sin datos"
+                        android:fontFamily="@font/nueva"
+                        android:textColor="@color/black"
+                        android:gravity="center|left"/>
+                    <ImageView
+                        android:id="@+id/imagen2actividad"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:gravity="center|left"/>
+                </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/tarjeta3"

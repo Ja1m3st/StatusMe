@@ -22,8 +22,8 @@ import java.util.HashMap;
 
 public class Main_Estadisticas extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView imagenActividad, imagenEstado;
-    private TextView textActividad, textEstado;
+    private ImageView imagenActividad, imagenEstado, imagen1Actividad, imagen1Estado;
+    private TextView textActividad, textEstado, text1Actividad, text1Estado;
     private String nombre;
 
     @Override
@@ -36,6 +36,10 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         imagenEstado = findViewById(R.id.imagen2estado);
         textEstado = findViewById(R.id.estado2);
         textActividad = findViewById(R.id.actividad2);
+        imagen1Actividad = findViewById(R.id.imagen1actividad);
+        imagen1Estado = findViewById(R.id.imagen1estado);
+        text1Estado = findViewById(R.id.estado1);
+        text1Actividad = findViewById(R.id.actividad1);
         TextView saludo = findViewById(R.id.saludo);
 
 
@@ -47,6 +51,7 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
                 if (dataSnapshot != null && dataSnapshot.exists()) {
                     ArrayList<ArrayList> totalDias = (ArrayList<ArrayList>) dataSnapshot.getValue();
                     datos(totalDias);
+                    datosGenerales(totalDias);
                 }
             }
 
@@ -123,9 +128,41 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
 
         // Actualizar la UI con los datos obtenidos
         textEstado.setText(animoMasRepetido);
-        cargarImagen(animoMasRepetido, true);
+        cargarImagen(animoMasRepetido, R.id.imagen2estado);
         textActividad.setText(actividadMasRepetida);
-        cargarImagen(actividadMasRepetida, false);
+        cargarImagen(actividadMasRepetida, R.id.imagen2actividad);
+    }
+
+    private void datosGenerales(ArrayList<ArrayList> totalDias) {
+        if (totalDias == null || totalDias.size() <= 7) {
+            return;
+        }
+
+        ArrayList<String> infoAnimo = new ArrayList<>();
+        ArrayList<String> infoActividad = new ArrayList<>();
+
+        // Recopilación de información de estado de ánimo y actividad
+        for (int i = totalDias.size() - 1; i >= 0; i--) {
+            ArrayList<ArrayList<String>> actividad = totalDias.get(i);
+            if (actividad != null) {
+                if (actividad.size() > 0 && actividad.get(0) != null) {
+                    infoAnimo.addAll(actividad.get(0));
+                }
+                if (actividad.size() > 1 && actividad.get(1) != null) {
+                    infoActividad.addAll(actividad.get(1));
+                }
+            }
+        }
+
+        // Encontrar el estado de ánimo y la actividad más repetidos
+        String animoMasRepetido = buscarMasRepetido(infoAnimo);
+        String actividadMasRepetida = buscarMasRepetido(infoActividad);
+
+        // Actualizar la UI con los datos obtenidos
+        text1Estado.setText(animoMasRepetido);
+        cargarImagen(animoMasRepetido, R.id.imagen1estado);
+        text1Actividad.setText(actividadMasRepetida);
+        cargarImagen(actividadMasRepetida, R.id.imagen1actividad);
     }
 
     // Método para buscar el elemento más repetido en una lista
@@ -152,7 +189,7 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
     }
 
     // Método para cargar la imagen correspondiente según el tipo de estado o actividad
-    private void cargarImagen(String stringMasRepetido, boolean isEstado) {
+    private void cargarImagen(String stringMasRepetido, int imageViewId) {
         int imagenId = android.R.color.transparent;
 
         switch (stringMasRepetido) {
@@ -206,11 +243,10 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
                 break;
         }
 
-        // Asignar la imagen correspondiente
-        if (isEstado) {
-            imagenEstado.setImageResource(imagenId);
-        } else {
-            imagenActividad.setImageResource(imagenId);
+        // Asignar la imagen correspondiente al ImageView especificado
+        ImageView imageView = findViewById(imageViewId);
+        if (imageView != null) {
+            imageView.setImageResource(imagenId);
         }
     }
 
