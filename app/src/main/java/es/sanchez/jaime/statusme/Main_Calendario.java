@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -103,22 +105,72 @@ public class Main_Calendario extends AppCompatActivity {
                 if (diaActual != null) {
                     String dia = (String) diaActual.get(2);
                     if (dia.equals(day)) {
-                        FrameLayout cardView = new FrameLayout(this);
+                        Typeface typeface = ResourcesCompat.getFont(this, R.font.nueva);
+                        RelativeLayout cardView = new RelativeLayout(this); // Cambia a RelativeLayout
+
                         LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT
                         );
                         cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
-                        cardView.setLayoutParams(cardLayoutParams);// Fondo blanco
+                        cardView.setLayoutParams(cardLayoutParams);
                         cardView.setBackground(getResources().getDrawable(R.drawable.minitarjetas));
 
+                        // Linear 1
                         LinearLayout innerLinearLayout = new LinearLayout(this);
                         innerLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                        innerLinearLayout.setLayoutParams(new ViewGroup.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT
-                        ));
-                        innerLinearLayout.setPadding(10,10,10,10);
+                        innerLinearLayout.setId(View.generateViewId()); // Generar un ID único
+                        RelativeLayout.LayoutParams layoutParams1 = new RelativeLayout.LayoutParams(
+                                RelativeLayout.LayoutParams.MATCH_PARENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        innerLinearLayout.setLayoutParams(layoutParams1);
+                        innerLinearLayout.setPadding(10, 20, 10, 10);
+
+                        // Linear 2
+                        LinearLayout innerLinearLayout2 = new LinearLayout(this);
+                        innerLinearLayout2.setOrientation(LinearLayout.HORIZONTAL);
+                        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(
+                                RelativeLayout.LayoutParams.MATCH_PARENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        layoutParams2.addRule(RelativeLayout.BELOW, innerLinearLayout.getId()); // Colocar debajo del primer LinearLayout
+                        innerLinearLayout2.setLayoutParams(layoutParams2);
+                        innerLinearLayout2.setPadding(50, 0, 10, 60);
+
+
+                        TextView textViewActividades3 = new TextView(this);
+                        LinearLayout.LayoutParams actividadesLayoutParams2 = new LinearLayout.LayoutParams(
+                                0,
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                1
+                        );
+                        actividadesLayoutParams2.setMargins(0,0,200,0);
+                        textViewActividades3.setTextSize(15);
+                        textViewActividades3.setPadding(0,0,0,0);
+                        textViewActividades3.setLayoutParams(actividadesLayoutParams2);
+                        textViewActividades3.setTypeface(typeface);
+
+                        ArrayList<String> actividades = (ArrayList<String>) diaActual.get(1);
+                        if (actividades != null) {
+                            StringBuilder actividadesText3 = new StringBuilder();
+                            boolean isFirst = true;
+
+                            for (String estado : actividades) {
+                                if (estado != null && !estado.trim().isEmpty()) {
+                                    if (isFirst) {
+                                        isFirst = false;
+                                    } else {
+                                        actividadesText3.append(", ");
+                                    }
+                                    actividadesText3.append(estado);
+                                }
+                            }
+
+                            // Asigna el texto final al TextView
+                            textViewActividades3.setText(actividadesText3.toString());
+                        }
+
 
                         TextView textViewDia = new TextView(this);
                         LinearLayout.LayoutParams diaLayoutParams = new LinearLayout.LayoutParams(
@@ -128,7 +180,6 @@ public class Main_Calendario extends AppCompatActivity {
                         );
                         diaLayoutParams.setMargins(30,0,0,0);
                         textViewDia.setLayoutParams(diaLayoutParams);
-                        Typeface typeface = ResourcesCompat.getFont(this, R.font.medio);
                         textViewDia.setTypeface(typeface);
                         textViewDia.setText(dia);
                         textViewDia.setTypeface(null, Typeface.BOLD);
@@ -145,6 +196,7 @@ public class Main_Calendario extends AppCompatActivity {
                         textViewActividades.setTextSize(15);
                         textViewActividades.setPadding(0,0,0,0);
                         textViewActividades.setLayoutParams(actividadesLayoutParams);
+                        textViewActividades.setTypeface(typeface);
 
 
                         StringBuilder actividadesText = new StringBuilder();
@@ -156,9 +208,45 @@ public class Main_Calendario extends AppCompatActivity {
                         }
                         textViewActividades.setText(actividadesText.toString());
 
+                        ImageButton botonEliminar = new ImageButton(this);
+                        LinearLayout.LayoutParams botonLayoutParams = new LinearLayout.LayoutParams(
+                                0,
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                1
+                        );
+                        botonEliminar.setImageResource(R.drawable.basura);
+                        botonEliminar.setScaleType(ImageView.ScaleType.CENTER);
+                        botonEliminar.setPadding(20,15,10,20);
+                        botonEliminar.setAdjustViewBounds(true);
+                        botonEliminar.setBackground(getResources().getDrawable(R.drawable.eliminar));
+                        botonLayoutParams.setMargins(50,10,10,10);
+                        botonEliminar.setLayoutParams(botonLayoutParams);
+
+                        botonEliminar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                int index = linearLayout.indexOfChild((View) v.getParent().getParent());
+                                int posicionEliminar = totalDias.size() - 1 - index;
+                                String posi = String.valueOf(posicionEliminar);
+                                if (posicionEliminar >= 0 && posicionEliminar < totalDias.size()) {
+
+                                    FirebaseManager.eliminarRegistroUsuario(posi);
+
+                                    // Eliminar el elemento del ArrayList local
+                                    totalDias.remove(posicionEliminar);
+
+                                    // Eliminar la vista correspondiente
+                                    linearLayout.removeViewAt(index);
+                                }
+                            }
+                        });
+
+                        innerLinearLayout2.addView(textViewActividades3);
                         innerLinearLayout.addView(textViewDia);
                         innerLinearLayout.addView(textViewActividades);
+                        innerLinearLayout.addView(botonEliminar);
 
+                        cardView.addView(innerLinearLayout2);
                         cardView.addView(innerLinearLayout);
 
                         linearLayout.addView(cardView);

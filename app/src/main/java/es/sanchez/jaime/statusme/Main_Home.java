@@ -5,10 +5,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -28,7 +28,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Main_Home extends AppCompatActivity {
+public class Main_Home extends AppCompatActivity{
 
     private FirebaseAuth mAuth;
     private ArrayList<String> firebaseKeys = new ArrayList<>();
@@ -82,6 +82,7 @@ public class Main_Home extends AppCompatActivity {
         obtenerYMostrarDatos();
     }
 
+
     private void obtenerYMostrarDatos() {
         FirebaseManager firebaseManager = new FirebaseManager();
 
@@ -120,6 +121,7 @@ public class Main_Home extends AppCompatActivity {
         ScrollView scrollView = findViewById(R.id.Main);
         String dia = "";
 
+
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         if (totalDias != null) {
@@ -130,22 +132,73 @@ public class Main_Home extends AppCompatActivity {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate fechaDia = LocalDate.parse(dia, formatter);
                     if (fechaDia.equals(fechaActual)) {
-                        FrameLayout cardView = new FrameLayout(this);
+
+                        Typeface typeface = ResourcesCompat.getFont(this, R.font.nueva);
+                        RelativeLayout cardView = new RelativeLayout(this); // Cambia a RelativeLayout
+
                         LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT
                         );
                         cardLayoutParams.setMargins(16, 16, 16, 16); // Margen de 16dp en todos los lados
-                        cardView.setLayoutParams(cardLayoutParams);// Fondo blanco
+                        cardView.setLayoutParams(cardLayoutParams);
                         cardView.setBackground(getResources().getDrawable(R.drawable.minitarjetas));
 
+                        // Linear 1
                         LinearLayout innerLinearLayout = new LinearLayout(this);
                         innerLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                        innerLinearLayout.setLayoutParams(new ViewGroup.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT
-                        ));
-                        innerLinearLayout.setPadding(10,10,10,10);
+                        innerLinearLayout.setId(View.generateViewId()); // Generar un ID único
+                        RelativeLayout.LayoutParams layoutParams1 = new RelativeLayout.LayoutParams(
+                                RelativeLayout.LayoutParams.MATCH_PARENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        innerLinearLayout.setLayoutParams(layoutParams1);
+                        innerLinearLayout.setPadding(10, 20, 10, 10);
+
+                        // Linear 2
+                        LinearLayout innerLinearLayout2 = new LinearLayout(this);
+                        innerLinearLayout2.setOrientation(LinearLayout.HORIZONTAL);
+                        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(
+                                RelativeLayout.LayoutParams.MATCH_PARENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        layoutParams2.addRule(RelativeLayout.BELOW, innerLinearLayout.getId()); // Colocar debajo del primer LinearLayout
+                        innerLinearLayout2.setLayoutParams(layoutParams2);
+                        innerLinearLayout2.setPadding(50, 0, 10, 60);
+
+
+                        TextView textViewActividades3 = new TextView(this);
+                        LinearLayout.LayoutParams actividadesLayoutParams2 = new LinearLayout.LayoutParams(
+                                0,
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                1
+                        );
+                        actividadesLayoutParams2.setMargins(0,0,200,0);
+                        textViewActividades3.setTextSize(15);
+                        textViewActividades3.setPadding(0,0,0,0);
+                        textViewActividades3.setLayoutParams(actividadesLayoutParams2);
+                        textViewActividades3.setTypeface(typeface);
+
+                        ArrayList<String> actividades = (ArrayList<String>) diaActual.get(1);
+                        if (actividades != null) {
+                            StringBuilder actividadesText3 = new StringBuilder();
+                            boolean isFirst = true;
+
+                            for (String estado : actividades) {
+                                if (estado != null && !estado.trim().isEmpty()) {
+                                    if (isFirst) {
+                                        isFirst = false;
+                                    } else {
+                                        actividadesText3.append(", ");
+                                    }
+                                    actividadesText3.append(estado);
+                                }
+                            }
+
+                            // Asigna el texto final al TextView
+                            textViewActividades3.setText(actividadesText3.toString());
+                        }
+
 
                         TextView textViewDia = new TextView(this);
                         LinearLayout.LayoutParams diaLayoutParams = new LinearLayout.LayoutParams(
@@ -155,7 +208,6 @@ public class Main_Home extends AppCompatActivity {
                         );
                         diaLayoutParams.setMargins(30,0,0,0);
                         textViewDia.setLayoutParams(diaLayoutParams);
-                        Typeface typeface = ResourcesCompat.getFont(this, R.font.medio);
                         textViewDia.setTypeface(typeface);
                         textViewDia.setText(dia);
                         textViewDia.setTypeface(null, Typeface.BOLD);
@@ -172,6 +224,7 @@ public class Main_Home extends AppCompatActivity {
                         textViewActividades.setTextSize(15);
                         textViewActividades.setPadding(0,0,0,0);
                         textViewActividades.setLayoutParams(actividadesLayoutParams);
+                        textViewActividades.setTypeface(typeface);
 
 
                         StringBuilder actividadesText = new StringBuilder();
@@ -216,10 +269,12 @@ public class Main_Home extends AppCompatActivity {
                             }
                         });
 
+                        innerLinearLayout2.addView(textViewActividades3);
                         innerLinearLayout.addView(textViewDia);
                         innerLinearLayout.addView(textViewActividades);
                         innerLinearLayout.addView(botonEliminar);
 
+                        cardView.addView(innerLinearLayout2);
                         cardView.addView(innerLinearLayout);
 
                         linearLayout.addView(cardView);

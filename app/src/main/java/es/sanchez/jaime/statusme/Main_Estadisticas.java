@@ -85,8 +85,6 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
                 }
             });
         }
-
-
     }
 
     // Método para calcular el total de días
