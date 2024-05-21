@@ -7,10 +7,6 @@
     <style name="CalendarViewTextAppearance">
         <item name="android:textColor">@drawable/boton_calendario</item>
     </style>
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Enable activity transitions -->
-        <item name="android:windowActivityTransitions">true</item>
-    </style>
 
     <drawable name="title">@drawable/status</drawable>
     <style name="Theme.StatusMe" parent="Base.Theme.StatusMe" />
