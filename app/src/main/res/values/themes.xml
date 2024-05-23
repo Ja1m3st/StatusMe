@@ -7,7 +7,6 @@
     <style name="CalendarViewTextAppearance">
         <item name="android:textColor">@drawable/boton_calendario</item>
     </style>
-
     <drawable name="title">@drawable/status</drawable>
     <style name="Theme.StatusMe" parent="Base.Theme.StatusMe" />
     <color name="main_color">@color/colorPrimaryLight</color>

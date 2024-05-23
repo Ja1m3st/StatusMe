@@ -31,7 +31,6 @@
             android:layout_marginRight="17dp"
             android:layout_alignParentEnd="true"/>
     </androidx.cardview.widget.CardView>
-
     <RelativeLayout
         android:id="@+id/animo"
         android:layout_width="match_parent"
@@ -692,38 +691,39 @@
 
             </FrameLayout>
         </LinearLayout>
+    </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/guardar"
+    <LinearLayout
+        android:id="@+id/guardar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/animo"
+        android:layout_above="@+id/card_view"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal"
-            android:layout_below="@+id/Extras4"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="20dp"
+            android:background="@drawable/minitarjetas"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
 
-            <FrameLayout
+            <Button
+                android:id="@+id/botonguardar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="20dp"
-                android:background="@drawable/minitarjetas"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp">
-
-                <Button
-                    android:id="@+id/botonguardar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Guardar"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/nueva"
-                    android:backgroundTint="@android:color/transparent"/>
+                android:text="Guardar"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nueva"
+                android:backgroundTint="@android:color/transparent"/>
 
 
-            </FrameLayout>
+        </FrameLayout>
 
-        </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/card_view"
