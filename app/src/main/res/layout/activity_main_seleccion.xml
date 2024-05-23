@@ -719,6 +719,7 @@
                 android:text="Guardar"
                 android:textColor="@color/black"
                 android:fontFamily="@font/nueva"
+                android:background="@android:color/transparent"
                 android:backgroundTint="@android:color/transparent"/>
 
 
