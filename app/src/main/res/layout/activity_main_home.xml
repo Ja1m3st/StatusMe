@@ -122,7 +122,6 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp">
 
-
                 <ImageButton
                     android:id="@+id/icono5"
                     android:layout_width="match_parent"

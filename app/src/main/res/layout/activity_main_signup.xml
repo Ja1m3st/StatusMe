@@ -149,7 +149,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="#449740"
+            android:backgroundTint="@color/green_main"
             android:fontFamily="@font/medio"
             android:onClick="onClick"
             android:text="Sign Up"

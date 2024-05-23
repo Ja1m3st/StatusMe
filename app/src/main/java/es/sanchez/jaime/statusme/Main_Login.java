@@ -8,14 +8,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -56,7 +54,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
         mail = findViewById(R.id.User);
         password = findViewById(R.id.Password);
         google = findViewById(R.id.card);
-        switchDarkMode = findViewById(R.id.DarkMode);
         myButton = findViewById(R.id.Login);
 
         // Configuración de listeners
@@ -86,17 +83,6 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // Configuración del modo oscuro
-        switchDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
-            }
-        });
     }
 
     // Método para iniciar sesión con correo y contraseña
