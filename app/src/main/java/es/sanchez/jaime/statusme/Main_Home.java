@@ -55,7 +55,7 @@ public class Main_Home extends AppCompatActivity{
             nombre = account.getGivenName();
 
             // Animación de saludo
-            TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+            TextAnimator animator = new TextAnimator("Bienvenido, " + nombre, saludo);
             animator.setDuration(3000);
             saludo.startAnimation(animator);
         } else if (SesionAuth() != null) {
@@ -64,7 +64,7 @@ public class Main_Home extends AppCompatActivity{
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot != null && dataSnapshot.exists()) {
                         nombre = dataSnapshot.child("name").getValue(String.class);
-                        TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+                        TextAnimator animator = new TextAnimator("Bienvenido, " + nombre, saludo);
                         animator.setDuration(3000);
                         saludo.startAnimation(animator);
                     }

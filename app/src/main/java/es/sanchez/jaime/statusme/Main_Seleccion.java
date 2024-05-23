@@ -83,7 +83,7 @@ public class Main_Seleccion extends AppCompatActivity implements View.OnClickLis
 
 
         // Animación de saludo
-        TextAnimator animator = new TextAnimator("A ver que tal", saludo);
+        TextAnimator animator = new TextAnimator("Veamos que tal hoy", saludo);
         animator.setDuration(3000);
         saludo.startAnimation(animator);
     }

@@ -6,23 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Main_Estadisticas"
     android:background="@color/main_color">
-
     <androidx.cardview.widget.CardView
         android:id="@+id/topnav"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <TextView
-            android:id="@+id/saludo"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="14dp"
-            android:fontFamily="@font/medio"
-            android:text=" "
-            android:textSize="20dp"
-            android:textColor="@color/black"/>
+            android:gravity="center">
+            <TextView
+                android:id="@+id/saludo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/medio"
+                android:text=" "
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -206,32 +210,8 @@
                         android:gravity="center|left"/>
                 </LinearLayout>
             </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/tarjeta3"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="20dp"
-                android:background="@drawable/minitarjetas"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/tarjeta4"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="20dp"
-                android:background="@drawable/minitarjetas"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
 
     <FrameLayout
         android:id="@+id/card_view"

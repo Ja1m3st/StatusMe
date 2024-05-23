@@ -69,7 +69,7 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         if (SesionGoogle() != null) {
             nombre = account.getGivenName();
             // Animación de saludo
-            TextAnimator animator = new TextAnimator("Hola, " + nombre, saludo);
+            TextAnimator animator = new TextAnimator("¿Que tal vas "+nombre+"?", saludo);
             animator.setDuration(3000);
             saludo.startAnimation(animator);
         } else if (SesionAuth() != null) {
