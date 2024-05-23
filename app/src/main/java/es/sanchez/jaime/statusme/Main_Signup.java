@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -114,8 +112,6 @@ public class Main_Signup extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.button_scale);
-        view.startAnimation(animation);
         if (view.getId() == R.id.Back) {
             Intent back = new Intent(Main_Signup.this, Main_Login.class);
             startActivity(back);

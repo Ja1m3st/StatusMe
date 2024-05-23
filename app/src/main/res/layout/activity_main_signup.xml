@@ -52,7 +52,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/title" />
+            android:src="@drawable/status" />
 
         <LinearLayout
             android:id="@+id/RememberLayout2"

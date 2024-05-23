@@ -19,7 +19,8 @@
             android:layout_marginLeft="14dp"
             android:fontFamily="@font/nueva"
             android:text=" "
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/dia"

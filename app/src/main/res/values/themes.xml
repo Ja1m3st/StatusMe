@@ -1,14 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.StatusMe" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryLight</item>
-    </style>
-    <style name="CalendarViewTextAppearance">
-        <item name="android:textColor">@drawable/boton_calendario</item>
+    <style name="AppTheme"  parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Otros atributos de tema -->
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryDark">#FFFFFF</item>
+        <!-- Otros colores y recursos aquí -->
     </style>
     <drawable name="title">@drawable/status</drawable>
-    <style name="Theme.StatusMe" parent="Base.Theme.StatusMe" />
+    <style name="Theme.StatusMe" parent="AppTheme" />
     <color name="main_color">@color/colorPrimaryLight</color>
     <color name="main_color_reverse">#2B2B2B</color>
     <color name="hint_color_dark">#8c8c8c</color>
