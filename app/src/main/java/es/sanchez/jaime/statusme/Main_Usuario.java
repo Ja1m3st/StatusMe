@@ -65,8 +65,6 @@ public class Main_Usuario extends AppCompatActivity {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
-
-
         // Cargar imagen del usuario
         CargarImagen();
 
@@ -98,7 +96,6 @@ public class Main_Usuario extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Manejar el error de la base de datos si es necesario
                 }
             });
         }
