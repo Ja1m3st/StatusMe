@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
-
+// Para poner la imagen de perfil redonda
 public class CircularImageView extends AppCompatImageView {
 
     private Paint paint;

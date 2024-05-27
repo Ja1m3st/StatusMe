@@ -19,10 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -255,18 +252,6 @@ public class Main_Calendario extends AppCompatActivity {
             }
             scrollView.addView(linearLayout);
         }
-    }
-
-    // Método para obtener sesión de Google
-    private String SesionGoogle() {
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        return account != null ? account.getEmail() : null;
-    }
-
-    // Método para obtener sesión de Firebase Auth
-    private String SesionAuth() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        return currentUser != null ? currentUser.getEmail() : null;
     }
 
     public void onClick(View view) {

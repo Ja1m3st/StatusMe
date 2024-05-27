@@ -92,11 +92,6 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
         }
     }
 
-    // Método para calcular el total de días
-    private int totalDias(ArrayList<ArrayList> totalDias) {
-        return totalDias == null ? 0 : totalDias.size() - 1;
-    }
-
     // Método para procesar los datos y actualizar la UI
     private void datos(ArrayList<ArrayList> totalDias) {
         if (totalDias == null || totalDias.size() <= 7) {

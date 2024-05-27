@@ -3,12 +3,12 @@ package es.sanchez.jaime.statusme;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.TextView;
-
+// Texto animado
 public class TextAnimator extends Animation {
 
     private CharSequence mText;
     private int mIndex;
-    private long mDelay = 50; // Velocidad de escritura, puedes ajustarla según tus preferencias
+    private long mDelay = 50;
     private TextView mTextView;
 
     public TextAnimator(CharSequence text, TextView textView) {
