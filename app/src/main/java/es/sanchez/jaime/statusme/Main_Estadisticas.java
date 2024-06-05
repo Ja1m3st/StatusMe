@@ -129,7 +129,7 @@ public class Main_Estadisticas extends AppCompatActivity implements View.OnClick
     }
 
     private void datosGenerales(ArrayList<ArrayList> totalDias) {
-        if (totalDias == null || totalDias.size() <= 7) {
+        if (totalDias == null || totalDias.size() <= 1) {
             return;
         }
 
