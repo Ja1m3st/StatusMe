@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -64,6 +65,7 @@ public class Main_Usuario extends AppCompatActivity {
 
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
 
         // Cargar imagen del usuario
         CargarImagen();
@@ -162,6 +164,7 @@ public class Main_Usuario extends AppCompatActivity {
             String downloadUrl = uri.toString();
             Glide.with(image)
                     .load(downloadUrl)
+                    .apply(RequestOptions.circleCropTransform())
                     .into(image);
         }).addOnFailureListener(exception -> {
             Log.e(TAG, "Error al obtener la URL de descarga de la imagen: " + exception.getMessage());
@@ -171,6 +174,7 @@ public class Main_Usuario extends AppCompatActivity {
                 String defaultDownloadUrl = uri1.toString();
                 Glide.with(image)
                         .load(defaultDownloadUrl)
+                        .apply(RequestOptions.circleCropTransform())
                         .into(image);
             }).addOnFailureListener(exception1 -> Log.e(TAG, "Error al cargar la imagen predeterminada: " + exception1.getMessage()));
         });

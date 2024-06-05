@@ -95,7 +95,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(Main_Login.this, "Sesión iniciada con Auth", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Main_Login.this,"Sesión iniciada", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Main_Login.this, Main_Home.class);
                                 startActivity(intent);
                                 finish();
@@ -140,7 +140,7 @@ public class Main_Login extends AppCompatActivity implements View.OnClickListene
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(Main_Login.this, Main_Home.class);
                             startActivity(intent);
-                            Toast.makeText(Main_Login.this, "Sesión iniciada con Google", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Main_Login.this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(Main_Login.this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
                         }
